@@ -1,0 +1,8 @@
+# Table of contents
+format: jb-book
+root: intro
+chapters:
+- file: Fibonacci
+- file: PhiProperties
+- file: FibonacciMatrix
+- file: RootsOf5I
