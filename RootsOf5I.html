@@ -1,0 +1,784 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Matrix Square Roots and Related Fibonacci Matrices &#8212; Jim Pearson&#39;s Page</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'RootsOf5I';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="The Fibonacci Matrix" href="FibonacciMatrix.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to Jim Pearson’s Page
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Fibonacci.html">The Fibonacci Sequence, Lucas Numbers, and the Golden Ratio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PhiProperties.html">Mathematical Properties of the Golden Ratio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FibonacciMatrix.html">The Fibonacci Matrix</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Matrix Square Roots and Related Fibonacci Matrices</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/RootsOf5I.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Matrix Square Roots and Related Fibonacci Matrices</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fibonacci-and-lucas-sequences">Fibonacci and Lucas Sequences</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fibonacci-lucas-and-the-golden-ratio-phi">Fibonacci, Lucas, and the Golden Ratio <span class="math notranslate nohighlight">\(\phi\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-roots-and-matrices-phi-and-pb">Matrix Roots and Matrices <span class="math notranslate nohighlight">\(\Phi\)</span> and <span class="math notranslate nohighlight">\(\Pb\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#phi-for-specific-roots-of-5i"><span class="math notranslate nohighlight">\(\Phi\)</span> for Specific Roots of <span class="math notranslate nohighlight">\(5I\)</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1">Example 1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2">Example 2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3">Example 3</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-4">Example 4</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-5">Example 5</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-6">Example 6</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <p><span class="math notranslate nohighlight">\(\newcommand{\ov}[2]{\overline{\smash{#1}\vphantom{#2}}}\)</span>
+<span class="math notranslate nohighlight">\(\newcommand{\pb}[0]{\ov{\phi}{;}}\)</span>
+<span class="math notranslate nohighlight">\(\newcommand{\cb}[0]{\ov{C}{;}}\)</span>
+<span class="math notranslate nohighlight">\(\newcommand{\pbn}[1]{\pb\vphantom{}^{#1}}\)</span>
+<span class="math notranslate nohighlight">\(\newcommand{\Pb}[0]{\ov{\Phi}{;}}\)</span>
+<span class="math notranslate nohighlight">\(\newcommand{\Pbn}[1]{\Pb\vphantom{}^{#1}}\)</span></p>
+<section class="tex2jax_ignore mathjax_ignore" id="matrix-square-roots-and-related-fibonacci-matrices">
+<h1>Matrix Square Roots and Related Fibonacci Matrices<a class="headerlink" href="#matrix-square-roots-and-related-fibonacci-matrices" title="Permalink to this heading">#</a></h1>
+<section id="fibonacci-and-lucas-sequences">
+<h2>Fibonacci and Lucas Sequences<a class="headerlink" href="#fibonacci-and-lucas-sequences" title="Permalink to this heading">#</a></h2>
+<p>The Fibonacci sequence <span class="math notranslate nohighlight">\(1, 1, 2, 3, 5, 8...\)</span> is defined by setting the first two values to <span class="math notranslate nohighlight">\(1\)</span> and thereafter setting each member of the sequence equal to the sum of the two values just before it. The definition can be extended to include values before the initial two <span class="math notranslate nohighlight">\(1\)</span>s. Formally, if we denote the <span class="math notranslate nohighlight">\(n^{th}\)</span> member of the sequence as <span class="math notranslate nohighlight">\(F_n\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[ F_1=1, F_2=1, \text{ and } F_n = F_{n-1} + F_{n-2} \text{ for all integers }n\]</div>
+<p>So that the series is double-ended and looks like:</p>
+<div class="math notranslate nohighlight">
+\[...5, -3, 2, -1, 1, 0, 1, 1, 2, 3, 5...\]</div>
+<p>A related sequence is the Lucas numbers which can be defined <span class="math notranslate nohighlight">\(L_n=F_{n-1}+F_{n+1}\)</span> looks like:</p>
+<div class="math notranslate nohighlight">
+\[...-11, 7, -4, 3, -1, 2, 1, 3, 4, 7, 11...\]</div>
+</section>
+<section id="fibonacci-lucas-and-the-golden-ratio-phi">
+<h2>Fibonacci, Lucas, and the Golden Ratio <span class="math notranslate nohighlight">\(\phi\)</span><a class="headerlink" href="#fibonacci-lucas-and-the-golden-ratio-phi" title="Permalink to this heading">#</a></h2>
+<p>The Fibonacci sequence famously relates to the golden ratio <span class="math notranslate nohighlight">\(\phi = \frac{1+\sqrt 5}{2}\)</span> in the following way:</p>
+<div class="math notranslate nohighlight">
+\[ \lim_{n \rightarrow \infty} \frac{F_{n+1}}{F_n} = \phi \]</div>
+<p>In words, the ratio of successive Fibonacci numbers tends to the golden ratio <span class="math notranslate nohighlight">\(\phi\)</span>. The same can be said of the Lucas numbers:</p>
+<div class="math notranslate nohighlight">
+\[ \lim_{n \rightarrow \infty} \frac{L_{n+1}}{L_n} = \phi \]</div>
+<p>But the relationships among the golden ratio and the two sequences run much deeper. Let’s denote the rational conjugate of <span class="math notranslate nohighlight">\(\phi\)</span> as <span class="math notranslate nohighlight">\(\pb=\frac{1 - \sqrt 5}{2}\)</span>. Here is a list of some of the most important properties among <span class="math notranslate nohighlight">\(\phi\)</span>, <span class="math notranslate nohighlight">\(\pb\)</span>, <span class="math notranslate nohighlight">\(F_n\)</span>, and <span class="math notranslate nohighlight">\(L_n\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align} \phi &amp;= \frac{1+\sqrt 5}{2} &amp;&amp; \pb = \frac{1-\sqrt 5}{2}\end{align} \\[5pt] \end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align} &amp;\phi + \pb = 1 &amp;&amp; \quad \phi - \pb = \sqrt 5 &amp;&amp;&amp;&amp; \phi \times \pb = -1 \end{align}\\[5pt]\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\phi^n &amp;= \frac{L_n+F_n\sqrt 5}{2} &amp;&amp; \pbn{n} = \frac{L_n-F_n\sqrt 5}{2} \\[5pt]
+L_n &amp;= \phi^n + \pbn{n} &amp;&amp; F_n = \frac{\phi^n - \pbn{n}}{\sqrt 5} \\[5pt]
+\end{align}\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{align} \phi^n &amp;= F_n \cdot \phi + F_{n-1}  &amp;&amp;\pbn{n} = F_n \cdot \pb + F_{n-1} \end{align}\]</div>
+<p>I won’t write here much explanation for the properties above, but notice that the list includes explicit formulas for calculating Lucas and Fibonacci numbers using powers of <span class="math notranslate nohighlight">\(\phi\)</span> and <span class="math notranslate nohighlight">\(\pb\)</span>. The list also shows more than one way to express powers of <span class="math notranslate nohighlight">\(\phi\)</span> and <span class="math notranslate nohighlight">\(\pb\)</span> using Lucas and/or Fibonacci numbers.</p>
+</section>
+<section id="matrix-roots-and-matrices-phi-and-pb">
+<h2>Matrix Roots and Matrices <span class="math notranslate nohighlight">\(\Phi\)</span> and <span class="math notranslate nohighlight">\(\Pb\)</span><a class="headerlink" href="#matrix-roots-and-matrices-phi-and-pb" title="Permalink to this heading">#</a></h2>
+<p>Note that the expressions for <span class="math notranslate nohighlight">\(\phi\)</span> and <span class="math notranslate nohighlight">\(\pb\)</span> above rely on <span class="math notranslate nohighlight">\(\sqrt 5\)</span>. In the realm of scalar numbers, <span class="math notranslate nohighlight">\(\pm \sqrt 5\)</span> are the only square roots of <span class="math notranslate nohighlight">\(5\)</span>. Let’s shift focus to matrices. Let <span class="math notranslate nohighlight">\(I\)</span> denote the <span class="math notranslate nohighlight">\(2 \times 2\)</span> identity matrix, <span class="math notranslate nohighlight">\(I = 
+\left[ \begin{matrix}
+1 &amp; 0 \\
+0 &amp; 1
+\end{matrix} \right]\)</span>. Then we can consider square roots of <span class="math notranslate nohighlight">\(5I\)</span>. There are infinitely many. Examples include:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \left[\begin{matrix}
+\sqrt 5 &amp; 0\\
+0 &amp; -\sqrt 5
+\end{matrix}\right] \quad
+\left[\begin{matrix}
+0 &amp; 1\\
+5 &amp; 0
+\end{matrix}\right] \quad
+\left[\begin{matrix}
+2 &amp; 1\\
+1 &amp; -2
+\end{matrix}\right] \quad
+\left[\begin{matrix}
+\sqrt 8 &amp; \sqrt 3\\
+-\sqrt 3 &amp; -\sqrt 8
+\end{matrix}\right]
+\end{split}\]</div>
+<p>Let <span class="math notranslate nohighlight">\(R\)</span> denote a square root of <span class="math notranslate nohighlight">\(5I\)</span>. Define <span class="math notranslate nohighlight">\(\Phi=\frac{I+R}{2}\)</span> and <span class="math notranslate nohighlight">\(\Pb=\frac{I-R}{2}\)</span>. Remarkably, <span class="math notranslate nohighlight">\(\Phi\)</span> and <span class="math notranslate nohighlight">\(\Pb\)</span> thus defined mimic all the properties of <span class="math notranslate nohighlight">\(\phi\)</span> and <span class="math notranslate nohighlight">\(\pb\)</span> listed in the previous section:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align} \Phi &amp;= \frac{I+R}{2} &amp;&amp; \Pb = \frac{I-R}{2}\end{align} \\[5pt] \end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align} &amp;\Phi + \Pb = I &amp;&amp; \quad \Phi - \Pb = R &amp;&amp;&amp;&amp; \Phi \times \Pb = -I \end{align}\\[5pt]\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\Phi^n &amp;= \frac{L_n\cdot I+F_n\cdot R}{2} &amp;&amp; \Pbn{n} = \frac{L_n \cdot I-F_n \cdot R}{2} \\[5pt]
+L_n\cdot I &amp;= \Phi ^n + \Pbn{n} &amp;&amp; F_n\cdot I = (\Phi^n - \Pbn{n})R^{-1} \\[5pt]
+\end{align}\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{align} \Phi^n &amp;= F_n \cdot \Phi + F_{n-1}\cdot  I  &amp;&amp;\Pbn{n} = F_n \cdot \Pb + F_{n-1} \cdot I \end{align}\]</div>
+<p>Furthermore, any such matrix <span class="math notranslate nohighlight">\(\Phi=\frac{I+R}{2}\)</span> satisfies the matrix equation <span class="math notranslate nohighlight">\(X^2=X+I\)</span>. The converse is also true: Any <span class="math notranslate nohighlight">\(2 \times 2\)</span> matrix satisfying <span class="math notranslate nohighlight">\(X^2=X+I\)</span> will be of the form <span class="math notranslate nohighlight">\(\frac{I+R}{2}\)</span>.</p>
+</section>
+<section id="phi-for-specific-roots-of-5i">
+<h2><span class="math notranslate nohighlight">\(\Phi\)</span> for Specific Roots of <span class="math notranslate nohighlight">\(5I\)</span><a class="headerlink" href="#phi-for-specific-roots-of-5i" title="Permalink to this heading">#</a></h2>
+<p>The previous subsection discussed matrices of the form <span class="math notranslate nohighlight">\(\Phi = \frac{I+R}{2}\)</span> where <span class="math notranslate nohighlight">\(R\)</span> is a chosen matrix square root of <span class="math notranslate nohighlight">\(5I\)</span>. It tends to be the case that powers of <span class="math notranslate nohighlight">\(\Phi\)</span> contain Fibonacci numbers and/or related values such as Lucas numbers and powers of the golden ratio, so such a matrices <span class="math notranslate nohighlight">\(\Phi\)</span> could be called Fibonacci matrices. Some choices of <span class="math notranslate nohighlight">\(R\)</span> lead to matrices <span class="math notranslate nohighlight">\(\Phi\)</span> with special properties. Let’s review some examples.</p>
+<section id="example-1">
+<h3>Example 1<a class="headerlink" href="#example-1" title="Permalink to this heading">#</a></h3>
+<p>Suppose <span class="math notranslate nohighlight">\(R = \left[\begin{matrix}
+1 &amp; 2\\
+2 &amp; -1
+\end{matrix}\right] \)</span>, so that <span class="math notranslate nohighlight">\(\Phi = \frac{I+R}{2} = 
+\left[\begin{matrix}
+1 &amp; 1\\
+1 &amp; 0
+\end{matrix}\right] \)</span>.</p>
+<p>This is the Fibonacci matrix, Also known as the Fibonacci Q-matrix. Two notable properties are:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \Phi^n = 
+\left[\begin{matrix}
+F_{n+1} &amp; F_n\\
+F_n &amp; F_{n-1}
+\end{matrix}\right] \end{split}\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} R \cdot \Phi^n = 
+\left[\begin{matrix}
+L_{n+1} &amp; L_n\\
+L_n &amp; L_{n-1}
+\end{matrix}\right] \end{split}\]</div>
+<p>In this case, <span class="math notranslate nohighlight">\(\Phi\)</span> expresses the recursive formula that the Fibonacci numbers obey, which is <span class="math notranslate nohighlight">\(F_n = F_{n-1} +F_{n-1}\)</span>. If we define a Fibonacci vector <span class="math notranslate nohighlight">\(\vec{F_n} = \left[\begin{matrix} F_n \\ F_{n-1} \end{matrix}\right] \)</span>, then <span class="math notranslate nohighlight">\(\Phi\)</span> will advance it to <span class="math notranslate nohighlight">\(\vec{F_{n+1}}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[ \Phi \vec{F_n} = \vec{F_{n+1}} \]</div>
+<p>The Lucas numbers obey the same recursive rule, <span class="math notranslate nohighlight">\(L_n = L_{n-1} +L_{n-1}\)</span>, so that if we define a Lucas vector <span class="math notranslate nohighlight">\(\vec{L_n} = \left[\begin{matrix} L_n \\ L_{n-1} \end{matrix}\right] \)</span> then</p>
+<div class="math notranslate nohighlight">
+\[ \Phi \vec{L_n} = \vec{L_{n+1}} \]</div>
+<p>More generally,</p>
+<div class="math notranslate nohighlight">
+\[ \Phi^k \vec{F_n} = \vec{F_{n+k}} \quad \text{and} \quad \Phi^k \vec{L_n} = \vec{L_{n+k}}\]</div>
+</section>
+<section id="example-2">
+<h3>Example 2<a class="headerlink" href="#example-2" title="Permalink to this heading">#</a></h3>
+<p>Suppose <span class="math notranslate nohighlight">\(R = \left[\begin{matrix}
+0 &amp; 1\\
+5 &amp; 0
+\end{matrix}\right] \)</span>, so that <span class="math notranslate nohighlight">\(\Phi = \frac{I+R}{2} = 
+\left[\begin{matrix}
+\frac 1 2 &amp; \frac 1 2\\
+\frac 5 2 &amp; \frac 1 2
+\end{matrix}\right] \)</span>.</p>
+<p>In this case,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \Phi^n =
+\left[\begin{matrix}
+\frac {L_n} 2 &amp; \frac {F_n} 2\\
+\frac {5F_n} 2 &amp; \frac {L_n} 2
+\end{matrix}\right] \end{split}\]</div>
+<p>This <span class="math notranslate nohighlight">\(\Phi\)</span> expresses a pair of identities:
+$<span class="math notranslate nohighlight">\( F_{n+1} = \frac{L_n + F_n}{2} \quad \text{and} \quad L_{n+1} = \frac{5F_{n}+L_n}{2} \)</span>$</p>
+<p>So:
+$<span class="math notranslate nohighlight">\( \Phi \left[\begin{matrix} F_n \\ L_{n} \end{matrix}\right] = \left[\begin{matrix} F_{n+1} \\ L_{n+1} \end{matrix}\right] \quad \text{and} \quad
+\Phi^k \left[\begin{matrix} F_n \\ L_{n} \end{matrix}\right] = \left[\begin{matrix} F_{n+k} \\ L_{n+k} \end{matrix}\right]
+\)</span>$</p>
+<p>This matrix <span class="math notranslate nohighlight">\(\Phi\)</span> is special because it is a matrix representation of the golden ratio <span class="math notranslate nohighlight">\(\phi = \frac 12 + \frac{\sqrt 5}2\)</span> in much the same sense that <span class="math notranslate nohighlight">\(\left[\begin{matrix}
+a &amp; b\\
+-b &amp; a
+\end{matrix}\right]\)</span> is the matrix representation of the complex number <span class="math notranslate nohighlight">\(a+bi\)</span>.</p>
+</section>
+<section id="example-3">
+<h3>Example 3<a class="headerlink" href="#example-3" title="Permalink to this heading">#</a></h3>
+<p>Let’s consider a more general example. If a matrix <span class="math notranslate nohighlight">\(R = \left[\begin{matrix} a &amp; b\\ c &amp; d \end{matrix}\right]\)</span> satisfies <span class="math notranslate nohighlight">\(R^2 = 5I\)</span>, then the following must hold:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+(a + d)b &amp;= 0 \\
+(a + d)c &amp;= 0 \\
+a^2 + bc &amp;= 5 \\
+d^2 + bc &amp;= 5
+\end{align}
+\end{split}\]</div>
+<p>Let’s assume <span class="math notranslate nohighlight">\(b\)</span> and <span class="math notranslate nohighlight">\(c\)</span> are non-zero. It follows that <span class="math notranslate nohighlight">\(d = -a\)</span> and <span class="math notranslate nohighlight">\(c = \frac{5 - a^2}{b}\)</span>. So we can write <span class="math notranslate nohighlight">\(R\)</span> in terms of <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> only as <span class="math notranslate nohighlight">\(R = \left[\begin{matrix} a &amp; b\\ \frac{5 - a^2}{b} &amp; -a \end{matrix}\right]\)</span>. Then <span class="math notranslate nohighlight">\(\Phi = \frac{I+R}{2} = 
+\left[\begin{matrix}
+\frac{1+a}{2} &amp; \frac{b}{2}\\
+\frac{5-a^2}{2b} &amp; \frac{1-a}{2}
+\end{matrix}\right] \)</span>. This form generalizes examples 1 and 2 above. Let’s investigate what powers of <span class="math notranslate nohighlight">\(\Phi\)</span> look like using a bit of code:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">phi</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">phibar</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">phi</span>
+
+<span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;a, b&#39;</span><span class="p">)</span>
+<span class="n">Phi</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">([[(</span><span class="n">a</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">b</span><span class="o">/</span><span class="mi">2</span><span class="p">],[(</span><span class="mi">5</span><span class="o">-</span><span class="n">a</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">b</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">]])</span>
+<span class="n">Phis</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\Phi&#39;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Eq</span><span class="p">(</span><span class="n">Phis</span><span class="p">,</span> <span class="n">Phi</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Eq</span><span class="p">(</span><span class="n">Phis</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">Phi</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Eq</span><span class="p">(</span><span class="n">Phis</span><span class="o">**</span><span class="mi">3</span><span class="p">,</span> <span class="n">Phi</span><span class="o">**</span><span class="mi">3</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Eq</span><span class="p">(</span><span class="n">Phis</span><span class="o">**</span><span class="mi">4</span><span class="p">,</span> <span class="n">Phi</span><span class="o">**</span><span class="mi">4</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Eq</span><span class="p">(</span><span class="n">Phis</span><span class="o">**</span><span class="mi">10</span><span class="p">,</span> <span class="n">Phi</span><span class="o">**</span><span class="mi">10</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}\displaystyle \Phi = \left[\begin{matrix}\frac{a}{2} + \frac{1}{2} &amp; \frac{b}{2}\\\frac{5 - a^{2}}{2 b} &amp; \frac{1}{2} - \frac{a}{2}\end{matrix}\right]\end{split}\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}\displaystyle \Phi^{2} = \left[\begin{matrix}\frac{a}{2} + \frac{3}{2} &amp; \frac{b}{2}\\\frac{5 - a^{2}}{2 b} &amp; \frac{3}{2} - \frac{a}{2}\end{matrix}\right]\end{split}\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}\displaystyle \Phi^{3} = \left[\begin{matrix}a + 2 &amp; b\\- \frac{a^{2}}{b} + \frac{5}{b} &amp; 2 - a\end{matrix}\right]\end{split}\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}\displaystyle \Phi^{4} = \left[\begin{matrix}\frac{3 a}{2} + \frac{7}{2} &amp; \frac{3 b}{2}\\\frac{15 - 3 a^{2}}{2 b} &amp; \frac{7}{2} - \frac{3 a}{2}\end{matrix}\right]\end{split}\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}\displaystyle \Phi^{10} = \left[\begin{matrix}\frac{55 a}{2} + \frac{123}{2} &amp; \frac{55 b}{2}\\\frac{275 - 55 a^{2}}{2 b} &amp; \frac{123}{2} - \frac{55 a}{2}\end{matrix}\right]\end{split}\]</div>
+</div>
+</div>
+<p>The <span class="math notranslate nohighlight">\(n^{th}\)</span> power of <span class="math notranslate nohighlight">\(\Phi\)</span> is filled with combinations of <span class="math notranslate nohighlight">\(F_n\)</span> and <span class="math notranslate nohighlight">\(L_n\)</span>.</p>
+</section>
+<section id="example-4">
+<h3>Example 4<a class="headerlink" href="#example-4" title="Permalink to this heading">#</a></h3>
+<p>Suppose <span class="math notranslate nohighlight">\(R = \left[\begin{matrix}
+-\sqrt 5 &amp; 2\\
+0 &amp; \sqrt 5
+\end{matrix}\right] \)</span>, so that <span class="math notranslate nohighlight">\(\Phi = \frac{I+R}{2} = 
+\left[\begin{matrix}
+\pb &amp; 1\\
+0 &amp; \phi
+\end{matrix}\right] \)</span> and <span class="math notranslate nohighlight">\(
+\Phi^n =
+\left[\begin{matrix}
+\pbn{n} &amp; F_n\\
+0 &amp; \phi^n
+\end{matrix}\right]\)</span>.</p>
+<p>This matrix can be used to implement the formula <span class="math notranslate nohighlight">\(F_{n+1} = \phi^n + \pb F_n\)</span>, an equation which comes from solving <span class="math notranslate nohighlight">\(\phi^{n+1} = F_{n+1} \phi + F_n\)</span> for <span class="math notranslate nohighlight">\(F_{n+1}\)</span>. Set a vector <span class="math notranslate nohighlight">\(\vec F_n =  \left[\begin{matrix} F_n \\ \phi^n \end{matrix}\right]\)</span> and then:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\Phi \vec F_n = \left[\begin{matrix}
+\pb &amp; 1\\
+0 &amp; \phi
+\end{matrix}\right] 
+\left[\begin{matrix} F_n \\ \phi^n \end{matrix}\right] =
+\left[\begin{matrix} \pb F_n + \phi^n \\ \phi \phi^n \end{matrix}\right]
+\left[\begin{matrix} F_{n+1} \\ \phi^{n+1} \end{matrix}\right] = \vec F_{n+1}
+\end{split}\]</div>
+<p>and more generally:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\Phi^k \vec F_n = \left[\begin{matrix}
+\pbn{k} &amp; F_k\\
+0 &amp; \phi^k
+\end{matrix}\right] 
+\left[\begin{matrix} F_n \\ \phi^n \end{matrix}\right] =
+\left[\begin{matrix} \pbn{k} F_n + \phi^n F_k \\ \phi^k \phi^n \end{matrix}\right]
+\left[\begin{matrix} F_{n+k} \\ \phi^{n+k} \end{matrix}\right] = \vec F_{n+k}
+\end{split}\]</div>
+<p>Which illustrates a curious identity <span class="math notranslate nohighlight">\(F_{n+k} = \pbn{k} F_n + \phi^n F_k\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Some illustrative calculations for Example 4</span>
+<span class="n">R</span><span class="o">=</span><span class="n">Matrix</span><span class="p">([[</span><span class="o">-</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="mi">2</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">5</span><span class="p">)]])</span>
+<span class="n">Phi</span> <span class="o">=</span> <span class="p">(</span><span class="n">R</span> <span class="o">+</span> <span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">F5</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\vec F_5&#39;</span><span class="p">)</span>
+<span class="n">F5vec</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="n">phi</span><span class="o">**</span><span class="mi">5</span><span class="p">])</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Eq</span><span class="p">(</span><span class="n">Phis</span><span class="p">,</span> <span class="n">Phi</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Eq</span><span class="p">(</span><span class="n">Phis</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">Phi</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Eq</span><span class="p">(</span><span class="n">Phis</span><span class="o">**</span><span class="mi">8</span><span class="p">,</span> <span class="n">Phi</span><span class="o">**</span><span class="mi">8</span><span class="p">,</span> <span class="n">evaluate</span> <span class="o">=</span> <span class="kc">False</span><span class="p">))</span>
+<span class="c1">#Phi^8 * F5vector = F13Vector. F13Vector contains the 13th Fibonacci number 233:</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Eq</span><span class="p">(</span><span class="n">Phis</span><span class="o">**</span><span class="mi">8</span> <span class="o">*</span> <span class="n">F5</span><span class="p">,</span> <span class="n">simplify</span><span class="p">(</span><span class="n">Phi</span><span class="o">**</span><span class="mi">8</span> <span class="o">*</span> <span class="n">F5vec</span><span class="p">),</span> <span class="n">evaluate</span> <span class="o">=</span> <span class="kc">False</span><span class="p">))</span>
+<span class="c1">#Confirm F_13 = 233 with the new identity:</span>
+<span class="n">F5val</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">F8val</span> <span class="o">=</span> <span class="mi">21</span>
+<span class="n">F13val</span> <span class="o">=</span> <span class="n">phibar</span> <span class="o">**</span> <span class="mi">8</span> <span class="o">*</span> <span class="n">F5val</span> <span class="o">+</span> <span class="n">phi</span> <span class="o">**</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">F8val</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Eq</span><span class="p">(</span><span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;F_13&#39;</span><span class="p">),</span> <span class="n">simplify</span><span class="p">(</span><span class="n">F13val</span><span class="p">),</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}\displaystyle \Phi = \left[\begin{matrix}\frac{1}{2} - \frac{\sqrt{5}}{2} &amp; 1\\0 &amp; \frac{1}{2} + \frac{\sqrt{5}}{2}\end{matrix}\right]\end{split}\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}\displaystyle \Phi^{2} = \left[\begin{matrix}\frac{3}{2} - \frac{\sqrt{5}}{2} &amp; 1\\0 &amp; \frac{\sqrt{5}}{2} + \frac{3}{2}\end{matrix}\right]\end{split}\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}\displaystyle \Phi^{8} = \left[\begin{matrix}\frac{47}{2} - \frac{21 \sqrt{5}}{2} &amp; 21\\0 &amp; \frac{21 \sqrt{5}}{2} + \frac{47}{2}\end{matrix}\right]\end{split}\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}\displaystyle \Phi^{8} \vec F_{5} = \left[\begin{matrix}233\\\frac{521}{2} + \frac{233 \sqrt{5}}{2}\end{matrix}\right]\end{split}\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle F_{13} = 233\]</div>
+</div>
+</div>
+</section>
+<section id="example-5">
+<h3>Example 5<a class="headerlink" href="#example-5" title="Permalink to this heading">#</a></h3>
+<p>Suppose <span class="math notranslate nohighlight">\(R = \left[\begin{matrix}
+-\sqrt 5 &amp; 2 \sqrt 5\\
+0 &amp; \sqrt 5
+\end{matrix}\right] \)</span>, so that <span class="math notranslate nohighlight">\(\Phi = \frac{I+R}{2} = 
+\left[\begin{matrix}
+\pb &amp; \sqrt 5\\
+0 &amp; \phi
+\end{matrix}\right] \)</span> and <span class="math notranslate nohighlight">\(
+\Phi^n =
+\left[\begin{matrix}
+\pbn{n} &amp; F_n \sqrt 5\\
+0 &amp; \phi^n
+\end{matrix}\right]\)</span>.</p>
+<p>This matrix operates similar to the previous example, but it’s based on the formula <span class="math notranslate nohighlight">\(L_{n+1} = \phi^n \sqrt 5 + \pb L_n \)</span> and leads to the identity <span class="math notranslate nohighlight">\(L_{n+k} = \pbn{k} L_n + F_k \sqrt 5 \phi^n \)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Some illustrative calculations for example 5</span>
+<span class="n">R</span><span class="o">=</span><span class="n">Matrix</span><span class="p">([[</span><span class="o">-</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">5</span><span class="p">)],[</span><span class="mi">0</span><span class="p">,</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">5</span><span class="p">)]])</span>
+<span class="n">Phi</span> <span class="o">=</span> <span class="p">(</span><span class="n">R</span> <span class="o">+</span> <span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">L6</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\vec L_6&#39;</span><span class="p">)</span>
+<span class="n">L6vec</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="mi">18</span><span class="p">,</span> <span class="n">phi</span><span class="o">**</span><span class="mi">6</span><span class="p">])</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Eq</span><span class="p">(</span><span class="n">Phis</span><span class="p">,</span> <span class="n">Phi</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Eq</span><span class="p">(</span><span class="n">Phis</span><span class="o">**</span><span class="mi">7</span><span class="p">,</span> <span class="n">Phi</span><span class="o">**</span><span class="mi">7</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Eq</span><span class="p">(</span><span class="n">Phis</span><span class="o">**</span><span class="mi">7</span> <span class="o">*</span> <span class="n">L6</span><span class="p">,</span> <span class="n">expand</span><span class="p">(</span><span class="n">Phi</span><span class="o">**</span><span class="mi">7</span> <span class="o">*</span> <span class="n">L6vec</span><span class="p">),</span> <span class="n">evaluate</span> <span class="o">=</span> <span class="kc">False</span><span class="p">))</span>
+
+<span class="c1"># An example of the formula L_n+k = phibar^k * L_n + F_k * sqrt(5) * phi^n with n = 6 and k = 7. </span>
+<span class="n">L6val</span> <span class="o">=</span> <span class="mi">18</span>
+<span class="n">F7val</span> <span class="o">=</span> <span class="mi">13</span>
+<span class="n">L13val</span> <span class="o">=</span> <span class="n">phibar</span><span class="o">**</span><span class="mi">7</span> <span class="o">*</span> <span class="n">L6val</span> <span class="o">+</span> <span class="n">F7val</span> <span class="o">*</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="o">*</span> <span class="n">phi</span><span class="o">**</span><span class="mi">6</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Eq</span><span class="p">(</span><span class="n">Symbol</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;L_13&#39;</span><span class="p">),</span><span class="n">simplify</span><span class="p">(</span><span class="n">L13val</span><span class="p">),</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}\displaystyle \Phi = \left[\begin{matrix}\frac{1}{2} - \frac{\sqrt{5}}{2} &amp; \sqrt{5}\\0 &amp; \frac{1}{2} + \frac{\sqrt{5}}{2}\end{matrix}\right]\end{split}\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}\displaystyle \Phi^{7} = \left[\begin{matrix}\frac{29}{2} - \frac{13 \sqrt{5}}{2} &amp; 13 \sqrt{5}\\0 &amp; \frac{29}{2} + \frac{13 \sqrt{5}}{2}\end{matrix}\right]\end{split}\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}\displaystyle \Phi^{7} \vec L_{6} = \left[\begin{matrix}521\\\frac{521}{2} + \frac{233 \sqrt{5}}{2}\end{matrix}\right]\end{split}\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle L_{13} = 521\]</div>
+</div>
+</div>
+</section>
+<section id="example-6">
+<h3>Example 6<a class="headerlink" href="#example-6" title="Permalink to this heading">#</a></h3>
+<p>Suppose <span class="math notranslate nohighlight">\(R = \left[\begin{matrix}
+\sqrt 5 &amp; 0\\
+0 &amp; -\sqrt 5
+\end{matrix}\right] \)</span>, so that <span class="math notranslate nohighlight">\(\Phi = \frac{I+R}{2} = 
+\left[\begin{matrix}
+\phi &amp; 0\\
+0 &amp; \pb
+\end{matrix}\right] \)</span>.</p>
+<p>One could use this matrix to implement Binet’s formula or similar formulas of the form <span class="math notranslate nohighlight">\(S_n = C \cdot \phi^n + \ov{C}{;} \cdot\pbn{n}\)</span> if so desired.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\left[\begin{matrix} 1 &amp; 1 \end{matrix}\right] \left[\begin{matrix}
+\phi &amp; 0\\
+0 &amp; \pb
+\end{matrix}\right] \left[\begin{matrix} C \\ \ov{C}{;} \end{matrix}\right] = C \cdot \phi^n + \ov{C}{;}\cdot\pbn{n}\end{split}\]</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="FibonacciMatrix.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">The Fibonacci Matrix</p>
+      </div>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fibonacci-and-lucas-sequences">Fibonacci and Lucas Sequences</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fibonacci-lucas-and-the-golden-ratio-phi">Fibonacci, Lucas, and the Golden Ratio <span class="math notranslate nohighlight">\(\phi\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-roots-and-matrices-phi-and-pb">Matrix Roots and Matrices <span class="math notranslate nohighlight">\(\Phi\)</span> and <span class="math notranslate nohighlight">\(\Pb\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#phi-for-specific-roots-of-5i"><span class="math notranslate nohighlight">\(\Phi\)</span> for Specific Roots of <span class="math notranslate nohighlight">\(5I\)</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1">Example 1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2">Example 2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3">Example 3</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-4">Example 4</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-5">Example 5</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-6">Example 6</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jim Pearson
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

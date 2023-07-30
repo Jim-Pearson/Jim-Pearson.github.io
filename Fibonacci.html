@@ -1,0 +1,904 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>The Fibonacci Sequence, Lucas Numbers, and the Golden Ratio &#8212; Jim Pearson&#39;s Page</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Fibonacci';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Mathematical Properties of the Golden Ratio" href="PhiProperties.html" />
+    <link rel="prev" title="Welcome to Jim Pearson’s Page" href="intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to Jim Pearson’s Page
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">The Fibonacci Sequence, Lucas Numbers, and the Golden Ratio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PhiProperties.html">Mathematical Properties of the Golden Ratio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FibonacciMatrix.html">The Fibonacci Matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="RootsOf5I.html">Matrix Square Roots and Related Fibonacci Matrices</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Fibonacci.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>The Fibonacci Sequence, Lucas Numbers, and the Golden Ratio</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fibonacci-sequence">Fibonacci Sequence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fibonacci-sequence-for-negative-indices">Fibonacci Sequence for Negative Indices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-lucas-sequence">The Lucas Sequence</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lucas-sequence-first-definition">Lucas Sequence First Definition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lucas-sequence-second-definition">Lucas Sequence Second Definition</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-golden-ratio">The Golden Ratio</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#binet-formula-for-fibonacci-numbers">Binet Formula for Fibonacci Numbers</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <p><span class="math notranslate nohighlight">\(\newcommand{\ov}[2]{\overline{\smash{#1}\vphantom{#2}}}\)</span>
+<span class="math notranslate nohighlight">\(\newcommand{\pb}[0]{\ov{\phi}{;}}\)</span>
+<span class="math notranslate nohighlight">\(\newcommand{\cb}[0]{\ov{C}{;}}\)</span>
+<span class="math notranslate nohighlight">\(\newcommand{\pbn}[1]{\pb\vphantom{}^{#1}}\)</span></p>
+<section class="tex2jax_ignore mathjax_ignore" id="the-fibonacci-sequence-lucas-numbers-and-the-golden-ratio">
+<h1>The Fibonacci Sequence, Lucas Numbers, and the Golden Ratio<a class="headerlink" href="#the-fibonacci-sequence-lucas-numbers-and-the-golden-ratio" title="Permalink to this heading">#</a></h1>
+<section id="fibonacci-sequence">
+<h2>Fibonacci Sequence<a class="headerlink" href="#fibonacci-sequence" title="Permalink to this heading">#</a></h2>
+<p>The Fibonacci sequence, aka Fibonacci numbers, is simple enough to be taught in primary schools. Its first few values are:</p>
+<div class="math notranslate nohighlight">
+\[1, 1, 2, 3, 5, 8...\]</div>
+<p>See that after the two <span class="math notranslate nohighlight">\(1\)</span>s at the beginning, each value is the sum of the two values before it. More formally, the sequence is defined recursively by setting the first two elements of the sequence equal to <span class="math notranslate nohighlight">\(1\)</span> and then applying the rule that each subsequent element is equal to the sum of its two immediate predecessors:</p>
+<div class="math notranslate nohighlight">
+\[ F_1=1, F_2=1, \text{and } F_n = F_{n-1} + F_{n-2} \text{ for all integers } n&gt;2.\]</div>
+<p>Let’s calculate the 15th Fibonacci number with a simple Python code.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">=</span><span class="mi">15</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Fib1</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">Fim2</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># i-2 Fibonacci number</span>
+        <span class="n">Fim1</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># i-1 Fibonacci number</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">Fi</span> <span class="o">=</span> <span class="n">Fim2</span> <span class="o">+</span> <span class="n">Fim1</span>
+            <span class="n">Fim2</span> <span class="o">=</span> <span class="n">Fim1</span>
+            <span class="n">Fim1</span> <span class="o">=</span> <span class="n">Fi</span>
+        <span class="k">return</span> <span class="n">Fi</span>
+
+<span class="n">Fib1</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>610
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The first 20 values in the Fibonacci sequence:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">20</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">Fib1</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The first 20 values in the Fibonacci sequence:
+1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987 1597 2584 4181 
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="fibonacci-sequence-for-negative-indices">
+<h2>Fibonacci Sequence for Negative Indices<a class="headerlink" href="#fibonacci-sequence-for-negative-indices" title="Permalink to this heading">#</a></h2>
+<p>The Fib1() function above only delivers valid results for counting numbers <span class="math notranslate nohighlight">\(1, 2, 3...\)</span> Notice that the sequence definition says nothing about a zeroth Fibonacci number <span class="math notranslate nohighlight">\(F_0\)</span> or negatively indexed Fibonacci numbers, e.g. <span class="math notranslate nohighlight">\(F_{-1}\)</span> or <span class="math notranslate nohighlight">\( F_{-5}\)</span>. However, there is a manner by which the sequence can be extended to include indices below <span class="math notranslate nohighlight">\(1\)</span>: We may simply stipulate that the Fibonacci recursion equation also applies to indices less than <span class="math notranslate nohighlight">\(1\)</span>. Note that the recursion equation <span class="math notranslate nohighlight">\( F_n = F_{n-1} + F_{n-2} \)</span> can be solved for <span class="math notranslate nohighlight">\(F_{n-2}\)</span>, yielding: <span class="math notranslate nohighlight">\( F_{n-2} = F_{n} - F_{n-1} .\)</span> One might prefer to reindex the equation so it reads <span class="math notranslate nohighlight">\( F_{n} = F_{n+2} - F_{n+1} .\)</span></p>
+<p>The equation in its original form said, “Each Fibonacci number is the sum of its two immediate predecessors”; Now the rearranged equation illustrates also that “Each Fibonacci number is the difference of its two immediate successors”. We may apply the equation to calculate values for <span class="math notranslate nohighlight">\(F_0, F_{-1}, F_{-2},\)</span> etc. as far as we please.</p>
+<p>Let’s use a function that calculates Fibonacci numbers for any integer index:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">=-</span><span class="mi">10</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Fib2</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Fib1</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">Fip2</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">Fip1</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">Fi</span> <span class="o">=</span> <span class="n">Fip2</span> <span class="o">-</span> <span class="n">Fip1</span>
+            <span class="n">Fip2</span> <span class="o">=</span> <span class="n">Fip1</span>
+            <span class="n">Fip1</span> <span class="o">=</span> <span class="n">Fi</span>
+        <span class="k">return</span> <span class="n">Fi</span>
+
+<span class="n">Fib2</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-55
+</pre></div>
+</div>
+</div>
+</div>
+<p>We find that <span class="math notranslate nohighlight">\(F_{-10} = -F_{10}\)</span>. A general formula that relates positively and negatively indexed Fibonacci numbers is <span class="math notranslate nohighlight">\(F_{-n}=(-1)^{n+1}  F_n .\)</span> In words, the negatively indexed Fibonacci numbers are equal in magnitude to their positively indexed counterparts but alternating in sign. We also find that <span class="math notranslate nohighlight">\(F_0=0\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The Fibonacci numbers indexed from -5 to 5 are:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">Fib2</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The Fibonacci numbers indexed from -5 to 5 are:
+5 -3 2 -1 1 0 1 1 2 3 5 
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="the-lucas-sequence">
+<h2>The Lucas Sequence<a class="headerlink" href="#the-lucas-sequence" title="Permalink to this heading">#</a></h2>
+<p>A sequence which is closely related to the Fibonacci sequence is the Lucas sequence <span class="math notranslate nohighlight">\(L_n\)</span>. (Lucas is a French name and the s is silent). The Lucas sequence is also known as the Lucas numbers. It can be defined similarly to the Fibonacci sequence:</p>
+<section id="lucas-sequence-first-definition">
+<h3>Lucas Sequence First Definition<a class="headerlink" href="#lucas-sequence-first-definition" title="Permalink to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[L_1=1, L_2=3, \text{ and } L_n=L_{n-1}+L_{n-2} \text{ for any integer } n.\]</div>
+<p>The definition differs only in the second starting value which is <span class="math notranslate nohighlight">\(3\)</span> instead of <span class="math notranslate nohighlight">\(1\)</span>.</p>
+<p>An equivalent definition gives the Lucas sequence in terms of Fibonacci:</p>
+</section>
+<section id="lucas-sequence-second-definition">
+<h3>Lucas Sequence Second Definition<a class="headerlink" href="#lucas-sequence-second-definition" title="Permalink to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[L_n = F_{n-1} + F_{n+1} \text{ for all integers } n. \]</div>
+<p>The second definition is can be implemented in code trivially since we already have a Fibonacci function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Lucas2</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">Fib2</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">Fib2</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The Lucas numbers indexed from -5 to 5 are:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">Lucas2</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The Lucas numbers indexed from -5 to 5 are:
+-11 7 -4 3 -1 2 1 3 4 7 11 
+</pre></div>
+</div>
+</div>
+</div>
+<p>Focus on the negatively indexed elements of the two sequences.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sequence values indexed from -5 to -1:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fibonacci:&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">Fib2</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Lucas:  &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">Lucas2</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sequence values indexed from -5 to -1:
+Fibonacci: 5 -3 2 -1 1 
+Lucas:   -11 7 -4 3 -1 
+</pre></div>
+</div>
+</div>
+</div>
+<p>It can be seen that as is the case with Fibonacci numbers, negatively indexed Lucas numbers are alternating in sign. However it is curious that the <strong>evenly</strong> indexed Fibonacci elements are negative and the <strong>oddly</strong> index elements are positive whereas with the Lucas numbers the opposite holds.</p>
+<p>Again, the equation that relates positively and negatively indexed Fibonacci numbers is: <span class="math notranslate nohighlight">\(F_{-n}=(-1)^{n+1}  F_n .\)</span><br />
+The analogous formula for Lucas numbers is: <span class="math notranslate nohighlight">\(L_{-n}=(-1)^{n}  L_n .\)</span></p>
+</section>
+</section>
+<section id="the-golden-ratio">
+<h2>The Golden Ratio<a class="headerlink" href="#the-golden-ratio" title="Permalink to this heading">#</a></h2>
+<p>The Fibonacci numbers famously exhibit the property that the ratios of successive terms approach <span class="math notranslate nohighlight">\( \phi = \frac{1+\sqrt{5}}{2} \approx 1.61803398875 \)</span>, a value known as the golden ratio.</p>
+<p>Examples:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\frac{F_6}{F_5} = \frac{8}{5} = 1.6\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\frac{F_{11}}{F_{10}}= \frac{89}{55} = 1.6\overline{18}\)</span></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">phi</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">5</span> <span class="o">**</span> <span class="mf">.5</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Phi is approximately </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">phi</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;F6/F5 = </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">Fib2</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">/</span><span class="n">Fib2</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;F11/F10 = </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">Fib2</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span><span class="o">/</span><span class="n">Fib2</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;F101/F100 = </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">Fib2</span><span class="p">(</span><span class="mi">101</span><span class="p">))</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">Fib2</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">Fib2</span><span class="p">(</span><span class="mi">101</span><span class="p">)</span><span class="o">/</span><span class="n">Fib2</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Phi is approximately 1.618033988749895
+F6/F5 = 1.6
+F11/F10 = 1.6181818181818182
+F101/F100 = 573147844013817084101/354224848179261915075 = 1.618033988749895
+</pre></div>
+</div>
+</div>
+</div>
+<p>It follows that the Fibonacci numbers are approximately proportional to <span class="math notranslate nohighlight">\(\phi^n\)</span>, and so it is possible to directly  approximate Fibonacci sequence values using the golden ratio <span class="math notranslate nohighlight">\(\phi\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[F_n \approx \frac{\phi^n}{\sqrt 5}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="k">def</span> <span class="nf">Fib3</span><span class="p">(</span><span class="n">n</span><span class="p">):</span> <span class="c1">#Fibonacci sequence approximator</span>
+    <span class="k">return</span> <span class="n">phi</span> <span class="o">**</span> <span class="n">n</span><span class="o">/</span><span class="mi">5</span> <span class="o">**</span> <span class="mf">.5</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;F&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; is &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">Fib2</span><span class="p">(</span><span class="n">n</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot;, which is approximately &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">Fib3</span><span class="p">(</span><span class="n">n</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>F10 is 55, which is approximately 55.00363612324743
+</pre></div>
+</div>
+</div>
+</div>
+<p>The observations above raise some questions:</p>
+<ul class="simple">
+<li><p>Why do the ratios approach <span class="math notranslate nohighlight">\(\phi\)</span>?</p></li>
+<li><p>Why does <span class="math notranslate nohighlight">\(\sqrt 5\)</span> appear in the approximation formula?</p></li>
+<li><p>Is there an exact version of the approximation formula?</p></li>
+</ul>
+<p>Firstly, the property that ratios of successive sequence values approach <span class="math notranslate nohighlight">\(\phi\)</span> is not particular to the Fibonacci sequence itself. Let’s define another sequence <span class="math notranslate nohighlight">\(S_n\)</span> which obeys the same recursive property that each element is the sum of the previous two, i.e. <span class="math notranslate nohighlight">\(S_n = S_{n-1} + S_{n-2}\)</span>. I’ll randomly choose <span class="math notranslate nohighlight">\(S_1 = 42\)</span> and <span class="math notranslate nohighlight">\(S_2 = 34\)</span>. Then <span class="math notranslate nohighlight">\(\frac{S_{n+1}}{S_n} \rightarrow \phi\)</span>, or in words, the ratio of successive terms again approaches the golden ratio. In the code below, feel free to adjust the starting values <span class="math notranslate nohighlight">\(S_1\)</span> and <span class="math notranslate nohighlight">\(S_2\)</span> as you please and see that <span class="math notranslate nohighlight">\(\frac{S_{n+1}}{S_n} \rightarrow \phi\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s1</span> <span class="o">=</span> <span class="mi">42</span>
+<span class="n">s2</span> <span class="o">=</span> <span class="mi">34</span>
+
+<span class="k">def</span> <span class="nf">sSequence</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">sim2</span> <span class="o">=</span> <span class="n">s1</span> <span class="c1"># S with index i minus 2</span>
+    <span class="n">sim1</span> <span class="o">=</span> <span class="n">s2</span> <span class="c1"># S with index i minus 1</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">si</span> <span class="o">=</span> <span class="n">sim1</span> <span class="o">+</span> <span class="n">sim2</span>
+        <span class="n">sim2</span> <span class="o">=</span> <span class="n">sim1</span>
+        <span class="n">sim1</span> <span class="o">=</span> <span class="n">si</span>
+    <span class="k">return</span> <span class="n">si</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Phi is approximately </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">phi</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;S6/S5 = </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">sSequence</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">/</span><span class="n">sSequence</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;S11/S10 = </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">sSequence</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span><span class="o">/</span><span class="n">sSequence</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;S101/S100 = </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">sSequence</span><span class="p">(</span><span class="mi">101</span><span class="p">))</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">sSequence</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">sSequence</span><span class="p">(</span><span class="mi">101</span><span class="p">)</span><span class="o">/</span><span class="n">sSequence</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Phi is approximately 1.618033988749895
+S6/S5 = 1.5913978494623655
+S11/S10 = 1.6182531894013739
+S101/S100 = 21238410663146222211642/13126059656852559080942 = 1.618033988749895
+</pre></div>
+</div>
+</div>
+</div>
+<p>The fact that ratios of successive sequence values approximate <span class="math notranslate nohighlight">\(\phi\)</span> is not specific to the Fibonacci numbers, but is a property of the recurrence relation <span class="math notranslate nohighlight">\(S_n = S_{n-1} + S_{n-2}\)</span>.</p>
+<p>The recurrence relation is an example of a difference equation, which can be solved using methods similar to linear ordinary differential equations. This will give us a formula that can directly calculate any Fibonacci number and which will incidentally address the three questions posed above. Let’s overview the process step by step.</p>
+<ol class="arabic simple">
+<li><p>Write the characteristic equation for <span class="math notranslate nohighlight">\(S_n = S_{n-1} + S_{n-2}\)</span>. The since the difference equation is second order, the characteristic equation will be a quadratic polynomial equation.</p></li>
+<li><p>Find solutions of the characteristic equation <span class="math notranslate nohighlight">\(r_1\)</span> and <span class="math notranslate nohighlight">\(r_2\)</span>. These solutions will inform the general solution <span class="math notranslate nohighlight">\(S_n = C \cdot r_1^n + \ov{C}{;} \cdot\ov{r_2}{;}\vphantom{}^n\)</span>.</p></li>
+<li><p>Use initial values to solve for the constant coefficients <span class="math notranslate nohighlight">\(C\)</span> and <span class="math notranslate nohighlight">\(\cb\)</span>.</p></li>
+</ol>
+<p>Now let’s follow these steps to find a formula for calculating Fibonacci numbers!</p>
+</section>
+<section id="binet-formula-for-fibonacci-numbers">
+<h2>Binet Formula for Fibonacci Numbers<a class="headerlink" href="#binet-formula-for-fibonacci-numbers" title="Permalink to this heading">#</a></h2>
+<p>Step 1 is to write the characteristic equation, which is done with simple manipulations of the difference equation <span class="math notranslate nohighlight">\(S_n = S_{n-1} + S_ {n-2}\)</span>. Replace each instance of <span class="math notranslate nohighlight">\(S\)</span> with <span class="math notranslate nohighlight">\(x\)</span> and change the indices into exponents, yielding the polynomial equation:<br />
+<span class="math notranslate nohighlight">\(x^n = x^{n-1} + x^{n-2}\)</span>.</p>
+<p>Now set <span class="math notranslate nohighlight">\(n = 2\)</span>, yielding the characteristic equation:</p>
+<p><span class="math notranslate nohighlight">\(x^2 = x + 1\)</span></p>
+<p>Step 1 is done. The idea is that if a value <span class="math notranslate nohighlight">\(r\)</span> solves this equation, then <span class="math notranslate nohighlight">\(S_n = C \cdot r^n\)</span> will solve the difference equation <span class="math notranslate nohighlight">\(S_n = S_{n-1} + S_{n-2}\)</span> for any constant <span class="math notranslate nohighlight">\(C\)</span>. Let’s continue to step 2: Find the solutions of the characteristic equation which will lead to solutions of the difference equation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solving the characteristic polynomial equation x^2 - x - 1 = 0 using the quadratic formula.</span>
+<span class="c1"># Coefficients</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">b</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="n">c</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+
+<span class="c1"># Discriminant</span>
+<span class="n">d</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">a</span><span class="o">*</span><span class="n">c</span><span class="p">)</span>
+
+<span class="c1"># Find the two solutions. I know that the discriminant is 5 &gt; 0, so I&#39;m unaffraid to take its square root.</span>
+<span class="n">phi</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">b</span><span class="o">+</span><span class="n">d</span> <span class="o">**</span> <span class="mf">.5</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">a</span><span class="p">)</span>
+<span class="n">phibar</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">b</span><span class="o">-</span><span class="n">d</span> <span class="o">**</span> <span class="mf">.5</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">a</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;One solution is the golden ratio (&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="o">-</span><span class="n">b</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; + sqrt(&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;))/(&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;).&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The other solution is the golden ratio&#39;s often neglected close relative (&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="o">-</span><span class="n">b</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; - sqrt(&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;))/(&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;).&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The solutions in decimal form are </span><span class="si">{0}</span><span class="s1"> and </span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span><span class="n">phibar</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>One solution is the golden ratio (1 + sqrt(5))/(2).
+The other solution is the golden ratio&#39;s often neglected close relative (1 - sqrt(5))/(2).
+The solutions in decimal form are 1.618033988749895 and -0.6180339887498949
+</pre></div>
+</div>
+</div>
+</div>
+<p>Skipping the algebra, the solutions of the characteristic equation are the golden ratio <span class="math notranslate nohighlight">\(\phi = \frac{1+\sqrt5}{2}\)</span> and its rational conjugate <span class="math notranslate nohighlight">\(\ov{\phi}{;} = \frac{1-\sqrt5}{2}\)</span>.</p>
+<p>Step 2 is done. It follows that <span class="math notranslate nohighlight">\(\phi^n = \phi^{n-1} + \phi^{n-2}\)</span> and <span class="math notranslate nohighlight">\(\ov{\phi}{;}\vphantom{}^n = \ov{\phi}{;}\vphantom{}^{n-1} + \ov{\phi}{;}\vphantom{}^{n-2}\)</span>, so <span class="math notranslate nohighlight">\(S_n = \phi^n\)</span> and <span class="math notranslate nohighlight">\(S_n = \ov{\phi}{;}\vphantom{}^n\)</span> both solve the difference equation <span class="math notranslate nohighlight">\(S_n = S_{n-1} + S_{n-2}\)</span>. An arbitrary linear combination of these two solutions yields the general solution <span class="math notranslate nohighlight">\(S_n = C \cdot \phi^n + \ov{C}{;} \cdot\ov{\phi}{;}\vphantom{}^n\)</span>.</p>
+<p>To finish, let’s perform step 3. A specific solution for a sequence can be determined by solving for <span class="math notranslate nohighlight">\(C\)</span> and <span class="math notranslate nohighlight">\(\ov{C}{;}\)</span> using initial values. In the case of the Fibonacci sequence, we would like to find values for <span class="math notranslate nohighlight">\(C\)</span> and <span class="math notranslate nohighlight">\(\ov{C}{;}\)</span> so that <span class="math notranslate nohighlight">\(F_n = C \cdot \phi^n + \ov{C}{;} \cdot \ov{\phi}{;}\vphantom{}^n\)</span>. So use the known values of <span class="math notranslate nohighlight">\(F_1\)</span> and <span class="math notranslate nohighlight">\(F_2\)</span> to set up a system of linear equations:<br />
+$<span class="math notranslate nohighlight">\(\begin{align}
+F_1&amp;=1 \text{ so set } C \cdot \phi^1 + \ov{C}{;}\cdot\ov{\phi}{;}\vphantom{}^1=1 \text{ and}\\
+F_2&amp;=1 \text{ so set } C \cdot \phi^2 + \ov{C}{;}\cdot\ov{\phi}{;}\vphantom{}^2=1.
+\end{align}\)</span>$</p>
+<p>In the notation of linear algebra, this equation system may be written as<br />
+$<span class="math notranslate nohighlight">\( \begin{bmatrix}
+\phi &amp; \ov{\phi}{;} \\
+\phi^2 &amp; \ov{\phi}{;}\vphantom{}^2 
+\end{bmatrix}  
+\begin{bmatrix}
+C \\
+\ov{C}{;}
+\end{bmatrix} =
+\begin{bmatrix}
+1 \\
+1
+\end{bmatrix}.\)</span><span class="math notranslate nohighlight">\(  
+Python's sympy can solve this system symbolically and tell us what \)</span>C<span class="math notranslate nohighlight">\( and \)</span>\ov{C}{;}$ are:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solve for the coefficients C and Cbar in the formula for Fibonacci numbers.</span>
+<span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sym</span>
+<span class="kn">from</span> <span class="nn">sympy.matrices</span> <span class="kn">import</span> <span class="n">Matrix</span> <span class="k">as</span> <span class="n">mat</span>
+
+<span class="n">phi</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">sym</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">phibar</span> <span class="o">=</span> <span class="mi">1</span><span class="o">-</span><span class="n">phi</span>
+<span class="c1">#initial values of the Fibonacci sequence</span>
+<span class="n">S1</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">S2</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">M</span> <span class="o">=</span> <span class="n">mat</span><span class="p">([[</span><span class="n">phi</span><span class="p">,</span> <span class="n">phibar</span><span class="p">],</span> <span class="p">[</span><span class="n">phi</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span> <span class="n">phibar</span> <span class="o">**</span> <span class="mi">2</span><span class="p">]])</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">mat</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="n">S1</span><span class="p">,</span> <span class="n">S2</span><span class="p">])</span>
+<span class="n">c</span><span class="p">,</span> <span class="n">cbar</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;C, \overline</span><span class="si">{C}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">cvec</span> <span class="o">=</span> <span class="n">mat</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="n">c</span><span class="p">,</span> <span class="n">cbar</span><span class="p">])</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">sym</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">cvec</span><span class="p">,</span> <span class="p">(</span><span class="n">M</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">b</span><span class="p">))</span><span class="o">.</span><span class="n">applyfunc</span><span class="p">(</span><span class="n">sym</span><span class="o">.</span><span class="n">simplify</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}\displaystyle \left[\begin{matrix}C\\\overline{C}\end{matrix}\right] = \left[\begin{matrix}\frac{\sqrt{5}}{5}\\- \frac{\sqrt{5}}{5}\end{matrix}\right]\end{split}\]</div>
+</div>
+</div>
+<p>Therefore, the specific solution for Fibonacci numbers is:<br />
+<span class="math notranslate nohighlight">\(F_n = \frac{\sqrt5}{5} \phi^n - \frac{\sqrt5}{5} \ov{\phi}{;}\vphantom{}^n \)</span>,<br />
+which can be rewritten as<br />
+<span class="math notranslate nohighlight">\(F_n = \frac{\phi^n - \ov{\phi}{;}\vphantom{}^n}{\sqrt5} \)</span>.<br />
+This formula is known as the Binet formula, attributed to Jaques Binet who used it in the 19th century.<br />
+Note that <span class="math notranslate nohighlight">\(|\ov{\phi}{;}| &lt; 1\)</span> so that <span class="math notranslate nohighlight">\(\ov{\phi}{;}\vphantom{}^n\)</span> goes to <span class="math notranslate nohighlight">\(0\)</span> as <span class="math notranslate nohighlight">\(n\)</span> grows, yielding the approximate formula we saw earlier, <span class="math notranslate nohighlight">\(F_n \approx \frac{\phi^n }{\sqrt5} \)</span>. This illustrates why the ratio of successive terms approximates <span class="math notranslate nohighlight">\(\phi\)</span>. We now have an explain for why <span class="math notranslate nohighlight">\(\sqrt 5\)</span> appears in the formula.</p>
+<p>Let’s repeat the exercise to derive a formula for Lucas numbers:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solve for the coefficients C and Cbar in the formula for Lucas numbers.</span>
+<span class="c1">#initial values of the Lucas sequence</span>
+<span class="n">S1</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">S2</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="n">mat</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="n">S1</span><span class="p">,</span> <span class="n">S2</span><span class="p">])</span>
+<span class="n">display</span><span class="p">(</span><span class="n">sym</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">cvec</span><span class="p">,</span> <span class="p">(</span><span class="n">M</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">b</span><span class="p">))</span><span class="o">.</span><span class="n">applyfunc</span><span class="p">(</span><span class="n">sym</span><span class="o">.</span><span class="n">simplify</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}\displaystyle \left[\begin{matrix}C\\\overline{C}\end{matrix}\right] = \left[\begin{matrix}1\\1\end{matrix}\right]\end{split}\]</div>
+</div>
+</div>
+<p>The coefficients for Lucas numbers are both one! The Lucas sequence formula is simply:<br />
+$<span class="math notranslate nohighlight">\(L_n = \phi^n + \ov{\phi}{;}\vphantom{}^n .\)</span>$</p>
+<p>Just for the sake of my curiosity, I’d like to find the formula for the sequence I invented earlier with <span class="math notranslate nohighlight">\(S_1 = 42\)</span> and <span class="math notranslate nohighlight">\(S_2 = 34\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solve for the coefficients C and Cbar in the formula for Pearson numbers.</span>
+<span class="c1">#initial values of the sequence</span>
+<span class="n">S1</span> <span class="o">=</span> <span class="mi">42</span>
+<span class="n">S2</span> <span class="o">=</span> <span class="mi">34</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="n">mat</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="n">S1</span><span class="p">,</span> <span class="n">S2</span><span class="p">])</span>
+<span class="n">display</span><span class="p">(</span><span class="n">sym</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">cvec</span><span class="p">,</span> <span class="p">(</span><span class="n">M</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">b</span><span class="p">))</span><span class="o">.</span><span class="n">applyfunc</span><span class="p">(</span><span class="n">sym</span><span class="o">.</span><span class="n">simplify</span><span class="p">)))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">sym</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">cvec</span><span class="p">,</span> <span class="p">(</span><span class="n">M</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">b</span><span class="p">))</span><span class="o">.</span><span class="n">evalf</span><span class="p">()))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}\displaystyle \left[\begin{matrix}C\\\overline{C}\end{matrix}\right] = \left[\begin{matrix}-4 + \frac{46 \sqrt{5}}{5}\\- \frac{46 \sqrt{5}}{5} - 4\end{matrix}\right]\end{split}\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}\displaystyle \left[\begin{matrix}C\\\overline{C}\end{matrix}\right] = \left[\begin{matrix}16.5718253929981\\-24.5718253929981\end{matrix}\right]\end{split}\]</div>
+</div>
+</div>
+<p>Note that Sympy can solve difference equations directly:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;n&#39;</span><span class="p">)</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="s1">&#39;f&#39;</span><span class="p">)</span>
+<span class="n">series</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">soln1</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">rsolve</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="p">{</span><span class="n">f</span><span class="p">(</span><span class="mi">1</span><span class="p">):</span> <span class="mi">1</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span> <span class="mi">1</span><span class="p">})</span> <span class="c1">#Solving Fibonacci</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The Binet formula:&#39;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">soln1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The 20th Fibonacci number using the Binet formula:&#39;</span><span class="p">)</span>
+<span class="n">F20</span> <span class="o">=</span> <span class="n">soln1</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">simplify</span><span class="p">()</span>
+<span class="n">display</span><span class="p">(</span><span class="n">sym</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">soln1</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">20</span><span class="p">),</span> <span class="n">F20</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+    
+<span class="n">soln2</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">rsolve</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="p">{</span><span class="n">f</span><span class="p">(</span><span class="mi">1</span><span class="p">):</span> <span class="mi">1</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span> <span class="mi">3</span><span class="p">})</span> <span class="c1">#Solving Lucas</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The 20th Lucas number using the explicit formula:&#39;</span><span class="p">)</span>
+<span class="n">L20</span> <span class="o">=</span> <span class="n">soln2</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">simplify</span><span class="p">()</span>
+<span class="n">display</span><span class="p">(</span><span class="n">sym</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">soln2</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">20</span><span class="p">),</span> <span class="n">L20</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+    
+<span class="n">soln3</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">rsolve</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="p">{</span><span class="n">f</span><span class="p">(</span><span class="mi">1</span><span class="p">):</span> <span class="mi">42</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span> <span class="mi">34</span><span class="p">})</span> <span class="c1">#Solving Pearson</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The 20th Pearson number using the explicit formula:&#39;</span><span class="p">)</span>
+<span class="n">P20</span> <span class="o">=</span> <span class="n">soln3</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">simplify</span><span class="p">()</span>
+<span class="n">display</span><span class="p">(</span><span class="n">sym</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">soln3</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">20</span><span class="p">),</span> <span class="n">P20</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The Binet formula:
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle - \frac{\sqrt{5} \left(\frac{1}{2} - \frac{\sqrt{5}}{2}\right)^{n}}{5} + \frac{\sqrt{5} \left(\frac{1}{2} + \frac{\sqrt{5}}{2}\right)^{n}}{5}\]</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The 20th Fibonacci number using the Binet formula:
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle - \frac{\sqrt{5} \left(\frac{1}{2} - \frac{\sqrt{5}}{2}\right)^{20}}{5} + \frac{\sqrt{5} \left(\frac{1}{2} + \frac{\sqrt{5}}{2}\right)^{20}}{5} = 6765\]</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The 20th Lucas number using the explicit formula:
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \left(\frac{1}{2} - \frac{\sqrt{5}}{2}\right)^{20} + \left(\frac{1}{2} + \frac{\sqrt{5}}{2}\right)^{20} = 15127\]</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The 20th Pearson number using the explicit formula:
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \left(\frac{1}{2} - \frac{\sqrt{5}}{2}\right)^{20} \left(- \frac{46 \sqrt{5}}{5} - 4\right) + \left(-4 + \frac{46 \sqrt{5}}{5}\right) \left(\frac{1}{2} + \frac{\sqrt{5}}{2}\right)^{20} = 250682\]</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Welcome to Jim Pearson’s Page</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="PhiProperties.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Mathematical Properties of the Golden Ratio</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fibonacci-sequence">Fibonacci Sequence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fibonacci-sequence-for-negative-indices">Fibonacci Sequence for Negative Indices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-lucas-sequence">The Lucas Sequence</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lucas-sequence-first-definition">Lucas Sequence First Definition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lucas-sequence-second-definition">Lucas Sequence Second Definition</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-golden-ratio">The Golden Ratio</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#binet-formula-for-fibonacci-numbers">Binet Formula for Fibonacci Numbers</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jim Pearson
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
