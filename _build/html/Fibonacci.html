@@ -346,14 +346,11 @@ document.write(`
 <p>Let’s calculate the 15th Fibonacci number with a simple Python code.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">=</span><span class="mi">15</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Fib1</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">Math</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="mi">15</span>
+<span class="k">def</span> <span class="nf">Fib1</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
         <span class="k">return</span> <span class="mi">1</span>
     <span class="k">else</span><span class="p">:</span>
@@ -365,29 +362,30 @@ document.write(`
             <span class="n">Fim1</span> <span class="o">=</span> <span class="n">Fi</span>
         <span class="k">return</span> <span class="n">Fi</span>
 
-<span class="n">Fib1</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">Fib1</span><span class="p">(</span><span class="n">n</span><span class="p">))))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>610
-</pre></div>
-</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle 610\]</div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The first 20 values in the Fibonacci sequence:&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\text{The first 20 values in the Fibonacci sequence:}&#39;</span><span class="p">))</span>
+<span class="n">vals</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">20</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">Fib1</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+    <span class="n">vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">Fib1</span><span class="p">(</span><span class="n">i</span><span class="p">)))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">vals</span><span class="p">)))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The first 20 values in the Fibonacci sequence:
-1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987 1597 2584 4181 
-</pre></div>
-</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \text{The first 20 values in the Fibonacci sequence:}\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181\]</div>
 </div>
 </div>
 </section>
@@ -399,13 +397,8 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">=-</span><span class="mi">10</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Fib2</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+
+<span class="k">def</span> <span class="nf">Fib2</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">Fib1</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
@@ -417,30 +410,31 @@ document.write(`
             <span class="n">Fip1</span> <span class="o">=</span> <span class="n">Fi</span>
         <span class="k">return</span> <span class="n">Fi</span>
 
-<span class="n">Fib2</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">Fib2</span><span class="p">(</span><span class="n">n</span><span class="p">))))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-55
-</pre></div>
-</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle -55\]</div>
 </div>
 </div>
 <p>We find that <span class="math notranslate nohighlight">\(F_{-10} = -F_{10}\)</span>. A general formula that relates positively and negatively indexed Fibonacci numbers is <span class="math notranslate nohighlight">\(F_{-n}=(-1)^{n+1}  F_n .\)</span> In words, the negatively indexed Fibonacci numbers are equal in magnitude to their positively indexed counterparts but alternating in sign. We also find that <span class="math notranslate nohighlight">\(F_0=0\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The Fibonacci numbers indexed from -5 to 5 are:&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\text{The Fibonacci numbers indexed from -5 to 5 are:}&quot;</span><span class="p">))</span>
+<span class="n">vals</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">Fib2</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+    <span class="n">vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">Fib2</span><span class="p">(</span><span class="n">i</span><span class="p">)))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">vals</span><span class="p">)))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The Fibonacci numbers indexed from -5 to 5 are:
-5 -3 2 -1 1 0 1 1 2 3 5 
-</pre></div>
-</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \text{The Fibonacci numbers indexed from -5 to 5 are:}\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle 5, -3, 2, -1, 1, 0, 1, 1, 2, 3, 5\]</div>
 </div>
 </div>
 </section>
@@ -464,39 +458,48 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Lucas2</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">Fib2</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">Fib2</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The Lucas numbers indexed from -5 to 5 are:&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\text{The Lucas numbers indexed from -5 to 5 are:}&quot;</span><span class="p">))</span>
+<span class="n">vals</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">Lucas2</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+    <span class="n">vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">Lucas2</span><span class="p">(</span><span class="n">i</span><span class="p">)))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">vals</span><span class="p">)))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The Lucas numbers indexed from -5 to 5 are:
--11 7 -4 3 -1 2 1 3 4 7 11 
-</pre></div>
-</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \text{The Lucas numbers indexed from -5 to 5 are:}\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle -11, 7, -4, 3, -1, 2, 1, 3, 4, 7, 11\]</div>
 </div>
 </div>
 <p>Focus on the negatively indexed elements of the two sequences.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sequence values indexed from -5 to -1:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fibonacci:&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\text{Sequence values indexed from -5 to -1}&#39;</span><span class="p">))</span>
+<span class="n">vals</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">Fib2</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Lucas:  &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+    <span class="n">vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">Fib2</span><span class="p">(</span><span class="n">i</span><span class="p">)))</span>
+<span class="n">vals</span> <span class="o">=</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">vals</span><span class="p">)</span>
+<span class="n">vals</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;\text</span><span class="si">{Fibonacci: }</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">vals</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="n">vals</span><span class="p">))</span>
+
+<span class="n">vals</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">Lucas2</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+    <span class="n">vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">Lucas2</span><span class="p">(</span><span class="n">i</span><span class="p">)))</span>
+<span class="n">vals</span> <span class="o">=</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">vals</span><span class="p">)</span>
+<span class="n">vals</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;\text</span><span class="si">{Lucas: }</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">vals</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="n">vals</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sequence values indexed from -5 to -1:
-Fibonacci: 5 -3 2 -1 1 
-Lucas:   -11 7 -4 3 -1 
-</pre></div>
-</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \text{Sequence values indexed from -5 to -1}\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \text{Fibonacci: }5, -3, 2, -1, 1\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \text{Lucas: }-11, 7, -4, 3, -1\]</div>
 </div>
 </div>
 <p>It can be seen that as is the case with Fibonacci numbers, negatively indexed Lucas numbers are alternating in sign. However it is curious that the <strong>evenly</strong> indexed Fibonacci elements are negative and the <strong>oddly</strong> index elements are positive whereas with the Lucas numbers the opposite holds.</p>
@@ -515,23 +518,31 @@ The analogous formula for Lucas numbers is <span class="math notranslate nohighl
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">phi</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">5</span> <span class="o">**</span> <span class="mf">.5</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Phi is approximately </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">phi</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;F6/F5 = </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">Fib2</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">/</span><span class="n">Fib2</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;F11/F10 = </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">Fib2</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span><span class="o">/</span><span class="n">Fib2</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;F101/F100 = </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">Fib2</span><span class="p">(</span><span class="mi">101</span><span class="p">))</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">Fib2</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">Fib2</span><span class="p">(</span><span class="mi">101</span><span class="p">)</span><span class="o">/</span><span class="n">Fib2</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Phi is approximately </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">phi</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\text{&#39;</span> <span class="o">+</span> <span class="n">msg</span> <span class="o">+</span> <span class="s1">&#39;}&#39;</span><span class="p">))</span>
+<span class="n">msg</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;\frac</span><span class="si">{F_6}{F_5}</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot; = </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">Fib2</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">/</span><span class="n">Fib2</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="n">msg</span><span class="p">))</span>
+<span class="n">msg</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;\frac{F_</span><span class="si">{11}</span><span class="s2">}{F_</span><span class="si">{10}</span><span class="s2">}&quot;</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot; = </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">Fib2</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span><span class="o">/</span><span class="n">Fib2</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="n">msg</span><span class="p">))</span>
+<span class="n">msg</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;\frac{F_</span><span class="si">{101}</span><span class="s2">}{F_</span><span class="si">{100}</span><span class="s2">} = &quot;</span>  <span class="c1"># F101/F100</span>
+<span class="n">msg</span> <span class="o">+=</span> <span class="sa">r</span><span class="s2">&quot;\frac{&quot;</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">Fib2</span><span class="p">(</span><span class="mi">101</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="sa">r</span><span class="s2">&quot;}{&quot;</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">Fib2</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="sa">r</span><span class="s2">&quot;}&quot;</span> <span class="c1"># fraction showing values of F101 and F100</span>
+<span class="n">msg</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot; = </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">Fib2</span><span class="p">(</span><span class="mi">101</span><span class="p">)</span><span class="o">/</span><span class="n">Fib2</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span> <span class="c1"># value of the fraction F101/F100</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="n">msg</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Phi is approximately 1.618033988749895
-F6/F5 = 1.6
-F11/F10 = 1.6181818181818182
-F101/F100 = 573147844013817084101/354224848179261915075 = 1.618033988749895
-</pre></div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \text{Phi is approximately 1.618033988749895}\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \frac{F_6}{F_5} = 1.6\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \frac{F_{11}}{F_{10}} = 1.6181818181818182\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \frac{F_{101}}{F_{100}} = \frac{573147844013817084101}{354224848179261915075} = 1.618033988749895\]</div>
 </div>
 </div>
-</div>
-<p>It follows that the Fibonacci numbers are approximately proportional to <span class="math notranslate nohighlight">\(\phi^n\)</span>, and so it is possible to directly  approximate Fibonacci sequence values using the golden ratio <span class="math notranslate nohighlight">\(\phi\)</span>:</p>
+<p>It follows that the Fibonacci numbers are approximately proportional to <span class="math notranslate nohighlight">\(\phi^n\)</span>. It is possible to directly approximate Fibonacci sequence values using the golden ratio <span class="math notranslate nohighlight">\(\phi\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[F_n \approx \frac{\phi^n}{\sqrt 5}\]</div>
 <div class="cell docutils container">
@@ -541,14 +552,13 @@ F101/F100 = 573147844013817084101/354224848179261915075 = 1.618033988749895
 <span class="k">def</span> <span class="nf">Fib3</span><span class="p">(</span><span class="n">n</span><span class="p">):</span> <span class="c1">#Fibonacci sequence approximator</span>
     <span class="k">return</span> <span class="n">phi</span> <span class="o">**</span> <span class="n">n</span><span class="o">/</span><span class="mi">5</span> <span class="o">**</span> <span class="mf">.5</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;F&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; is &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">Fib2</span><span class="p">(</span><span class="n">n</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot;, which is approximately &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">Fib3</span><span class="p">(</span><span class="n">n</span><span class="p">)))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;F_{&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="sa">r</span><span class="s2">&quot;} \text{ is }&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">Fib2</span><span class="p">(</span><span class="n">n</span><span class="p">))</span> <span class="o">+</span> <span class="sa">r</span><span class="s2">&quot;\text{, which is approximately } \phi^{&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="sa">r</span><span class="s2">&quot;} = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">Fib3</span><span class="p">(</span><span class="n">n</span><span class="p">))))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>F10 is 55, which is approximately 55.00363612324743
-</pre></div>
-</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle F_{10} \text{ is }55\text{, which is approximately } \phi^{10} = 55.00363612324743\]</div>
 </div>
 </div>
 <p>The observations above raise some questions:</p>
@@ -557,7 +567,7 @@ F101/F100 = 573147844013817084101/354224848179261915075 = 1.618033988749895
 <li><p>Why does <span class="math notranslate nohighlight">\(\sqrt 5\)</span> appear in the approximation formula?</p></li>
 <li><p>Is there an exact version of the approximation formula?</p></li>
 </ul>
-<p>Firstly, the property that ratios of successive sequence values approach <span class="math notranslate nohighlight">\(\phi\)</span> is not particular to the Fibonacci sequence itself. Let’s define another sequence <span class="math notranslate nohighlight">\(S_n\)</span> which obeys the same recursive property that each element is the sum of the previous two, i.e. <span class="math notranslate nohighlight">\(S_n = S_{n-1} + S_{n-2}\)</span>. I’ll randomly choose <span class="math notranslate nohighlight">\(S_1 = 42\)</span> and <span class="math notranslate nohighlight">\(S_2 = 34\)</span>. Then <span class="math notranslate nohighlight">\(\frac{S_{n+1}}{S_n} \rightarrow \phi\)</span>, or in words, the ratio of successive terms again approaches the golden ratio. In the code below, feel free to adjust the starting values <span class="math notranslate nohighlight">\(S_1\)</span> and <span class="math notranslate nohighlight">\(S_2\)</span> as you please and see that <span class="math notranslate nohighlight">\(\frac{S_{n+1}}{S_n} \rightarrow \phi\)</span>.</p>
+<p>Firstly, the property that ratios of successive sequence values approach <span class="math notranslate nohighlight">\(\phi\)</span> is not particular to the Fibonacci sequence itself. Let’s define another sequence <span class="math notranslate nohighlight">\(S_n\)</span> which obeys the same recursive property that each element is the sum of the previous two, i.e. <span class="math notranslate nohighlight">\(S_n = S_{n-1} + S_{n-2}\)</span>. I’ll randomly choose <span class="math notranslate nohighlight">\(S_1 = 42\)</span> and <span class="math notranslate nohighlight">\(S_2 = 34\)</span>. Then <span class="math notranslate nohighlight">\(\frac{S_{n+1}}{S_n} \rightarrow \phi\)</span>, or in words, the ratio of successive terms again approaches the golden ratio. In the code output below, see that <span class="math notranslate nohighlight">\(\frac{S_{n+1}}{S_n} \approx \phi\)</span> for large <span class="math notranslate nohighlight">\(n\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s1</span> <span class="o">=</span> <span class="mi">42</span>
@@ -572,20 +582,28 @@ F101/F100 = 573147844013817084101/354224848179261915075 = 1.618033988749895
         <span class="n">sim1</span> <span class="o">=</span> <span class="n">si</span>
     <span class="k">return</span> <span class="n">si</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Phi is approximately </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">phi</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;S6/S5 = </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">sSequence</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">/</span><span class="n">sSequence</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;S11/S10 = </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">sSequence</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span><span class="o">/</span><span class="n">sSequence</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;S101/S100 = </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">sSequence</span><span class="p">(</span><span class="mi">101</span><span class="p">))</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">sSequence</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">sSequence</span><span class="p">(</span><span class="mi">101</span><span class="p">)</span><span class="o">/</span><span class="n">sSequence</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Phi is approximately </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">phi</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\text{&#39;</span> <span class="o">+</span> <span class="n">msg</span> <span class="o">+</span> <span class="s1">&#39;}&#39;</span><span class="p">))</span>
+<span class="n">msg</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;\frac</span><span class="si">{S_6}{S_5}</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot; = </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">sSequence</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">/</span><span class="n">sSequence</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="n">msg</span><span class="p">))</span>
+<span class="n">msg</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;\frac{S_</span><span class="si">{11}</span><span class="s2">}{S_</span><span class="si">{10}</span><span class="s2">}&quot;</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot; = </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">sSequence</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span><span class="o">/</span><span class="n">sSequence</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="n">msg</span><span class="p">))</span>
+<span class="n">msg</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;\frac{S_</span><span class="si">{101}</span><span class="s2">}{S_</span><span class="si">{100}</span><span class="s2">} = &quot;</span> <span class="c1"># S101/S100</span>
+<span class="n">msg</span> <span class="o">+=</span> <span class="sa">r</span><span class="s2">&quot;\frac{&quot;</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">sSequence</span><span class="p">(</span><span class="mi">101</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="sa">r</span><span class="s2">&quot;}{&quot;</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">sSequence</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="sa">r</span><span class="s2">&quot;}&quot;</span> <span class="c1"># fraction showing values of S101 and S100</span>
+<span class="n">msg</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot; = </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">sSequence</span><span class="p">(</span><span class="mi">101</span><span class="p">)</span><span class="o">/</span><span class="n">sSequence</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span> <span class="c1"># value of S101/S100</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="n">msg</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Phi is approximately 1.618033988749895
-S6/S5 = 1.5913978494623655
-S11/S10 = 1.6182531894013739
-S101/S100 = 21238410663146222211642/13126059656852559080942 = 1.618033988749895
-</pre></div>
-</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \text{Phi is approximately 1.618033988749895}\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \frac{S_6}{S_5} = 1.5913978494623655\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \frac{S_{11}}{S_{10}} = 1.6182531894013739\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \frac{S_{101}}{S_{100}} = \frac{21238410663146222211642}{13126059656852559080942} = 1.618033988749895\]</div>
 </div>
 </div>
 <p>The fact that ratios of successive sequence values approximate <span class="math notranslate nohighlight">\(\phi\)</span> is not specific to the Fibonacci numbers, but is a property of the recurrence relation <span class="math notranslate nohighlight">\(S_n = S_{n-1} + S_{n-2}\)</span>.</p>
@@ -619,18 +637,24 @@ S101/S100 = 21238410663146222211642/13126059656852559080942 = 1.618033988749895
 <span class="n">phi</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">b</span><span class="o">+</span><span class="n">d</span> <span class="o">**</span> <span class="mf">.5</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">a</span><span class="p">)</span>
 <span class="n">phibar</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">b</span><span class="o">-</span><span class="n">d</span> <span class="o">**</span> <span class="mf">.5</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">a</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;One solution is the golden ratio (&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="o">-</span><span class="n">b</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; + sqrt(&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;))/(&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;).&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The other solution is the golden ratio&#39;s often neglected close relative (&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="o">-</span><span class="n">b</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; - sqrt(&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;))/(&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;).&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The solutions in decimal form are </span><span class="si">{0}</span><span class="s1"> and </span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span><span class="n">phibar</span><span class="p">))</span>
+<span class="n">msg</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;\text{One solution is the golden ratio }&quot;</span> 
+<span class="n">msg</span> <span class="o">+=</span> <span class="sa">r</span><span class="s2">&quot; \frac{&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="o">-</span><span class="n">b</span><span class="p">)</span> <span class="o">+</span> <span class="sa">r</span><span class="s2">&quot; + \sqrt{&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="o">+</span> <span class="sa">r</span><span class="s2">&quot;}}{&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;}.&quot;</span> <span class="c1"># Calculated phi value in Latex</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="n">msg</span><span class="p">))</span>
+<span class="n">msg</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;\text{The other solution is the golden ratio&#39;s often neglected close relative }&quot;</span>  
+<span class="n">msg</span> <span class="o">+=</span> <span class="sa">r</span><span class="s2">&quot;\frac{&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="o">-</span><span class="n">b</span><span class="p">)</span> <span class="o">+</span> <span class="sa">r</span><span class="s2">&quot; - \sqrt{&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="o">+</span> <span class="sa">r</span><span class="s2">&quot;}}{&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;}.&quot;</span> <span class="c1"># Calculated phibar value in Latex</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="n">msg</span><span class="p">))</span>
+<span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;The solutions in decimal form are </span><span class="si">{0}</span><span class="s1"> and </span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span><span class="n">phibar</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\text{&#39;</span> <span class="o">+</span> <span class="n">msg</span> <span class="o">+</span> <span class="sa">r</span><span class="s1">&#39;}&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>One solution is the golden ratio (1 + sqrt(5))/(2).
-The other solution is the golden ratio&#39;s often neglected close relative (1 - sqrt(5))/(2).
-The solutions in decimal form are 1.618033988749895 and -0.6180339887498949
-</pre></div>
-</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \text{One solution is the golden ratio } \frac{1 + \sqrt{5}}{2}.\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \text{The other solution is the golden ratio's often neglected close relative }\frac{1 - \sqrt{5}}{2}.\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \text{The solutions in decimal form are 1.618033988749895 and -0.6180339887498949}\]</div>
 </div>
 </div>
 <p>Skipping the algebra, the solutions of the characteristic equation are the golden ratio <span class="math notranslate nohighlight">\(\phi = \frac{1+\sqrt5}{2}\)</span> and its rational conjugate <span class="math notranslate nohighlight">\(\ov{\phi}{;} = \frac{1-\sqrt5}{2}\)</span>.</p>
@@ -685,7 +709,7 @@ Python's sympy can solve this system symbolically and tell us what \)</span>C<sp
 which can be rewritten as<br />
 <span class="math notranslate nohighlight">\(F_n = \frac{\phi^n - \ov{\phi}{;}\vphantom{}^n}{\sqrt5} \)</span>.<br />
 This formula is known as the Binet formula, attributed to Jaques Binet who used it in the 19th century.<br />
-Note that <span class="math notranslate nohighlight">\(|\ov{\phi}{;}| &lt; 1\)</span> so that <span class="math notranslate nohighlight">\(\ov{\phi}{;}\vphantom{}^n\)</span> goes to <span class="math notranslate nohighlight">\(0\)</span> as <span class="math notranslate nohighlight">\(n\)</span> grows, yielding the approximate formula we saw earlier, <span class="math notranslate nohighlight">\(F_n \approx \frac{\phi^n }{\sqrt5} \)</span>. This illustrates why the ratio of successive terms approximates <span class="math notranslate nohighlight">\(\phi\)</span>. We now have an explain for why <span class="math notranslate nohighlight">\(\sqrt 5\)</span> appears in the formula.</p>
+Note that <span class="math notranslate nohighlight">\(|\ov{\phi}{;}| &lt; 1\)</span> so that <span class="math notranslate nohighlight">\(\ov{\phi}{;}\vphantom{}^n\)</span> goes to <span class="math notranslate nohighlight">\(0\)</span> as <span class="math notranslate nohighlight">\(n\)</span> grows, yielding the approximate formula we saw earlier, <span class="math notranslate nohighlight">\(F_n \approx \frac{\phi^n }{\sqrt5} \)</span>. This illustrates why the ratio of successive terms approximates <span class="math notranslate nohighlight">\(\phi\)</span> and why <span class="math notranslate nohighlight">\(\sqrt 5\)</span> appears in the formula.</p>
 <p>Let’s repeat the exercise to derive a formula for Lucas numbers:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -734,9 +758,10 @@ $<span class="math notranslate nohighlight">\(L_n = \phi^n + \ov{\phi}{;}\vphant
 <span class="n">f</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="s1">&#39;f&#39;</span><span class="p">)</span>
 <span class="n">series</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
 
-<span class="n">soln1</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">rsolve</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="p">{</span><span class="n">f</span><span class="p">(</span><span class="mi">1</span><span class="p">):</span> <span class="mi">1</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span> <span class="mi">1</span><span class="p">})</span> <span class="c1">#Solving Fibonacci</span>
+<span class="n">soln1</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">rsolve</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="p">{</span><span class="n">f</span><span class="p">(</span><span class="mi">1</span><span class="p">):</span> <span class="mi">1</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span> <span class="mi">1</span><span class="p">})</span> <span class="c1">#Solving Fibonacci - Generates Binet&#39;s formula in one line.</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The Binet formula:&#39;</span><span class="p">)</span>
 <span class="n">display</span><span class="p">(</span><span class="n">soln1</span><span class="p">)</span>
+
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The 20th Fibonacci number using the Binet formula:&#39;</span><span class="p">)</span>
 <span class="n">F20</span> <span class="o">=</span> <span class="n">soln1</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">simplify</span><span class="p">()</span>
 <span class="n">display</span><span class="p">(</span><span class="n">sym</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">soln1</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">20</span><span class="p">),</span> <span class="n">F20</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
@@ -745,11 +770,6 @@ $<span class="math notranslate nohighlight">\(L_n = \phi^n + \ov{\phi}{;}\vphant
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The 20th Lucas number using the explicit formula:&#39;</span><span class="p">)</span>
 <span class="n">L20</span> <span class="o">=</span> <span class="n">soln2</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">simplify</span><span class="p">()</span>
 <span class="n">display</span><span class="p">(</span><span class="n">sym</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">soln2</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">20</span><span class="p">),</span> <span class="n">L20</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
-    
-<span class="n">soln3</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">rsolve</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="p">{</span><span class="n">f</span><span class="p">(</span><span class="mi">1</span><span class="p">):</span> <span class="mi">42</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span> <span class="mi">34</span><span class="p">})</span> <span class="c1">#Solving Pearson</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The 20th Pearson number using the explicit formula:&#39;</span><span class="p">)</span>
-<span class="n">P20</span> <span class="o">=</span> <span class="n">soln3</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">simplify</span><span class="p">()</span>
-<span class="n">display</span><span class="p">(</span><span class="n">sym</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">soln3</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">20</span><span class="p">),</span> <span class="n">P20</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -769,11 +789,6 @@ $<span class="math notranslate nohighlight">\(L_n = \phi^n + \ov{\phi}{;}\vphant
 </div>
 <div class="output text_latex math notranslate nohighlight">
 \[\displaystyle \left(\frac{1}{2} - \frac{\sqrt{5}}{2}\right)^{20} + \left(\frac{1}{2} + \frac{\sqrt{5}}{2}\right)^{20} = 15127\]</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The 20th Pearson number using the explicit formula:
-</pre></div>
-</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \left(\frac{1}{2} - \frac{\sqrt{5}}{2}\right)^{20} \left(- \frac{46 \sqrt{5}}{5} - 4\right) + \left(-4 + \frac{46 \sqrt{5}}{5}\right) \left(\frac{1}{2} + \frac{\sqrt{5}}{2}\right)^{20} = 250682\]</div>
 </div>
 </div>
 </section>
