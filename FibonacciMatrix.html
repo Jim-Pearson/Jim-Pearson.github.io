@@ -163,6 +163,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="PhiProperties.html">Mathematical Properties of the Golden Ratio</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">The Fibonacci Matrix</a></li>
 <li class="toctree-l1"><a class="reference internal" href="RootsOf5I.html">Matrix Square Roots and Related Fibonacci Matrices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GoldenSquareFractal.html">Golden Square Fractal</a></li>
 </ul>
 
     </div>
@@ -325,12 +326,10 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <p><span class="math notranslate nohighlight">\(\newcommand{\ov}[2]{\overline{\smash{#1}\vphantom{#2}}}\)</span>
-<span class="math notranslate nohighlight">\(\newcommand{\pb}[0]{\ov{\phi}{;}}\)</span>
-<span class="math notranslate nohighlight">\(\newcommand{\cb}[0]{\ov{C}{;}}\)</span>
+  <p><span class="math notranslate nohighlight">\(\newcommand{\pb}[0]{\overline{\phi}}\)</span>
+<span class="math notranslate nohighlight">\(\newcommand{\cb}[0]{\overline{C}}\)</span>
 <span class="math notranslate nohighlight">\(\newcommand{\pbn}[1]{\pb\vphantom{}^{#1}}\)</span>
-<span class="math notranslate nohighlight">\(\newcommand{\Pb}[0]{\ov{\Phi}{;}}\)</span>
-<span class="math notranslate nohighlight">\(\newcommand{\Pbn}[1]{\Pb\vphantom{}^{#1}}\)</span></p>
+<span class="math notranslate nohighlight">\(\newcommand{\Pb}[0]{\overline{\Phi}}\)</span></p>
 <section class="tex2jax_ignore mathjax_ignore" id="the-fibonacci-matrix">
 <h1>The Fibonacci Matrix<a class="headerlink" href="#the-fibonacci-matrix" title="Permalink to this heading">#</a></h1>
 <section id="the-fibonacci-sequence-defined">
@@ -511,12 +510,12 @@ L_n &amp;= \phi^n + \pbn{n} &amp;&amp; F_n = \frac{\phi^n - \pbn{n}}{\sqrt 5} \\
 \[\begin{split}\begin{align} &amp;\Phi + \Pb = I &amp;&amp; \quad \Phi - \Pb = C &amp;&amp;&amp;&amp; \Phi \times \Pb = -I \end{align}\\[5pt]\end{split}\]</div>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align}
-\Phi^n &amp;= \frac{L_n\cdot I+F_n\cdot C}{2} &amp;&amp; \Pbn{n} = \frac{L_n \cdot I-F_n \cdot C}{2} \\[5pt]
-L_n\cdot I &amp;= \Phi ^n + \Pbn{n} &amp;&amp; F_n\cdot I = (\Phi^n - \Pbn{n})C^{-1} \\[5pt]
-C \cdot \Phi^n &amp;= \Phi^{n-1} + \Phi^{n+1} &amp;&amp; C \cdot \Pbn{n} = -(\Pbn{n-1} + \Pbn{n+1}) \\
+\Phi^n &amp;= \frac{L_n\cdot I+F_n\cdot C}{2} &amp;&amp; \Pb^{n} = \frac{L_n \cdot I-F_n \cdot C}{2} \\[5pt]
+L_n\cdot I &amp;= \Phi ^n + \Pb^{n} &amp;&amp; F_n\cdot I = (\Phi^n - \Pb^n)C^{-1} \\[5pt]
+C \cdot \Phi^n &amp;= \Phi^{n-1} + \Phi^{n+1} &amp;&amp; C \cdot \Pb^{n} = -(\Pb^{n-1} + \Pb^{n+1}) \\
 \end{align}\end{split}\]</div>
 <div class="math notranslate nohighlight">
-\[\begin{align} \Phi^n &amp;= F_n \cdot \Phi + F_{n-1}\cdot  I  &amp;&amp;\Pbn{n} = F_n \cdot \Pb + F_{n-1} \cdot I \end{align}\]</div>
+\[\begin{align} \Phi^n &amp;= F_n \cdot \Phi + F_{n-1}\cdot  I  &amp;&amp;\Pb^{n} = F_n \cdot \Pb + F_{n-1} \cdot I \end{align}\]</div>
 <p>Earlier we saw that <span class="math notranslate nohighlight">\(\Phi^n\)</span> can represent <span class="math notranslate nohighlight">\(F_n\)</span>; Now <span class="math notranslate nohighlight">\(\Phi^n\)</span> mimics <span class="math notranslate nohighlight">\(\phi^n\)</span>. It always seems to take one form or the other upon observation; Perhaps we should call it Schrodinger’s matrix!</p>
 </section>
 <section id="about-square-roots-of-5i">

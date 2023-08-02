@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Welcome to Jim Pearson’s Page &#8212; Jim Pearson&#39;s Page</title>
+    <title>Golden Square Fractal &#8212; Jim Pearson&#39;s Page</title>
   
   
   
@@ -61,10 +61,10 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'intro';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'GoldenSquareFractal';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="The Fibonacci Sequence, Lucas Numbers, and the Golden Ratio" href="Fibonacci.html" />
+    <link rel="prev" title="Matrix Square Roots and Related Fibonacci Matrices" href="RootsOf5I.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -130,7 +130,7 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="sidebar-primary-item">
   
 
-<a class="navbar-brand logo" href="#">
+<a class="navbar-brand logo" href="intro.html">
   
   
   
@@ -149,18 +149,18 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1 current active">
-                <a class="reference internal" href="#">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
                     Welcome to Jim Pearson’s Page
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Fibonacci.html">The Fibonacci Sequence, Lucas Numbers, and the Golden Ratio</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PhiProperties.html">Mathematical Properties of the Golden Ratio</a></li>
 <li class="toctree-l1"><a class="reference internal" href="FibonacciMatrix.html">The Fibonacci Matrix</a></li>
 <li class="toctree-l1"><a class="reference internal" href="RootsOf5I.html">Matrix Square Roots and Related Fibonacci Matrices</a></li>
-<li class="toctree-l1"><a class="reference internal" href="GoldenSquareFractal.html">Golden Square Fractal</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Golden Square Fractal</a></li>
 </ul>
 
     </div>
@@ -215,7 +215,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="_sources/intro.md" target="_blank"
+      <li><a href="_sources/GoldenSquareFractal.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -225,7 +225,7 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.md</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
 </li>
       
@@ -295,7 +295,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Welcome to Jim Pearson’s Page</h1>
+    <h1>Golden Square Fractal</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -309,17 +309,70 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="welcome-to-jim-pearson-s-page">
-<h1>Welcome to Jim Pearson’s Page<a class="headerlink" href="#welcome-to-jim-pearson-s-page" title="Permalink to this heading">#</a></h1>
-<p>Some insights regarding Fibonacci numbers are the golden ratio are described here. I love math and took an interest in Fibonacci numbers a few years ago. I doubt anything here is new, but some of the ideas here I haven’t seen elsewhere.</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="Fibonacci.html">The Fibonacci Sequence, Lucas Numbers, and the Golden Ratio</a></li>
-<li class="toctree-l1"><a class="reference internal" href="PhiProperties.html">Mathematical Properties of the Golden Ratio</a></li>
-<li class="toctree-l1"><a class="reference internal" href="FibonacciMatrix.html">The Fibonacci Matrix</a></li>
-<li class="toctree-l1"><a class="reference internal" href="RootsOf5I.html">Matrix Square Roots and Related Fibonacci Matrices</a></li>
-<li class="toctree-l1"><a class="reference internal" href="GoldenSquareFractal.html">Golden Square Fractal</a></li>
-</ul>
+  <section class="tex2jax_ignore mathjax_ignore" id="golden-square-fractal">
+<h1>Golden Square Fractal<a class="headerlink" href="#golden-square-fractal" title="Permalink to this heading">#</a></h1>
+<p>The code below draws a fractal shape with the color scheme carefully manipulated to make it pretty. See the resulting shape below the code.</p>
+<p>For now I’ll leave it to you the reader to wrap (or warp) you mind around this.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="kn">import</span> <span class="nn">matplotlib.patches</span> <span class="k">as</span> <span class="nn">mpatches</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">chain</span><span class="p">,</span> <span class="n">combinations</span>
+
+<span class="n">SAVE</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">SECOND_HALF</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="k">def</span> <span class="nf">powerset</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+<span class="c1"># Returns the powerset of s. s doesn&#39;t need to be a set. I cheated a little; The output is a list, not a set, and</span>
+<span class="c1"># The elements of the output set are tuples rather than sets.</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">chain</span><span class="o">.</span><span class="n">from_iterable</span><span class="p">(</span><span class="n">combinations</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)))</span>
+
+<span class="n">depth</span> <span class="o">=</span> <span class="mi">14</span>
+<span class="n">phi</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5</span><span class="o">**</span><span class="mf">.5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="c1"># Golden ratio</span>
+<span class="n">psi</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">phi</span>
+<span class="n">sideLength</span> <span class="o">=</span> <span class="mi">1</span>
+
+
+
+<span class="c1"># start building the plot </span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s2">&quot;cool&quot;</span><span class="p">)</span>
+<span class="n">colors2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s2">&quot;spring&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">depth</span><span class="p">):</span> <span class="c1"># for iteration i</span>
+    <span class="n">sideLength</span> <span class="o">*=</span> <span class="n">psi</span>
+    <span class="n">powers</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="c1"># powers of psi</span>
+    <span class="n">psiPowers</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">psi</span> <span class="o">**</span> <span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">powers</span><span class="p">])</span>
+    <span class="n">coords</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span> <span class="c1"># lower-left coordinate of squares for this iteration</span>
+    <span class="k">for</span> <span class="n">tupl</span> <span class="ow">in</span> <span class="n">powerset</span><span class="p">(</span><span class="n">psiPowers</span><span class="p">):</span> <span class="c1"># fill the coords set</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">tupl</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">psiPowers</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">tupl</span><span class="p">))</span>
+        <span class="n">coords</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">coord</span> <span class="ow">in</span> <span class="n">coords</span><span class="p">:</span>
+        <span class="n">square</span> <span class="o">=</span> <span class="n">mpatches</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">(</span><span class="n">coord</span><span class="p">,</span> <span class="n">sideLength</span><span class="p">,</span> <span class="n">sideLength</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="n">colors</span><span class="p">((</span><span class="n">i</span><span class="o">/</span><span class="p">(</span><span class="n">depth</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">**</span><span class="p">(</span><span class="mf">.3</span><span class="p">)))</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">square</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">SECOND_HALF</span><span class="p">:</span>
+            <span class="c1"># Subtraction of tuples</span>
+            <span class="c1"># using map() + lambda</span>
+            <span class="n">coord2</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="n">i</span> <span class="o">-</span> <span class="n">j</span><span class="p">,</span> <span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="n">phi</span><span class="p">),</span> <span class="n">coord</span><span class="p">))</span>
+            <span class="n">square</span> <span class="o">=</span> <span class="n">mpatches</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">(</span><span class="n">coord2</span><span class="p">,</span> <span class="o">-</span><span class="n">sideLength</span><span class="p">,</span> <span class="o">-</span><span class="n">sideLength</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="n">colors2</span><span class="p">((</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span><span class="o">/</span><span class="p">(</span><span class="n">depth</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">**</span><span class="p">(</span><span class="mi">10</span><span class="o">/</span><span class="mi">3</span><span class="p">)))</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">square</span><span class="p">)</span>
+    
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([]);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span> <span class="c1"># suppress display of axes</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">SAVE</span><span class="p">:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;square.png&#39;</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">transparent</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">pad_inches</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/828611b0019235d61bc46d5228997266d2880e29752dfef444f38b40d22c8197.png" src="_images/828611b0019235d61bc46d5228997266d2880e29752dfef444f38b40d22c8197.png" />
+</div>
 </div>
 </section>
 
@@ -354,14 +407,14 @@ document.write(`
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
-    <a class="right-next"
-       href="Fibonacci.html"
-       title="next page">
+    <a class="left-prev"
+       href="RootsOf5I.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">The Fibonacci Sequence, Lucas Numbers, and the Golden Ratio</p>
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Matrix Square Roots and Related Fibonacci Matrices</p>
       </div>
-      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div></div>
   

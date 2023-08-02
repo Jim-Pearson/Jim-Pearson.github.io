@@ -163,6 +163,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Mathematical Properties of the Golden Ratio</a></li>
 <li class="toctree-l1"><a class="reference internal" href="FibonacciMatrix.html">The Fibonacci Matrix</a></li>
 <li class="toctree-l1"><a class="reference internal" href="RootsOf5I.html">Matrix Square Roots and Related Fibonacci Matrices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GoldenSquareFractal.html">Golden Square Fractal</a></li>
 </ul>
 
     </div>
@@ -327,10 +328,9 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <p><span class="math notranslate nohighlight">\(\newcommand{\ov}[2]{\overline{\smash{#1}\vphantom{#2}}}\)</span>
-<span class="math notranslate nohighlight">\(\newcommand{\pb}[0]{\ov{\phi}{;}}\)</span>
-<span class="math notranslate nohighlight">\(\newcommand{\cb}[0]{\ov{C}{;}}\)</span>
-<span class="math notranslate nohighlight">\(\newcommand{\pbn}[1]{\pb\vphantom{}^{#1}}\)</span></p>
+  <p><span class="math notranslate nohighlight">\(\newcommand{\pb}[0]{\overline{\phi}}\)</span>
+<span class="math notranslate nohighlight">\(\newcommand{\cb}[0]{\overline{C}}\)</span>
+<span class="math notranslate nohighlight">\(\newcommand{\pbn}[1]{\pb^{#1}}\)</span></p>
 <section class="tex2jax_ignore mathjax_ignore" id="mathematical-properties-of-the-golden-ratio">
 <h1>Mathematical Properties of the Golden Ratio<a class="headerlink" href="#mathematical-properties-of-the-golden-ratio" title="Permalink to this heading">#</a></h1>
 <section id="defining-the-golden-ratio-and-its-rational-conjugate">
@@ -360,6 +360,7 @@ document.write(`
 <span class="n">display</span><span class="p">(</span><span class="n">sym</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">phi</span> <span class="o">-</span> <span class="n">phibar</span><span class="p">,</span> <span class="n">phiv</span> <span class="o">-</span> <span class="n">phibarv</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Their product is -1&#39;</span><span class="p">)</span>
 <span class="n">display</span><span class="p">(</span><span class="n">sym</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">phi</span> <span class="o">*</span> <span class="n">phibar</span><span class="p">,</span> <span class="p">(</span><span class="n">phiv</span> <span class="o">*</span> <span class="n">phibarv</span><span class="p">)</span><span class="o">.</span><span class="n">simplify</span><span class="p">()))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">phi</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -379,6 +380,8 @@ document.write(`
 </div>
 <div class="output text_latex math notranslate nohighlight">
 \[\displaystyle \phi \vphantom{}\overline{\smash{\phi}\vphantom{;}} = -1\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \phi\]</div>
 </div>
 </div>
 </section>

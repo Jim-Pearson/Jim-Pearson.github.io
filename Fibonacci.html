@@ -163,6 +163,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="PhiProperties.html">Mathematical Properties of the Golden Ratio</a></li>
 <li class="toctree-l1"><a class="reference internal" href="FibonacciMatrix.html">The Fibonacci Matrix</a></li>
 <li class="toctree-l1"><a class="reference internal" href="RootsOf5I.html">Matrix Square Roots and Related Fibonacci Matrices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GoldenSquareFractal.html">Golden Square Fractal</a></li>
 </ul>
 
     </div>
@@ -329,10 +330,9 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <p><span class="math notranslate nohighlight">\(\newcommand{\ov}[2]{\overline{\smash{#1}\vphantom{#2}}}\)</span>
-<span class="math notranslate nohighlight">\(\newcommand{\pb}[0]{\ov{\phi}{;}}\)</span>
-<span class="math notranslate nohighlight">\(\newcommand{\cb}[0]{\ov{C}{;}}\)</span>
-<span class="math notranslate nohighlight">\(\newcommand{\pbn}[1]{\pb\vphantom{}^{#1}}\)</span></p>
+  <p><span class="math notranslate nohighlight">\(\newcommand{\pb}[0]{\overline{\phi}}\)</span>
+<span class="math notranslate nohighlight">\(\newcommand{\cb}[0]{\overline{C}}\)</span>
+<span class="math notranslate nohighlight">\(\newcommand{\pbn}[1]{\pb\vphantom{\phi}^{#1}}\)</span></p>
 <section class="tex2jax_ignore mathjax_ignore" id="the-fibonacci-sequence-lucas-numbers-and-the-golden-ratio">
 <h1>The Fibonacci Sequence, Lucas Numbers, and the Golden Ratio<a class="headerlink" href="#the-fibonacci-sequence-lucas-numbers-and-the-golden-ratio" title="Permalink to this heading">#</a></h1>
 <section id="fibonacci-sequence">
@@ -610,7 +610,7 @@ The analogous formula for Lucas numbers is <span class="math notranslate nohighl
 <p>The recurrence relation is an example of a difference equation, which can be solved using methods similar to linear ordinary differential equations. This will give us a formula that can directly calculate any Fibonacci number and which will incidentally address the three questions posed above. Let’s overview the process step by step.</p>
 <ol class="arabic simple">
 <li><p>Write the characteristic equation for <span class="math notranslate nohighlight">\(S_n = S_{n-1} + S_{n-2}\)</span>. The since the difference equation is second order, the characteristic equation will be a quadratic polynomial equation.</p></li>
-<li><p>Find solutions of the characteristic equation <span class="math notranslate nohighlight">\(r_1\)</span> and <span class="math notranslate nohighlight">\(r_2\)</span>. These solutions will inform the general solution <span class="math notranslate nohighlight">\(S_n = C \cdot r_1^n + \ov{C}{;} \cdot\ov{r_2}{;}\vphantom{}^n\)</span>.</p></li>
+<li><p>Find solutions of the characteristic equation <span class="math notranslate nohighlight">\(r_1\)</span> and <span class="math notranslate nohighlight">\(r_2\)</span>. These solutions will inform the general solution <span class="math notranslate nohighlight">\(S_n = C \cdot r_1^n + \cb \cdot\overline{r_2}\vphantom{r}^n\)</span>.</p></li>
 <li><p>Use initial values to solve for the constant coefficients <span class="math notranslate nohighlight">\(C\)</span> and <span class="math notranslate nohighlight">\(\cb\)</span>.</p></li>
 </ol>
 <p>Now let’s follow these steps to find a formula for calculating Fibonacci numbers!</p>
@@ -657,27 +657,28 @@ The analogous formula for Lucas numbers is <span class="math notranslate nohighl
 \[\displaystyle \text{The solutions in decimal form are 1.618033988749895 and -0.6180339887498949}\]</div>
 </div>
 </div>
-<p>Skipping the algebra, the solutions of the characteristic equation are the golden ratio <span class="math notranslate nohighlight">\(\phi = \frac{1+\sqrt5}{2}\)</span> and its rational conjugate <span class="math notranslate nohighlight">\(\ov{\phi}{;} = \frac{1-\sqrt5}{2}\)</span>.</p>
-<p>Step 2 is done. It follows that <span class="math notranslate nohighlight">\(\phi^n = \phi^{n-1} + \phi^{n-2}\)</span> and <span class="math notranslate nohighlight">\(\ov{\phi}{;}\vphantom{}^n = \ov{\phi}{;}\vphantom{}^{n-1} + \ov{\phi}{;}\vphantom{}^{n-2}\)</span>, so <span class="math notranslate nohighlight">\(S_n = \phi^n\)</span> and <span class="math notranslate nohighlight">\(S_n = \ov{\phi}{;}\vphantom{}^n\)</span> both solve the difference equation <span class="math notranslate nohighlight">\(S_n = S_{n-1} + S_{n-2}\)</span>. An arbitrary linear combination of these two solutions yields the general solution <span class="math notranslate nohighlight">\(S_n = C \cdot \phi^n + \ov{C}{;} \cdot\ov{\phi}{;}\vphantom{}^n\)</span>.</p>
-<p>To finish, let’s perform step 3. A specific solution for a sequence can be determined by solving for <span class="math notranslate nohighlight">\(C\)</span> and <span class="math notranslate nohighlight">\(\ov{C}{;}\)</span> using initial values. In the case of the Fibonacci sequence, we would like to find values for <span class="math notranslate nohighlight">\(C\)</span> and <span class="math notranslate nohighlight">\(\ov{C}{;}\)</span> so that <span class="math notranslate nohighlight">\(F_n = C \cdot \phi^n + \ov{C}{;} \cdot \ov{\phi}{;}\vphantom{}^n\)</span>. So use the known values of <span class="math notranslate nohighlight">\(F_1\)</span> and <span class="math notranslate nohighlight">\(F_2\)</span> to set up a system of linear equations:<br />
+<p>Skipping the algebra, the solutions of the characteristic equation are the golden ratio <span class="math notranslate nohighlight">\(\phi = \frac{1+\sqrt5}{2}\)</span> and its rational conjugate <span class="math notranslate nohighlight">\(\overline{\phi} = \frac{1-\sqrt5}{2}\)</span>.</p>
+<p>Step 2 is done. It follows that <span class="math notranslate nohighlight">\(\phi^n = \phi^{n-1} + \phi^{n-2}\)</span> and <span class="math notranslate nohighlight">\(\overline{\phi}\vphantom{\phi}^n = \overline{\phi}\vphantom{\phi}^{n-1} + \overline{\phi}\vphantom{\phi}^{n-2}\)</span>, so <span class="math notranslate nohighlight">\(S_n = \phi^n\)</span> and <span class="math notranslate nohighlight">\(S_n = \overline{\phi}\vphantom{\phi}^n\)</span> both solve the difference equation <span class="math notranslate nohighlight">\(S_n = S_{n-1} + S_{n-2}\)</span>. An arbitrary linear combination of these two solutions yields the general solution <span class="math notranslate nohighlight">\(S_n = C \cdot \phi^n + \overline{C} \cdot\overline{\phi}\vphantom{\phi}^n\)</span>.</p>
+<p>To finish, let’s perform step 3. A specific solution for a sequence can be determined by solving for <span class="math notranslate nohighlight">\(C\)</span> and <span class="math notranslate nohighlight">\(\overline{C}\)</span> using initial values. In the case of the Fibonacci sequence, we would like to find values for <span class="math notranslate nohighlight">\(C\)</span> and <span class="math notranslate nohighlight">\(\overline{C}\)</span> so that <span class="math notranslate nohighlight">\(F_n = C \cdot \phi^n + \overline{C} \cdot \overline{\phi}\vphantom{\phi}^n\)</span>. So use the known values of <span class="math notranslate nohighlight">\(F_1\)</span> and <span class="math notranslate nohighlight">\(F_2\)</span> to set up a system of linear equations:<br />
 $<span class="math notranslate nohighlight">\(\begin{align}
-F_1&amp;=1 \text{ so set } C \cdot \phi^1 + \ov{C}{;}\cdot\ov{\phi}{;}\vphantom{}^1=1 \text{ and}\\
-F_2&amp;=1 \text{ so set } C \cdot \phi^2 + \ov{C}{;}\cdot\ov{\phi}{;}\vphantom{}^2=1.
+F_1&amp;=1 \text{ so set } C \cdot \phi^1 + \overline{C}\cdot\overline{\phi}\vphantom{\phi}^1=1 \text{ and}\\
+F_2&amp;=1 \text{ so set } C \cdot \phi^2 + \overline{C}\cdot\overline{\phi}\vphantom{\phi}^2=1.
 \end{align}\)</span>$</p>
-<p>In the notation of linear algebra, this equation system may be written as<br />
-$<span class="math notranslate nohighlight">\( \begin{bmatrix}
-\phi &amp; \ov{\phi}{;} \\
-\phi^2 &amp; \ov{\phi}{;}\vphantom{}^2 
+<p>In the notation of linear algebra, this equation system may be written as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{bmatrix}
+\phi &amp; \overline{\phi} \\
+\phi^2 &amp; \overline{\phi}\vphantom{\phi}^2 
 \end{bmatrix}  
 \begin{bmatrix}
 C \\
-\ov{C}{;}
+\overline{C}
 \end{bmatrix} =
 \begin{bmatrix}
 1 \\
 1
-\end{bmatrix}.\)</span><span class="math notranslate nohighlight">\(  
-Python's sympy can solve this system symbolically and tell us what \)</span>C<span class="math notranslate nohighlight">\( and \)</span>\ov{C}{;}$ are:</p>
+\end{bmatrix}\end{split}\]</div>
+<p>Python’s sympy can solve this system symbolically and tell us what <span class="math notranslate nohighlight">\(C\)</span> and <span class="math notranslate nohighlight">\(\overline{C}\)</span> are:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solve for the coefficients C and Cbar in the formula for Fibonacci numbers.</span>
@@ -705,11 +706,11 @@ Python's sympy can solve this system symbolically and tell us what \)</span>C<sp
 </div>
 </div>
 <p>Therefore, the specific solution for Fibonacci numbers is:<br />
-<span class="math notranslate nohighlight">\(F_n = \frac{\sqrt5}{5} \phi^n - \frac{\sqrt5}{5} \ov{\phi}{;}\vphantom{}^n \)</span>,<br />
+<span class="math notranslate nohighlight">\(F_n = \frac{\sqrt5}{5} \phi^n - \frac{\sqrt5}{5} \overline{\phi}\vphantom{\phi}^n \)</span>,<br />
 which can be rewritten as<br />
-<span class="math notranslate nohighlight">\(F_n = \frac{\phi^n - \ov{\phi}{;}\vphantom{}^n}{\sqrt5} \)</span>.<br />
+<span class="math notranslate nohighlight">\(F_n = \frac{\phi^n - \overline{\phi}\vphantom{\phi}^n}{\sqrt5} \)</span>.<br />
 This formula is known as the Binet formula, attributed to Jaques Binet who used it in the 19th century.<br />
-Note that <span class="math notranslate nohighlight">\(|\ov{\phi}{;}| &lt; 1\)</span> so that <span class="math notranslate nohighlight">\(\ov{\phi}{;}\vphantom{}^n\)</span> goes to <span class="math notranslate nohighlight">\(0\)</span> as <span class="math notranslate nohighlight">\(n\)</span> grows, yielding the approximate formula we saw earlier, <span class="math notranslate nohighlight">\(F_n \approx \frac{\phi^n }{\sqrt5} \)</span>. This illustrates why the ratio of successive terms approximates <span class="math notranslate nohighlight">\(\phi\)</span> and why <span class="math notranslate nohighlight">\(\sqrt 5\)</span> appears in the formula.</p>
+Note that <span class="math notranslate nohighlight">\(|\overline{\phi}| &lt; 1\)</span> so that <span class="math notranslate nohighlight">\(\overline{\phi}\vphantom{\phi}^n\)</span> goes to <span class="math notranslate nohighlight">\(0\)</span> as <span class="math notranslate nohighlight">\(n\)</span> grows, yielding the approximate formula we saw earlier, <span class="math notranslate nohighlight">\(F_n \approx \frac{\phi^n }{\sqrt5} \)</span>. This illustrates why the ratio of successive terms approximates <span class="math notranslate nohighlight">\(\phi\)</span> and why <span class="math notranslate nohighlight">\(\sqrt 5\)</span> appears in the formula.</p>
 <p>Let’s repeat the exercise to derive a formula for Lucas numbers:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -729,7 +730,7 @@ Note that <span class="math notranslate nohighlight">\(|\ov{\phi}{;}| &lt; 1\)</
 </div>
 </div>
 <p>The coefficients for Lucas numbers are both one! The Lucas sequence formula is simply:<br />
-$<span class="math notranslate nohighlight">\(L_n = \phi^n + \ov{\phi}{;}\vphantom{}^n .\)</span>$</p>
+$<span class="math notranslate nohighlight">\(L_n = \phi^n + \overline{\phi}\vphantom{\phi}^n .\)</span>$</p>
 <p>Just for the sake of my curiosity, I’d like to find the formula for the sequence I invented earlier with <span class="math notranslate nohighlight">\(S_1 = 42\)</span> and <span class="math notranslate nohighlight">\(S_2 = 34\)</span>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
