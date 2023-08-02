@@ -34,3 +34,6 @@ repository:
 sphinx:
   config:
     html_show_copyright: false
+
+html:
+  google_analytics_id: G-C5T1CBDHJB
