@@ -3,6 +3,7 @@
 
 title: Jim Pearson's Page
 author: Jim Pearson
+copyright: "2023"
 logo: logo.png
 
 # Force re-execution of notebooks on each build.
@@ -33,7 +34,8 @@ repository:
 
 sphinx:
   config:
-    html_show_copyright: false
+    html_show_copyright: true
 
 html:
+  favicon: logo.png
   google_analytics_id: G-C5T1CBDHJB
