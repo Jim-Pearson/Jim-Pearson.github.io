@@ -218,6 +218,37 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/Jim-Pearson/Jim-Pearson.github.io/master?urlpath=tree/SunflowerSim.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
 <div class="dropdown dropdown-download-buttons">
   <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
     <i class="fas fa-download"></i>
@@ -421,8 +452,64 @@ document.write(`
 <img alt="_images/120e7f9e017a081867050ae8abaa129b97199bf2081d9232d045a549a606b434.png" src="_images/120e7f9e017a081867050ae8abaa129b97199bf2081d9232d045a549a606b434.png" />
 </div>
 </div>
-<p>This code produces impressive illustrations. One amazing property is that the arrangement of seeds is “spirally” but the apparent placement spirals depends of the coloration and the number of disks. It’s fun to change the number of colors and disks and see the results. Fibonacci numbers of colors tend to nicely color a Fibonacci number of spiral arms, e.g. see the 13 spiral arms in the graphic above. But the number of apparent spirals is always a Fibonacci number.</p>
-<p>I thought an image like this would make a great logo for my web page. I wanted to alter the shape and color. The original code can make the seeds all one color but only dark blue, which would’t show up well if a visitor switched to dark mode.</p>
+<p>This code produces impressive illustrations. One amazing property is that the arrangement of seeds is “spirally” but the apparent placement spirals depends of the coloration and the number of disks. It’s fun to experiment with the values. Fibonacci numbers of colors tend to nicely color a Fibonacci number of spiral arms, e.g. see the <span class="math notranslate nohighlight">\(13\)</span> spiral arms in the output graphic above and remember <span class="math notranslate nohighlight">\(F_7 = 13\)</span>. If the number of colors is <span class="math notranslate nohighlight">\(21\)</span>, you’ll see <span class="math notranslate nohighlight">\(21\)</span> spirals, because <span class="math notranslate nohighlight">\(F_8 = 21\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">numberOfDiscs</span><span class="o">=</span><span class="mi">300</span>
+<span class="n">colors</span><span class="o">=</span><span class="mi">21</span>
+<span class="n">angleOffset</span><span class="o">=</span><span class="mf">0.0</span>
+<span class="n">Sunflower</span><span class="p">(</span><span class="n">numberOfDiscs</span><span class="p">,</span> <span class="n">colors</span><span class="p">,</span> <span class="n">angleOffset</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/afa1640c5b9280dbbabffadb772c64a4a7dab2909f3e5c7924dd74dff5200777.png" src="_images/afa1640c5b9280dbbabffadb772c64a4a7dab2909f3e5c7924dd74dff5200777.png" />
+</div>
+</div>
+<p>What if the number of colors is not Fibonacci? How about, say <span class="math notranslate nohighlight">\(7\)</span> colors?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">numberOfDiscs</span><span class="o">=</span><span class="mi">300</span>
+<span class="n">colors</span><span class="o">=</span><span class="mi">7</span>
+<span class="n">angleOffset</span><span class="o">=</span><span class="mf">0.0</span>
+<span class="n">Sunflower</span><span class="p">(</span><span class="n">numberOfDiscs</span><span class="p">,</span> <span class="n">colors</span><span class="p">,</span> <span class="n">angleOffset</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/83c9c863cbe0e49c5e0754abfc87fbe2a033a45a00cc6fc8c090d93de48ae329.png" src="_images/83c9c863cbe0e49c5e0754abfc87fbe2a033a45a00cc6fc8c090d93de48ae329.png" />
+</div>
+</div>
+<p>Again, <span class="math notranslate nohighlight">\(21\)</span> arms appeared, three of each color. Why? Becuase <span class="math notranslate nohighlight">\(21=3 \times 7\)</span>. Ok what if the number of colors is also not a divisor of a Fibonacci number? Maybe <span class="math notranslate nohighlight">\(12\)</span> colors?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">numberOfDiscs</span><span class="o">=</span><span class="mi">300</span>
+<span class="n">colors</span><span class="o">=</span><span class="mi">12</span>
+<span class="n">angleOffset</span><span class="o">=</span><span class="mf">0.0</span>
+<span class="n">Sunflower</span><span class="p">(</span><span class="n">numberOfDiscs</span><span class="p">,</span> <span class="n">colors</span><span class="p">,</span> <span class="n">angleOffset</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/a075dd652665bb9702ec20076fe3690a68b2b30d9e6429daf30b1bd7f9b3462e.png" src="_images/a075dd652665bb9702ec20076fe3690a68b2b30d9e6429daf30b1bd7f9b3462e.png" />
+</div>
+</div>
+<p>With <span class="math notranslate nohighlight">\(12\)</span> colors, <span class="math notranslate nohighlight">\(13\)</span> arms appeared. But each arm cycles through the color palatte. It happens because <span class="math notranslate nohighlight">\(12\)</span> is close to the Fibonacci number <span class="math notranslate nohighlight">\(13\)</span>. By the way, <span class="math notranslate nohighlight">\(12\)</span> in fact does divide a Fibonacci number, because <span class="math notranslate nohighlight">\(F_{12} = 144\)</span>. Watch what happens if the number of colors remains at <span class="math notranslate nohighlight">\(12\)</span> but the scale is increased by adding more discs:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">numberOfDiscs</span><span class="o">=</span><span class="mi">1500</span>
+<span class="n">colors</span><span class="o">=</span><span class="mi">12</span>
+<span class="n">angleOffset</span><span class="o">=</span><span class="mf">0.0</span>
+<span class="n">Sunflower</span><span class="p">(</span><span class="n">numberOfDiscs</span><span class="p">,</span> <span class="n">colors</span><span class="p">,</span> <span class="n">angleOffset</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/55dd1a938e93fa9ab813e1afec36eb00c9fce4bd1e74a618f4699cf3ac050d4d.png" src="_images/55dd1a938e93fa9ab813e1afec36eb00c9fce4bd1e74a618f4699cf3ac050d4d.png" />
+</div>
+</div>
+<p>At a greater scale, <span class="math notranslate nohighlight">\(144\)</span> arms appeared with <span class="math notranslate nohighlight">\(12\)</span> arms of each color.</p>
+<p>I thought this code could draw a great logo for my web page, but I wanted to alter the shape and color. The original code can make the seeds all one color but only dark blue, which would’t show up well if a visitor switched my page to dark mode.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">numberOfDiscs</span><span class="o">=</span><span class="mi">300</span>
@@ -436,7 +523,7 @@ document.write(`
 <img alt="_images/f00a655dfcadf8d199f19bb7438226f84ececde8fbc846823a77e0337b2dc6c4.png" src="_images/f00a655dfcadf8d199f19bb7438226f84ececde8fbc846823a77e0337b2dc6c4.png" />
 </div>
 </div>
-<p>Red contrasts well against both light and dark backgrounds. And I thought it might be more interesting to change the seed shape to square so that they can pack really tightly together. I adjusted the sizes of the seeds so that they wouldn’t overlap; Seeds near the center need to be smaller so I included an exponent on the expression for the <code class="docutils literal notranslate"><span class="pre">side</span></code> variable which specifies each square’s side length. The size adjustment is ad hoc but the result came out nicely.</p>
+<p>So I needed to chose another color. Red contrasts well against both light and dark backgrounds. I thought it might be more interesting to change the seed shape to square so that they can pack really tightly together. So I did all that. Additionally, I decreased the sizes of the central seeds so that they wouldn’t overlap; I included an exponent on the expression for the <code class="docutils literal notranslate"><span class="pre">side</span></code> variable which specifies each square’s side length. The size adjustment is ad hoc but the result came out nicely. I removed the text and border as well.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Uses the golden angle to draw circle in a pattern mimicking seeds of a </span>
@@ -491,7 +578,7 @@ document.write(`
 <img alt="_images/7789c922977d9fe88fde1c2674e6c2cb4f8557f0db1784ad443e8107bc41bc06.png" src="_images/7789c922977d9fe88fde1c2674e6c2cb4f8557f0db1784ad443e8107bc41bc06.png" />
 </div>
 </div>
-<p>Notice how the appearnce of spiral arms depends on the distance from the center. From the outer edge, there are <span class="math notranslate nohighlight">\(55\)</span> spiral arms, or perhaps <span class="math notranslate nohighlight">\(89\)</span>, depending on how you count. Closer to the center, maybe <span class="math notranslate nohighlight">\(21\)</span> or <span class="math notranslate nohighlight">\(13\)</span>. In general, the further from the center, the greater the number of apparent spirals.</p>
+<p>Notice how the appearnce of spiral arms depends on the distance from the center. From the outer edge, there are <span class="math notranslate nohighlight">\(55\)</span> spiral arms, or perhaps <span class="math notranslate nohighlight">\(89\)</span>, depending on how you count. Closer to the center, maybe <span class="math notranslate nohighlight">\(21\)</span> or <span class="math notranslate nohighlight">\(13\)</span>. In general, the further from the center, the greater the number of apparent spirals. The looks really nice, so I made it my web page logo.</p>
 <p><img alt="Counting spirals" src="_images/sfspirals.png" /></p>
 </section>
 </section>
