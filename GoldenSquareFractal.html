@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Golden Square Fractal &#8212; Jim Pearson&#39;s Page</title>
+    <title>Golden Square Fractal (August 26, 2023 update!) &#8212; Jim Pearson&#39;s Page</title>
   
   
   
@@ -68,6 +68,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'GoldenSquareFractal';</script>
     <link rel="shortcut icon" href="_static/logo.png"/>
     <link rel="index" title="Index" href="genindex.html" />
@@ -169,7 +171,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="PhiProperties.html">Mathematical Properties of the Golden Ratio</a></li>
 <li class="toctree-l1"><a class="reference internal" href="FibonacciMatrix.html">The Fibonacci Matrix</a></li>
 <li class="toctree-l1"><a class="reference internal" href="RootsOf5I.html">Matrix Square Roots and Related Fibonacci Matrices</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Golden Square Fractal</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Golden Square Fractal (August 26, 2023 update!)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="SunflowerSim.html">Sunflower Simulator</a></li>
 </ul>
 
@@ -336,7 +338,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Golden Square Fractal</h1>
+    <h1>Golden Square Fractal (August 26, 2023 update!)</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -350,60 +352,78 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="golden-square-fractal">
-<h1>Golden Square Fractal<a class="headerlink" href="#golden-square-fractal" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="golden-square-fractal-august-26-2023-update">
+<h1>Golden Square Fractal (August 26, 2023 update!)<a class="headerlink" href="#golden-square-fractal-august-26-2023-update" title="Permalink to this heading">#</a></h1>
 <p>The code below draws a fractal shape with the color scheme carefully manipulated to make it pretty. See the resulting shape below the code.</p>
-<p>For now I’ll leave it to you the reader to wrap (or warp) you mind around this.</p>
+<p><strong>August 26 update:</strong> An explanation follows.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Creates a fractal image using psi, the reciprocal of phi. i.e. phi = (1+sqrt(5))/2 and psi = 2/(1+sqrt(5)) = (sqrt(5)-1)/2.</span>
+<span class="sd">The code operates in iterations. The nth iteration produces squares with side length psi^n. The squares are arranged in such</span>
+<span class="sd">a way that they fill in a phi x phi square. The squares are colored in a way I thought looked interesting.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">matplotlib</span>
 <span class="kn">import</span> <span class="nn">matplotlib.patches</span> <span class="k">as</span> <span class="nn">mpatches</span>
 <span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">chain</span><span class="p">,</span> <span class="n">combinations</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+
+<span class="k">def</span> <span class="nf">powerset</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+<span class="c1"># Returns the powerset of s. I cheated a little; s doesn&#39;t need to be a set. The output is a list, not a set, and</span>
+<span class="c1"># The elements of the output &quot;set&quot; are tuples rather than sets.</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">chain</span><span class="o">.</span><span class="n">from_iterable</span><span class="p">(</span><span class="n">combinations</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)))</span>
+
+<span class="k">def</span> <span class="nf">CreatePlot</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">colors</span><span class="p">,</span> <span class="n">colors2</span><span class="p">,</span> <span class="n">depth</span><span class="p">,</span> <span class="n">SECOND_HALF</span><span class="p">):</span>
+    <span class="n">phi</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5</span><span class="o">**</span><span class="mf">.5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="c1"># Golden ratio</span>
+    <span class="n">psi</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">phi</span>
+    <span class="n">sideLength</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">depth</span><span class="p">):</span> <span class="c1"># for iteration i</span>
+        <span class="n">sideLength</span> <span class="o">*=</span> <span class="n">psi</span>
+        <span class="n">powers</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="c1"># powers of psi</span>
+        <span class="n">psiPowers</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">psi</span> <span class="o">**</span> <span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">powers</span><span class="p">])</span>
+        
+    <span class="c1">#    coords = set() # lower-left coordinate of squares for this iteration</span>
+    <span class="c1">#    for tupl in powerset(psiPowers): # fill the coords set</span>
+    <span class="c1">#        x = sum(tupl)</span>
+    <span class="c1">#        y = sum(psiPowers - set(tupl))</span>
+    <span class="c1">#        coords.add((x, y))</span>
+
+        <span class="c1"># This line implements in one line the commented five code lines above.</span>
+        <span class="n">coords</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([(</span><span class="nb">sum</span><span class="p">(</span><span class="n">tupl</span><span class="p">),</span> <span class="nb">sum</span><span class="p">(</span><span class="n">psiPowers</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">tupl</span><span class="p">)))</span> <span class="k">for</span> <span class="n">tupl</span> <span class="ow">in</span> <span class="n">powerset</span><span class="p">(</span><span class="n">psiPowers</span><span class="p">)])</span>
+        <span class="c1"># The coords set contains the lower-left coordinate of each square of the ith iteration. I made it a set to eliminate</span>
+        <span class="c1"># duplicate coordinates, of which there will be a large number.</span>
+
+        <span class="k">for</span> <span class="n">coord</span> <span class="ow">in</span> <span class="n">coords</span><span class="p">:</span>
+            <span class="n">square</span> <span class="o">=</span> <span class="n">mpatches</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">(</span><span class="n">coord</span><span class="p">,</span> <span class="n">sideLength</span><span class="p">,</span> <span class="n">sideLength</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="n">colors</span><span class="p">((</span><span class="n">i</span><span class="o">/</span><span class="p">(</span><span class="n">depth</span><span class="p">))</span><span class="o">**</span><span class="p">(</span><span class="mf">.3</span><span class="p">)))</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">square</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">SECOND_HALF</span><span class="p">:</span> <span class="c1"># The first half of the image is a right triangle with its right angle at the lower-left.</span>
+                            <span class="c1"># The code below reflects the triangle towards the upper-right to form the second half of a square.</span>
+                            <span class="c1"># The second half is colored differently for interest.</span>
+                <span class="c1"># Elementwise subtraction of each coordinate pair from (phi, phi) to reflect the triangle</span>
+                <span class="c1"># using map() + lambda.</span>
+                <span class="n">coord2</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="n">i</span> <span class="o">-</span> <span class="n">j</span><span class="p">,</span> <span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="n">phi</span><span class="p">),</span> <span class="n">coord</span><span class="p">))</span>
+                <span class="c1"># The result of the subtraction is the upper-right corner location of the squares in the second half.</span>
+                <span class="n">square</span> <span class="o">=</span> <span class="n">mpatches</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">(</span><span class="n">coord2</span><span class="p">,</span> <span class="o">-</span><span class="n">sideLength</span><span class="p">,</span> <span class="o">-</span><span class="n">sideLength</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="n">colors2</span><span class="p">((</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span><span class="o">/</span><span class="p">(</span><span class="n">depth</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">**</span><span class="p">(</span><span class="mi">10</span><span class="o">/</span><span class="mi">3</span><span class="p">)))</span>
+                <span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">square</span><span class="p">)</span>
 
 <span class="n">SAVE</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="n">SECOND_HALF</span> <span class="o">=</span> <span class="kc">True</span>
-
-<span class="k">def</span> <span class="nf">powerset</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-<span class="c1"># Returns the powerset of s. s doesn&#39;t need to be a set. I cheated a little; The output is a list, not a set, and</span>
-<span class="c1"># The elements of the output set are tuples rather than sets.</span>
-    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">chain</span><span class="o">.</span><span class="n">from_iterable</span><span class="p">(</span><span class="n">combinations</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)))</span>
-
-<span class="n">depth</span> <span class="o">=</span> <span class="mi">14</span>
-<span class="n">phi</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5</span><span class="o">**</span><span class="mf">.5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="c1"># Golden ratio</span>
-<span class="n">psi</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">phi</span>
-<span class="n">sideLength</span> <span class="o">=</span> <span class="mi">1</span>
-
-
-
+<span class="n">depth</span> <span class="o">=</span> <span class="mi">14</span>  <span class="c1"># 14 iterations is enough. The image doesn&#39;t change in further iterations.              </span>
 <span class="c1"># start building the plot </span>
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">colors</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s2">&quot;cool&quot;</span><span class="p">)</span>
-<span class="n">colors2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s2">&quot;spring&quot;</span><span class="p">)</span>
+<span class="n">phi</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5</span><span class="o">**</span><span class="mf">.5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="c1"># Golden ratio</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">phi</span><span class="p">,</span><span class="n">phi</span><span class="p">])</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s2">&quot;cool&quot;</span><span class="p">)</span> <span class="c1"># Color palate for the lower-left half of the square.</span>
+<span class="n">colors2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s2">&quot;spring&quot;</span><span class="p">)</span> <span class="c1"># Color palate for the upper-right half.</span>
 
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">depth</span><span class="p">):</span> <span class="c1"># for iteration i</span>
-    <span class="n">sideLength</span> <span class="o">*=</span> <span class="n">psi</span>
-    <span class="n">powers</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="c1"># powers of psi</span>
-    <span class="n">psiPowers</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">psi</span> <span class="o">**</span> <span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">powers</span><span class="p">])</span>
-    <span class="n">coords</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span> <span class="c1"># lower-left coordinate of squares for this iteration</span>
-    <span class="k">for</span> <span class="n">tupl</span> <span class="ow">in</span> <span class="n">powerset</span><span class="p">(</span><span class="n">psiPowers</span><span class="p">):</span> <span class="c1"># fill the coords set</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">tupl</span><span class="p">)</span>
-        <span class="n">y</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">psiPowers</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">tupl</span><span class="p">))</span>
-        <span class="n">coords</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
-    <span class="k">for</span> <span class="n">coord</span> <span class="ow">in</span> <span class="n">coords</span><span class="p">:</span>
-        <span class="n">square</span> <span class="o">=</span> <span class="n">mpatches</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">(</span><span class="n">coord</span><span class="p">,</span> <span class="n">sideLength</span><span class="p">,</span> <span class="n">sideLength</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="n">colors</span><span class="p">((</span><span class="n">i</span><span class="o">/</span><span class="p">(</span><span class="n">depth</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">**</span><span class="p">(</span><span class="mf">.3</span><span class="p">)))</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">square</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">SECOND_HALF</span><span class="p">:</span>
-            <span class="c1"># Subtraction of tuples</span>
-            <span class="c1"># using map() + lambda</span>
-            <span class="n">coord2</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="n">i</span> <span class="o">-</span> <span class="n">j</span><span class="p">,</span> <span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="n">phi</span><span class="p">),</span> <span class="n">coord</span><span class="p">))</span>
-            <span class="n">square</span> <span class="o">=</span> <span class="n">mpatches</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">(</span><span class="n">coord2</span><span class="p">,</span> <span class="o">-</span><span class="n">sideLength</span><span class="p">,</span> <span class="o">-</span><span class="n">sideLength</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="n">colors2</span><span class="p">((</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span><span class="o">/</span><span class="p">(</span><span class="n">depth</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">**</span><span class="p">(</span><span class="mi">10</span><span class="o">/</span><span class="mi">3</span><span class="p">)))</span>
-            <span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">square</span><span class="p">)</span>
+<span class="n">CreatePlot</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">colors</span><span class="p">,</span> <span class="n">colors2</span><span class="p">,</span> <span class="n">depth</span><span class="p">,</span> <span class="n">SECOND_HALF</span><span class="p">)</span>
     
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([]);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span> <span class="c1"># suppress display of axes</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span> <span class="c1"># adjust horizontal/vertical scales so the image renders as a square</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span> <span class="c1"># suppress border display</span>
 
 <span class="k">if</span> <span class="n">SAVE</span><span class="p">:</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;square.png&#39;</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">transparent</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">pad_inches</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -412,9 +432,172 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/828611b0019235d61bc46d5228997266d2880e29752dfef444f38b40d22c8197.png" src="_images/828611b0019235d61bc46d5228997266d2880e29752dfef444f38b40d22c8197.png" />
+<img alt="_images/fe5b77ffc0abfc6741b8ba9817866c7f7f54652dd68a4aec3c4fbc64d8021210.png" src="_images/fe5b77ffc0abfc6741b8ba9817866c7f7f54652dd68a4aec3c4fbc64d8021210.png" />
 </div>
 </div>
+<p>I’ll try explaining the algorithm step by step.</p>
+<p>First a bit of mathematic background. As mentioned in the code comments, the fractal is built using squares whose side lengths are powers of <span class="math notranslate nohighlight">\(\psi = \frac{\sqrt 5 - 1}{2}\)</span> which is the reciprocal of the Golden Ratio <span class="math notranslate nohighlight">\(\phi = \frac{\sqrt 5 + 1}{2}\)</span>, i.e. <span class="math notranslate nohighlight">\(\psi = \frac{1}{\phi}\)</span>. <span class="math notranslate nohighlight">\(\psi\)</span> obeys a curious recursive property:</p>
+<div class="math notranslate nohighlight" id="equation-psi-recursion-eqn">
+<span class="eqno">(1)<a class="headerlink" href="#equation-psi-recursion-eqn" title="Permalink to this equation">#</a></span>\[\psi^{n+2} + \psi^{n+1} = \psi^n\]</div>
+<p>In words, the sum of two consecutive powers of <span class="math notranslate nohighlight">\(\psi\)</span> equals the previous power of <span class="math notranslate nohighlight">\(\psi\)</span>. Since the component squares in the figue have side lengths of powers of <span class="math notranslate nohighlight">\(\psi\)</span>, equation <a class="reference internal" href="#equation-psi-recursion-eqn">(1)</a> will be useful in understanding the fractal.</p>
+<p>For the remainder of this article, any text that refers to placing a square at a certain point means that the <em>lower left corner</em> is placed at the stated point. This seems to me to be the easiest way to conceive how the algorithm works and happens to coincide with the syntax of the Matplotlib library in Python.</p>
+<p>Now let’s break the fractal down conceptually. We’ll focus on the lower-left half first. Let’s see a rendering that includes axes to show the scale of the image:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">depth</span> <span class="o">=</span> <span class="mi">14</span>                
+<span class="c1"># start building the plot </span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">phi</span><span class="p">,</span><span class="n">phi</span><span class="p">])</span>
+
+<span class="n">CreatePlot</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">colors</span><span class="p">,</span> <span class="n">colors2</span><span class="p">,</span> <span class="n">depth</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span> <span class="c1"># adjust horizontal/vertical scales so the image renders as a square</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/fcd6d715d7fb47f681000d9e001ea125effb1d4cb4f12eb2d6ee5f077dfd50e3.png" src="_images/fcd6d715d7fb47f681000d9e001ea125effb1d4cb4f12eb2d6ee5f077dfd50e3.png" />
+</div>
+</div>
+<p>Notice that the origin is at the lower-left corner and the fractal appears in the first quandrant, i.e. the area where <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> values are positive. See that the length of bottom edge length is about <span class="math notranslate nohighlight">\(1.6\)</span>. The bottom edge is formed by (in principle) infinitely many squares side-by-side each with side length <span class="math notranslate nohighlight">\(\psi^n\)</span>. The sum of the infinite series <span class="math notranslate nohighlight">\(\psi^n\)</span> is the golden ratio <span class="math notranslate nohighlight">\(\phi \approx 1.618\)</span>. In symbols:</p>
+<div class="math notranslate nohighlight">
+\[
+\sum^\infty_{n=1} \psi^n = \frac{\psi}{1-\psi} = \phi
+\]</div>
+<p>The algorithm which produces the fractal operates iteratively, and each iteration produces squares of a different size. Specifically, the <span class="math notranslate nohighlight">\(n^{th}\)</span> iteration produces squares of side length <span class="math notranslate nohighlight">\(\psi^n\)</span>. The first iteration produces only the single largest square at the lower left. Let’s see that:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># start building the plot </span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+
+<span class="c1"># Some manual axis manipulation to force the image to take a similar scale to the others.</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">phi</span><span class="p">,</span> <span class="n">phi</span> <span class="o">*</span> <span class="mf">640.</span><span class="o">/</span><span class="mf">480.</span><span class="p">])</span> 
+
+<span class="n">depth</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># only one iteration for this figure                </span>
+
+<span class="n">CreatePlot</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">colors</span><span class="p">,</span> <span class="n">colors2</span><span class="p">,</span> <span class="n">depth</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+
+<span class="n">phi</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5</span><span class="o">**</span><span class="mf">.5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="c1"># Golden ratio</span>
+<span class="n">psi</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">phi</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">mpatches</span><span class="o">.</span><span class="n">Circle</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="n">psi</span><span class="p">),</span> <span class="mf">0.02</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">mpatches</span><span class="o">.</span><span class="n">Circle</span><span class="p">((</span><span class="n">psi</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mf">0.02</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;New target points</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="sa">r</span><span class="s1">&#39;at (0, $\psi$) and ($\psi$ , 0)&#39;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.618</span><span class="p">),</span> <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+           <span class="n">bbox</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;boxstyle&#39;</span><span class="p">:</span> <span class="s1">&#39;Round&#39;</span><span class="p">,</span> <span class="s1">&#39;facecolor&#39;</span><span class="p">:</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;pad&#39;</span><span class="p">:</span> <span class="mf">.5</span><span class="p">,</span> <span class="s1">&#39;ec&#39;</span><span class="p">:</span><span class="s1">&#39;black&#39;</span><span class="p">},</span>
+            <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.05</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mf">0.618</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+            <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.05</span><span class="p">))</span>
+
+<span class="n">ticks</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">.25</span><span class="p">,</span> <span class="mf">1.75</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span> <span class="c1"># More manual axis manipulation for correct scaling.</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">ticks</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">ticks</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/db74f71d17df4d3a126944ab636f2258d37514011de788d5f8049b780dadb8b6.png" src="_images/db74f71d17df4d3a126944ab636f2258d37514011de788d5f8049b780dadb8b6.png" />
+</div>
+</div>
+<p>The first iteration simply places one <span class="math notranslate nohighlight">\(\psi \times \psi\)</span> square at the lower left corner of the figure, i.e. at the point <span class="math notranslate nohighlight">\((0,0)\)</span>. (Again, throughout this document, to say that a square is placed at a point means that the square is placed so that the lower left corner of the square is at the stated point). The presence of the blue square creates two new lower left points, so to speak, at <span class="math notranslate nohighlight">\((0, \psi)\)</span> and <span class="math notranslate nohighlight">\((\psi, 0)\)</span>. The second iteration places squares at these two target points. See:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">phi</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5</span><span class="o">**</span><span class="mf">.5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="c1"># Golden ratio</span>
+<span class="n">psi</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">phi</span>
+
+<span class="c1"># start building the plot </span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+
+<span class="c1"># Some manual axis manipulation to force the image to take a similar scale to the others.</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">phi</span><span class="p">,</span> <span class="n">phi</span> <span class="o">*</span> <span class="mf">640.</span><span class="o">/</span><span class="mf">480.</span><span class="p">])</span> 
+
+<span class="n">depth</span> <span class="o">=</span> <span class="mi">2</span> <span class="c1"># two iterations for this figure                </span>
+
+<span class="n">CreatePlot</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">colors</span><span class="p">,</span> <span class="n">colors2</span><span class="p">,</span> <span class="n">depth</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">mpatches</span><span class="o">.</span><span class="n">Circle</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="mf">0.02</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">mpatches</span><span class="o">.</span><span class="n">Circle</span><span class="p">((</span><span class="n">psi</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span> <span class="n">psi</span><span class="p">),</span> <span class="mf">0.02</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">mpatches</span><span class="o">.</span><span class="n">Circle</span><span class="p">((</span><span class="n">psi</span><span class="p">,</span> <span class="n">psi</span> <span class="o">**</span> <span class="mi">2</span><span class="p">),</span> <span class="mf">0.02</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">mpatches</span><span class="o">.</span><span class="n">Circle</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mf">0.02</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>
+
+
+
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;New target points</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="sa">r</span><span class="s1">&#39;at (0, $\psi + \psi^2$), ($\psi^2$, $\psi$),&#39;</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span>
+            <span class="sa">r</span><span class="s1">&#39; ($\psi$, $\psi^2$),  and ($\psi+\psi^2$ , 0)&#39;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mf">1.05</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+           <span class="n">bbox</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;boxstyle&#39;</span><span class="p">:</span> <span class="s1">&#39;Round&#39;</span><span class="p">,</span> <span class="s1">&#39;facecolor&#39;</span><span class="p">:</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;pad&#39;</span><span class="p">:</span> <span class="mf">.5</span><span class="p">,</span> <span class="s1">&#39;ec&#39;</span><span class="p">:</span><span class="s1">&#39;black&#39;</span><span class="p">},</span>
+            <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.05</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">psi</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span> <span class="n">psi</span><span class="p">),</span> <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mf">1.05</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.05</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">psi</span><span class="p">,</span> <span class="n">psi</span> <span class="o">**</span> <span class="mi">2</span><span class="p">),</span> <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mf">1.05</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.05</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mf">1.05</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.05</span><span class="p">))</span>
+
+
+<span class="n">ticks</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">.25</span><span class="p">,</span> <span class="mf">1.75</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span> <span class="c1"># More manual axis manipulation for correct scaling.</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">ticks</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">ticks</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/eeed703d5c9795202c05fbc83228de834b3a087da22a592abf46dae5fdc0d506.png" src="_images/eeed703d5c9795202c05fbc83228de834b3a087da22a592abf46dae5fdc0d506.png" />
+</div>
+</div>
+<p>The placement of two new squares created the four new target points indicated in the figure: at <span class="math notranslate nohighlight">\((0, \psi + \psi^2), (\psi^2, \psi), (\psi, \psi^2),\)</span> and <span class="math notranslate nohighlight">\((\psi + \psi^2, 0)\)</span>. This is our first opportunity to apply <span class="math notranslate nohighlight">\(\psi\)</span>’s recursion equation <a class="reference internal" href="#equation-psi-recursion-eqn">(1)</a>. Setting <span class="math notranslate nohighlight">\(n=0\)</span> in <a class="reference internal" href="#equation-psi-recursion-eqn">(1)</a> yields <span class="math notranslate nohighlight">\(\psi^2 + \psi^1 = \psi^0 = 1\)</span>. The left-most and right-most target points can be written <span class="math notranslate nohighlight">\((0,1)\)</span> and <span class="math notranslate nohighlight">\((1,0)\)</span>. The recursion equation <a class="reference internal" href="#equation-psi-recursion-eqn">(1)</a> will play a more important role starting in the next iteration.</p>
+<p>Until this point, the number of squares in used for each iteration has followed a simple pattern. The first iteration used one square, the second used two squares, and we see that the third iteration will use four. It appears that the number of squares doubles with each iteration. But this pattern is about to break.</p>
+<p>Next iteration:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">phi</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5</span><span class="o">**</span><span class="mf">.5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="c1"># Golden ratio</span>
+<span class="n">psi</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">phi</span>
+
+<span class="c1"># start building the plot </span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+
+<span class="c1"># Some manual axis manipulation to force the image to take a similar scale to the others.</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">phi</span><span class="p">,</span> <span class="n">phi</span> <span class="o">*</span> <span class="mf">640.</span><span class="o">/</span><span class="mf">480.</span><span class="p">])</span> 
+
+<span class="n">depth</span> <span class="o">=</span> <span class="mi">3</span> <span class="c1"># three iterations                </span>
+
+<span class="n">CreatePlot</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">colors</span><span class="p">,</span> <span class="n">colors2</span><span class="p">,</span> <span class="n">depth</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+
+<span class="n">singleTargets</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="o">+</span><span class="n">psi</span><span class="o">**</span><span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="n">psi</span><span class="o">**</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="n">psi</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">psi</span><span class="o">+</span><span class="n">psi</span><span class="o">**</span><span class="mi">3</span><span class="p">),</span>
+                 <span class="p">(</span><span class="n">psi</span><span class="o">+</span><span class="n">psi</span><span class="o">**</span><span class="mi">3</span><span class="p">,</span><span class="n">psi</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">psi</span><span class="o">**</span><span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">psi</span><span class="o">**</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]</span> <span class="c1"># Unrepeated target coordinates</span>
+<span class="n">singleTargetsText</span> <span class="o">=</span> <span class="p">[</span><span class="sa">r</span><span class="s1">&#39;(0, $\psi+\psi^2+\psi^3$)&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;($\psi^3, \psi+\psi^2$)&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;($\psi^2, \psi+\psi^3$)&#39;</span><span class="p">,</span>
+                    <span class="sa">r</span><span class="s1">&#39;($\psi+\psi^3, \psi^2$)&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;($\psi+\psi^2, \psi^3$)&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;($\psi+\psi^2+\psi^3$, 0)&#39;</span><span class="p">]</span>
+
+<span class="n">tloc</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.05</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">)</span> <span class="c1"># Annotation text location and arrow origin location</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;New target points&#39;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="n">tloc</span><span class="p">,</span> <span class="n">xytext</span><span class="o">=</span><span class="n">tloc</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+           <span class="n">bbox</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;boxstyle&#39;</span><span class="p">:</span> <span class="s1">&#39;Round&#39;</span><span class="p">,</span> <span class="s1">&#39;facecolor&#39;</span><span class="p">:</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;pad&#39;</span><span class="p">:</span> <span class="mf">.5</span><span class="p">,</span> <span class="s1">&#39;ec&#39;</span><span class="p">:</span><span class="s1">&#39;black&#39;</span><span class="p">})</span>
+<span class="k">for</span> <span class="n">loc</span><span class="p">,</span> <span class="n">txt</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">singleTargets</span><span class="p">,</span> <span class="n">singleTargetsText</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">mpatches</span><span class="o">.</span><span class="n">Circle</span><span class="p">(</span><span class="n">loc</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span> <span class="c1"># Put an orange dot</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">txt</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="n">loc</span><span class="p">,</span> <span class="n">xytext</span><span class="o">=</span><span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="n">i</span><span class="o">-</span><span class="n">j</span><span class="p">,</span> <span class="n">loc</span><span class="p">,</span> <span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">.075</span><span class="p">))),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="c1"># Annotate dot</span>
+               <span class="n">bbox</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;facecolor&#39;</span><span class="p">:</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="mf">0.25</span><span class="p">,</span> <span class="s1">&#39;pad&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">})</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="n">loc</span><span class="p">,</span> <span class="n">xytext</span><span class="o">=</span><span class="n">tloc</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.05</span><span class="p">))</span> <span class="c1"># Draw an arrow</span>
+
+<span class="c1"># Special point gets a different color dot</span>
+<span class="n">specialTarget</span> <span class="o">=</span> <span class="p">(</span><span class="n">psi</span><span class="p">,</span> <span class="n">psi</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">mpatches</span><span class="o">.</span><span class="n">Circle</span><span class="p">((</span><span class="n">psi</span><span class="p">,</span> <span class="n">psi</span><span class="p">),</span> <span class="mf">0.02</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span> <span class="c1"># Dot</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;($\psi, \psi$)&#39;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="n">specialTarget</span><span class="p">,</span> <span class="n">xytext</span><span class="o">=</span><span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="n">i</span><span class="o">-</span><span class="n">j</span><span class="p">,</span> 
+            <span class="n">specialTarget</span><span class="p">,</span> <span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">.075</span><span class="p">))),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="c1"># Annotate dot</span>
+            <span class="n">bbox</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;facecolor&#39;</span><span class="p">:</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="mf">0.25</span><span class="p">,</span> <span class="s1">&#39;pad&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">})</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="n">specialTarget</span><span class="p">,</span> <span class="n">xytext</span><span class="o">=</span><span class="n">tloc</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.05</span><span class="p">))</span> <span class="c1"># Draw an arrow</span>
+
+<span class="n">ticks</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">.25</span><span class="p">,</span> <span class="mf">1.75</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span> <span class="c1"># More manual axis manipulation for correct scaling.</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">ticks</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">ticks</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/cb03a6a2ecdab83a8def2ac091defe7d646c3bc6c1b0c7e6d059c4495c3d0eed.png" src="_images/cb03a6a2ecdab83a8def2ac091defe7d646c3bc6c1b0c7e6d059c4495c3d0eed.png" />
+</div>
+</div>
+<p>This iteration only generated seven new target points instead of eight. The target point marked green in the figure is special. Notice that two magenta colored squares touch corners there. The green point is both <span class="math notranslate nohighlight">\((\psi, \psi^2+\psi^3)\)</span> and <span class="math notranslate nohighlight">\((\psi^2+\psi^3, \psi)\)</span>. Recalling <a class="reference internal" href="#equation-psi-recursion-eqn">(1)</a> again, set <span class="math notranslate nohighlight">\(n=1\)</span> and then <span class="math notranslate nohighlight">\(\psi^3+\psi^2=\psi\)</span>. So <span class="math notranslate nohighlight">\((\psi, \psi^2+\psi^3)\)</span> and <span class="math notranslate nohighlight">\((\psi^2+\psi^3, \psi)\)</span> are the same point and can both be written <span class="math notranslate nohighlight">\((\psi, \psi)\)</span>. Since this one point took the place of two points, the total number of points was reduced by one from eight to seven.</p>
+<p>The code which generates the fractal calculates every possible target point and then attempts to eliminate redundancy by placing all the points in a set. Sets are not allowed to contain the same element more than once. It’s likely that this approach does not eliminate all redundancy due to rounding errors. It would be nice to handle the redundancies more elegantly. Will that perhaps be the next update?</p>
+<p>The next iteration, the fourth one, which I won’t illustrate, generates seven squares measuring <span class="math notranslate nohighlight">\(\psi^4 \times \psi^4\)</span> and 12 new target points. The fifth iteration produces 12 <span class="math notranslate nohighlight">\(\psi^5 \times \psi^5\)</span> squares and 20 new target points. In general, the number of squares produced in the <span class="math notranslate nohighlight">\(n^{th}\)</span> iteration is <span class="math notranslate nohighlight">\(F_{n+2} - 1\)</span> i.e. one less than the <span class="math notranslate nohighlight">\(n+2^{th}\)</span> Fibonacci number. You could also say that the number of squares produced in the <span class="math notranslate nohighlight">\(n^{th}\)</span> iteration equals the sum of the first <span class="math notranslate nohighlight">\(n\)</span> Fibonacci numbers due to a well-known identity:</p>
+<div class="math notranslate nohighlight">
+\[
+\sum_{i=1}^n F_n = F_{n+2}-1
+\]</div>
+<p>So now you have an idea how the lower left half of the fractal is produced. The code is set to run for 14 iterations because the image stops changing after 14. The upper right half is produced by reflecting the lower left half. I won’t get into the gritty details of the arithmetic involved in reflection or the coloring scheme. This concludes the explanation. Hopefully somone will read this tutorial and enjoy it!</p>
 </section>
 
     <script type="text/x-thebe-config">
