@@ -359,9 +359,11 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">Creates a fractal image using psi, the reciprocal of phi. i.e. phi = (1+sqrt(5))/2 and psi = 2/(1+sqrt(5)) = (sqrt(5)-1)/2.</span>
-<span class="sd">The code operates in iterations. The nth iteration produces squares with side length psi^n. The squares are arranged in such</span>
-<span class="sd">a way that they fill in a phi x phi square. The squares are colored in a way I thought looked interesting.</span>
+<span class="sd">Creates a fractal image using psi, the reciprocal of phi. i.e. phi = (1+sqrt(5))/2 and </span>
+<span class="sd">psi = 2/(1+sqrt(5)) = (sqrt(5)-1)/2. The code operates in iterations. The nth iteration </span>
+<span class="sd">produces squares with side length psi^n. The squares are arranged in such a way that </span>
+<span class="sd">they fill in a phi x phi square. The squares are colored in a way I thought </span>
+<span class="sd">looked interesting.</span>
 <span class="sd">&#39;&#39;&#39;</span>
 
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -370,43 +372,62 @@ document.write(`
 <span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">chain</span><span class="p">,</span> <span class="n">combinations</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-
-<span class="k">def</span> <span class="nf">powerset</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-<span class="c1"># Returns the powerset of s. I cheated a little; s doesn&#39;t need to be a set. The output is a list, not a set, and</span>
-<span class="c1"># The elements of the output &quot;set&quot; are tuples rather than sets.</span>
-    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">chain</span><span class="o">.</span><span class="n">from_iterable</span><span class="p">(</span><span class="n">combinations</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)))</span>
-
 <span class="k">def</span> <span class="nf">CreatePlot</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">colors</span><span class="p">,</span> <span class="n">colors2</span><span class="p">,</span> <span class="n">depth</span><span class="p">,</span> <span class="n">SECOND_HALF</span><span class="p">):</span>
     <span class="n">phi</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5</span><span class="o">**</span><span class="mf">.5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="c1"># Golden ratio</span>
     <span class="n">psi</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">phi</span>
     <span class="n">sideLength</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">coords</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">tol</span> <span class="o">=</span> <span class="mf">1e-5</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">depth</span><span class="p">):</span> <span class="c1"># for iteration i</span>
+        <span class="n">tpIncrement</span> <span class="o">=</span> <span class="n">sideLength</span> <span class="c1"># Increment to use for updating coordinates</span>
         <span class="n">sideLength</span> <span class="o">*=</span> <span class="n">psi</span>
-        <span class="n">powers</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="c1"># powers of psi</span>
-        <span class="n">psiPowers</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">psi</span> <span class="o">**</span> <span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">powers</span><span class="p">])</span>
         
-    <span class="c1">#    coords = set() # lower-left coordinate of squares for this iteration</span>
-    <span class="c1">#    for tupl in powerset(psiPowers): # fill the coords set</span>
-    <span class="c1">#        x = sum(tupl)</span>
-    <span class="c1">#        y = sum(psiPowers - set(tupl))</span>
-    <span class="c1">#        coords.add((x, y))</span>
-
-        <span class="c1"># This line implements in one line the commented five code lines above.</span>
-        <span class="n">coords</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([(</span><span class="nb">sum</span><span class="p">(</span><span class="n">tupl</span><span class="p">),</span> <span class="nb">sum</span><span class="p">(</span><span class="n">psiPowers</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">tupl</span><span class="p">)))</span> <span class="k">for</span> <span class="n">tupl</span> <span class="ow">in</span> <span class="n">powerset</span><span class="p">(</span><span class="n">psiPowers</span><span class="p">)])</span>
-        <span class="c1"># The coords set contains the lower-left coordinate of each square of the ith iteration. I made it a set to eliminate</span>
-        <span class="c1"># duplicate coordinates, of which there will be a large number.</span>
-
+        <span class="c1"># Update the coords set</span>
+        <span class="k">if</span> <span class="n">coords</span><span class="p">:</span> <span class="c1"># If the coords list is non-empyty, update it.</span>
+            <span class="c1"># After the first interation, each iteration&#39;s target points come from adding </span>
+            <span class="c1"># a psi^(n-1) increment to the x cooridates and the y coordinates of the previous </span>
+            <span class="c1"># iteration&#39;s points. Thus each point of the previous iteration spawns two points.</span>
+            <span class="c1"># But there will be some redundancy after the first few iterations. So the code</span>
+            <span class="c1"># first adds psi^(n-1) to all the x coordinates, then uses a for loop to add the </span>
+            <span class="c1"># psi^(n-1) increment to the y coordinates one at a time and checks whether the</span>
+            <span class="c1"># point is redundant before adding it to the nextCoords array.</span>
+            <span class="n">nextCoords</span> <span class="o">=</span> <span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="p">,</span> <span class="n">coord</span><span class="p">,</span> <span class="p">(</span><span class="n">tpIncrement</span><span class="p">,</span> <span class="mi">0</span><span class="p">)))</span> 
+                              <span class="k">for</span> <span class="n">coord</span> <span class="ow">in</span> <span class="n">coords</span><span class="p">]</span> <span class="c1"># Increment xs</span>
+            <span class="k">for</span> <span class="n">coord</span> <span class="ow">in</span> <span class="n">coords</span><span class="p">:</span>
+                <span class="n">testYCoord</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="p">,</span> <span class="n">coord</span><span class="p">,</span> 
+                                       <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">tpIncrement</span><span class="p">)))</span> <span class="c1"># Increment y on one coord.</span>
+                <span class="n">good</span> <span class="o">=</span> <span class="kc">True</span> <span class="c1"># Assume that the y-incremented coord is not redundant until</span>
+                            <span class="c1"># proven otherwise.</span>
+                <span class="k">for</span> <span class="n">testXCoord</span> <span class="ow">in</span> <span class="n">nextCoords</span><span class="p">:</span> <span class="c1"># For each of the x-incremented coords,</span>
+                    <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">testXCoord</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">testYCoord</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">:</span> <span class="c1"># check it against the </span>
+                                                                <span class="c1"># y-incremented coord.</span>
+                        <span class="n">good</span> <span class="o">=</span> <span class="kc">False</span> <span class="c1"># The difference is below tolerance, so the y-incremented</span>
+                                    <span class="c1"># coord is redundant and will be disregarded.</span>
+                        <span class="k">break</span> <span class="c1"># Move on to the next y-incremented coord.</span>
+                <span class="k">if</span> <span class="n">good</span><span class="p">:</span>
+                    <span class="n">nextCoords</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">testYCoord</span><span class="p">)</span> <span class="c1"># The y-incremented coord is not redundant,</span>
+                                                    <span class="c1"># so save it.</span>
+            <span class="n">coords</span> <span class="o">=</span> <span class="n">nextCoords</span> <span class="c1"># nextCoords is complete, so it becomes this iteration&#39;s coords.           </span>
+        <span class="k">else</span><span class="p">:</span> <span class="c1"># If the coords set is empty, this is the first iteration so simply put </span>
+              <span class="c1"># (0,0) in the list.</span>
+            <span class="n">coords</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)]</span>
+        <span class="c1">#print(len(coords))</span>
         <span class="k">for</span> <span class="n">coord</span> <span class="ow">in</span> <span class="n">coords</span><span class="p">:</span>
             <span class="n">square</span> <span class="o">=</span> <span class="n">mpatches</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">(</span><span class="n">coord</span><span class="p">,</span> <span class="n">sideLength</span><span class="p">,</span> <span class="n">sideLength</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="n">colors</span><span class="p">((</span><span class="n">i</span><span class="o">/</span><span class="p">(</span><span class="n">depth</span><span class="p">))</span><span class="o">**</span><span class="p">(</span><span class="mf">.3</span><span class="p">)))</span>
             <span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">square</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">SECOND_HALF</span><span class="p">:</span> <span class="c1"># The first half of the image is a right triangle with its right angle at the lower-left.</span>
-                            <span class="c1"># The code below reflects the triangle towards the upper-right to form the second half of a square.</span>
+            <span class="k">if</span> <span class="n">SECOND_HALF</span><span class="p">:</span> <span class="c1"># The first half of the image is a right triangle with its right </span>
+                            <span class="c1"># angle at the lower-left. The code below reflects the triangle </span>
+                            <span class="c1"># towards the upper-right to form the second half of a square. </span>
                             <span class="c1"># The second half is colored differently for interest.</span>
-                <span class="c1"># Elementwise subtraction of each coordinate pair from (phi, phi) to reflect the triangle</span>
-                <span class="c1"># using map() + lambda.</span>
-                <span class="n">coord2</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="n">i</span> <span class="o">-</span> <span class="n">j</span><span class="p">,</span> <span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="n">phi</span><span class="p">),</span> <span class="n">coord</span><span class="p">))</span>
-                <span class="c1"># The result of the subtraction is the upper-right corner location of the squares in the second half.</span>
-                <span class="n">square</span> <span class="o">=</span> <span class="n">mpatches</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">(</span><span class="n">coord2</span><span class="p">,</span> <span class="o">-</span><span class="n">sideLength</span><span class="p">,</span> <span class="o">-</span><span class="n">sideLength</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="n">colors2</span><span class="p">((</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span><span class="o">/</span><span class="p">(</span><span class="n">depth</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">**</span><span class="p">(</span><span class="mi">10</span><span class="o">/</span><span class="mi">3</span><span class="p">)))</span>
+                            
+                <span class="n">coord2</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="n">i</span> <span class="o">-</span> <span class="n">j</span><span class="p">,</span> <span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="n">phi</span><span class="p">),</span> <span class="n">coord</span><span class="p">))</span><span class="c1"># Elementwise subtraction</span>
+                            <span class="c1"># using map() + lambda. of each coordinate pair from (phi, phi) </span>
+                            <span class="c1"># to reflect the triangle.</span>
+                
+                <span class="c1"># The result of the subtraction is the upper-right corner location of the squares </span>
+                <span class="c1"># in the second half.</span>
+                <span class="n">square</span> <span class="o">=</span> <span class="n">mpatches</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">(</span><span class="n">coord2</span><span class="p">,</span> <span class="o">-</span><span class="n">sideLength</span><span class="p">,</span> <span class="o">-</span><span class="n">sideLength</span><span class="p">,</span> 
+                                            <span class="n">color</span> <span class="o">=</span> <span class="n">colors2</span><span class="p">((</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span><span class="o">/</span><span class="p">(</span><span class="n">depth</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">**</span><span class="p">(</span><span class="mi">10</span><span class="o">/</span><span class="mi">3</span><span class="p">)))</span>
                 <span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">square</span><span class="p">)</span>
 
 <span class="n">SAVE</span> <span class="o">=</span> <span class="kc">False</span>
@@ -432,7 +453,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/fe5b77ffc0abfc6741b8ba9817866c7f7f54652dd68a4aec3c4fbc64d8021210.png" src="_images/fe5b77ffc0abfc6741b8ba9817866c7f7f54652dd68a4aec3c4fbc64d8021210.png" />
+<img alt="_images/06be71d8718af7a7b4328f479038ea686114e31ec386f0900b03aed73b143403.png" src="_images/06be71d8718af7a7b4328f479038ea686114e31ec386f0900b03aed73b143403.png" />
 </div>
 </div>
 <p>I’ll try explaining the algorithm step by step.</p>
@@ -444,7 +465,7 @@ document.write(`
 <p>Now let’s break the fractal down conceptually. We’ll focus on the lower-left half first. Let’s see a rendering that includes axes to show the scale of the image:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">depth</span> <span class="o">=</span> <span class="mi">14</span>                
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">depth</span> <span class="o">=</span> <span class="mi">4</span>                
 <span class="c1"># start building the plot </span>
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">phi</span><span class="p">,</span><span class="n">phi</span><span class="p">])</span>
@@ -457,7 +478,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/fcd6d715d7fb47f681000d9e001ea125effb1d4cb4f12eb2d6ee5f077dfd50e3.png" src="_images/fcd6d715d7fb47f681000d9e001ea125effb1d4cb4f12eb2d6ee5f077dfd50e3.png" />
+<img alt="_images/5b0360cd183be75ee165ef7e76c44f635e0680c75a64a7cb2625bd45ff1c3366.png" src="_images/5b0360cd183be75ee165ef7e76c44f635e0680c75a64a7cb2625bd45ff1c3366.png" />
 </div>
 </div>
 <p>Notice that the origin is at the lower-left corner and the fractal appears in the first quandrant, i.e. the area where <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> values are positive. See that the length of bottom edge length is about <span class="math notranslate nohighlight">\(1.6\)</span>. The bottom edge is formed by (in principle) infinitely many squares side-by-side each with side length <span class="math notranslate nohighlight">\(\psi^n\)</span>. The sum of the infinite series <span class="math notranslate nohighlight">\(\psi^n\)</span> is the golden ratio <span class="math notranslate nohighlight">\(\phi \approx 1.618\)</span>. In symbols:</p>
@@ -591,13 +612,41 @@ document.write(`
 </div>
 </div>
 <p>This iteration only generated seven new target points instead of eight. The target point marked green in the figure is special. Notice that two magenta colored squares touch corners there. The green point is both <span class="math notranslate nohighlight">\((\psi, \psi^2+\psi^3)\)</span> and <span class="math notranslate nohighlight">\((\psi^2+\psi^3, \psi)\)</span>. Recalling <a class="reference internal" href="#equation-psi-recursion-eqn">(1)</a> again, set <span class="math notranslate nohighlight">\(n=1\)</span> and then <span class="math notranslate nohighlight">\(\psi^3+\psi^2=\psi\)</span>. So <span class="math notranslate nohighlight">\((\psi, \psi^2+\psi^3)\)</span> and <span class="math notranslate nohighlight">\((\psi^2+\psi^3, \psi)\)</span> are the same point and can both be written <span class="math notranslate nohighlight">\((\psi, \psi)\)</span>. Since this one point took the place of two points, the total number of points was reduced by one from eight to seven.</p>
-<p>The code which generates the fractal calculates every possible target point and then attempts to eliminate redundancy by placing all the points in a set. Sets are not allowed to contain the same element more than once. It’s likely that this approach does not eliminate all redundancy due to rounding errors. It would be nice to handle the redundancies more elegantly. Will that perhaps be the next update?</p>
+<p>The code which generates the fractal calculates every possible target point and then attempts to eliminate redundancy by placing all the points in a set. Sets are not allowed to contain the same element more than once. I needed to round the values a bit to overcome floating point imprecision.</p>
 <p>The next iteration, the fourth one, which I won’t illustrate, generates seven squares measuring <span class="math notranslate nohighlight">\(\psi^4 \times \psi^4\)</span> and 12 new target points. The fifth iteration produces 12 <span class="math notranslate nohighlight">\(\psi^5 \times \psi^5\)</span> squares and 20 new target points. In general, the number of squares produced in the <span class="math notranslate nohighlight">\(n^{th}\)</span> iteration is <span class="math notranslate nohighlight">\(F_{n+2} - 1\)</span> i.e. one less than the <span class="math notranslate nohighlight">\(n+2^{th}\)</span> Fibonacci number. You could also say that the number of squares produced in the <span class="math notranslate nohighlight">\(n^{th}\)</span> iteration equals the sum of the first <span class="math notranslate nohighlight">\(n\)</span> Fibonacci numbers due to a well-known identity:</p>
 <div class="math notranslate nohighlight">
 \[
 \sum_{i=1}^n F_n = F_{n+2}-1
 \]</div>
 <p>So now you have an idea how the lower left half of the fractal is produced. The code is set to run for 14 iterations because the image stops changing after 14. The upper right half is produced by reflecting the lower left half. I won’t get into the gritty details of the arithmetic involved in reflection or the coloring scheme. This concludes the explanation. Hopefully somone will read this tutorial and enjoy it!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;    </span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">b</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">break</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
+    0
+    1
+    2
+1
+    0
+    1
+    2
+2
+    0
+    1
+    2
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 
     <script type="text/x-thebe-config">
