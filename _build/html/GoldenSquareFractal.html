@@ -409,14 +409,14 @@ document.write(`
     <span class="n">phi</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5</span><span class="o">**</span><span class="mf">.5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="c1"># Golden ratio</span>
     <span class="n">psi</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">phi</span>
     <span class="n">sideLength</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="n">coords</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">coords</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">tol</span> <span class="o">=</span> <span class="mf">1e-5</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">depth</span><span class="p">):</span> <span class="c1"># for iteration i</span>
         <span class="n">tpIncrement</span> <span class="o">=</span> <span class="n">sideLength</span> <span class="c1"># Increment to use for updating coordinates</span>
         <span class="n">sideLength</span> <span class="o">*=</span> <span class="n">psi</span>
         
-        <span class="c1"># Update the coords set</span>
-        <span class="k">if</span> <span class="n">coords</span><span class="p">:</span> <span class="c1"># If the coords list is non-empyty, update it.</span>
+        <span class="c1"># Update the coords list</span>
+        <span class="k">if</span> <span class="n">coords</span><span class="p">:</span> <span class="c1"># If the coords list is non-empty, update it.</span>
             <span class="c1"># After the first interation, each iteration&#39;s target points come from adding </span>
             <span class="c1"># a psi^(n-1) increment to the x cooridates and the y coordinates of the previous </span>
             <span class="c1"># iteration&#39;s points. Thus each point of the previous iteration spawns two points.</span>
