@@ -39,6 +39,9 @@ sphinx:
 html:
   favicon: logo.png
   google_analytics_id: G-C5T1CBDHJB
+  comments:
+    utterances:
+      repo: "https://github.com/Jim-Pearson/Jim-Pearson.github.io"
 
 launch_buttons:
   binderhub_url: "https://mybinder.org" 
