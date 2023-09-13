@@ -79,7 +79,7 @@ var addUtterances = () => {
     script.setAttribute("label", "💬 comment");
     script.setAttribute("crossorigin", "anonymous");
 
-    sections = document.querySelectorAll("section");
+    sections = document.querySelectorAll("div.section");
     if (sections !== null) {
         section = sections[sections.length-1];
         section.appendChild(script);
@@ -205,7 +205,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Mathematical Properties of the Golden Ratio</a></li>
 <li class="toctree-l1"><a class="reference internal" href="FibonacciMatrix.html">The Fibonacci Matrix</a></li>
 <li class="toctree-l1"><a class="reference internal" href="RootsOf5I.html">Matrix Square Roots and Related Fibonacci Matrices</a></li>
-<li class="toctree-l1"><a class="reference internal" href="GoldenSquareFractal.html">Golden Square Fractal (August 26, 2023 update!)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GoldenSquareFractal.html">Golden Square Fractal</a></li>
 <li class="toctree-l1"><a class="reference internal" href="SunflowerSim.html">Sunflower Simulator</a></li>
 </ul>
 
@@ -402,7 +402,7 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <p><span class="math notranslate nohighlight">\(\newcommand{\pb}[0]{\overline{\phi}}\)</span>
+  <p><span class="math notranslate nohighlight">\(\newcommand{\pb}[0]{\overline{\phi}\vphantom{\phi}}\)</span>
 <span class="math notranslate nohighlight">\(\newcommand{\cb}[0]{\overline{C}}\)</span>
 <span class="math notranslate nohighlight">\(\newcommand{\pbn}[1]{\pb^{#1}}\)</span></p>
 <section class="tex2jax_ignore mathjax_ignore" id="mathematical-properties-of-the-golden-ratio">

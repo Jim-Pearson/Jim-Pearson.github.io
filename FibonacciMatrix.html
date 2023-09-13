@@ -79,7 +79,7 @@ var addUtterances = () => {
     script.setAttribute("label", "💬 comment");
     script.setAttribute("crossorigin", "anonymous");
 
-    sections = document.querySelectorAll("section");
+    sections = document.querySelectorAll("div.section");
     if (sections !== null) {
         section = sections[sections.length-1];
         section.appendChild(script);
@@ -205,7 +205,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="PhiProperties.html">Mathematical Properties of the Golden Ratio</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">The Fibonacci Matrix</a></li>
 <li class="toctree-l1"><a class="reference internal" href="RootsOf5I.html">Matrix Square Roots and Related Fibonacci Matrices</a></li>
-<li class="toctree-l1"><a class="reference internal" href="GoldenSquareFractal.html">Golden Square Fractal (August 26, 2023 update!)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GoldenSquareFractal.html">Golden Square Fractal</a></li>
 <li class="toctree-l1"><a class="reference internal" href="SunflowerSim.html">Sunflower Simulator</a></li>
 </ul>
 
@@ -440,7 +440,7 @@ F_n \\ F_{n-1}
 <p>One reason for denoting this matrix with the Greek letter <span class="math notranslate nohighlight">\(\Phi\)</span> is because <span class="math notranslate nohighlight">\(\Phi\)</span> is the counterpart to the Latin letter <span class="math notranslate nohighlight">\(F\)</span>. Another reason is that, as we’ll see later, the matrix <span class="math notranslate nohighlight">\(\Phi\)</span> also mimics many of the properties of the golden ratio <span class="math notranslate nohighlight">\(\phi\)</span>.</p>
 <p>So now we have</p>
 <div class="math notranslate nohighlight">
-\[\Phi \vec{F_n} = \vec{F_{n+1}}\]</div>
+\[\Phi \vec{F_n} = \vec{F_{n}}_{+1}\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="o">*</span>
@@ -472,7 +472,7 @@ F_n \\ F_{n-1}
 \[\Phi^{n} \vec{F_0} = \vec{F_n} \text{ for any integer } n.\]</div>
 <p>And more generally</p>
 <div class="math notranslate nohighlight">
-\[\Phi^{n} \vec{F_k} = \vec{F_{k+n}} \text{ for any integers } n \text{ and } k.\]</div>
+\[\Phi^{n} \vec{F_k} = \vec{F_{k}}_{+n} \text{ for any integers } n \text{ and } k.\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">Eq</span><span class="p">(</span><span class="n">Phi</span> <span class="o">**</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">PhiMat</span> <span class="o">**</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
@@ -501,7 +501,7 @@ F_n \\ F_{n-1}
 <p>At this point, it might not be obvious what’s inside the matrix <span class="math notranslate nohighlight">\(\Phi^n\)</span>. But the values are easy to reveal because remember that <span class="math notranslate nohighlight">\(\vec{F_1} = \left[\begin{matrix} F_1 \\ F_0 \end{matrix}\right] \)</span> and <span class="math notranslate nohighlight">\(\vec{F_0} = \left[\begin{matrix} F_0 \\ F_{-1} \end{matrix}\right]\)</span> are the unit vectors <span class="math notranslate nohighlight">\( \left[\begin{matrix} 1 \\ 0 \end{matrix}\right] \)</span> and <span class="math notranslate nohighlight">\( \left[\begin{matrix} 0 \\ 1 \end{matrix}\right] \)</span>, respectively.</p>
 <p>So the left column of <span class="math notranslate nohighlight">\(\Phi^n\)</span> is given by</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\Phi^n \left[\begin{matrix} 1 \\ 0 \end{matrix}\right] = \Phi^n \vec{F_1}  = \vec{F_{n+1}} = \left[\begin{matrix} F_{n+1} \\ F_n \end{matrix}\right] \end{split}\]</div>
+\[\begin{split}\Phi^n \left[\begin{matrix} 1 \\ 0 \end{matrix}\right] = \Phi^n \vec{F_1}  = \vec{F_{n}}_{+1} = \left[\begin{matrix} F_{n+1} \\ F_n \end{matrix}\right] \end{split}\]</div>
 <p>and likewise the right column of <span class="math notranslate nohighlight">\(\Phi^n\)</span> is</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\Phi^n \left[\begin{matrix} 0 \\ 1 \end{matrix}\right] = \Phi^n \vec{F_0}  = \vec{F_{n}} = \left[\begin{matrix} F_{n} \\ F_{n-1} \end{matrix}\right] \end{split}\]</div>
