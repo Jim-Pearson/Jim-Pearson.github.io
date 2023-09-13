@@ -79,7 +79,7 @@ var addUtterances = () => {
     script.setAttribute("label", "💬 comment");
     script.setAttribute("crossorigin", "anonymous");
 
-    sections = document.querySelectorAll("section");
+    sections = document.querySelectorAll("div.section");
     if (sections !== null) {
         section = sections[sections.length-1];
         section.appendChild(script);
@@ -108,7 +108,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="_static/logo.png"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Golden Square Fractal (August 26, 2023 update!)" href="GoldenSquareFractal.html" />
+    <link rel="prev" title="Golden Square Fractal" href="GoldenSquareFractal.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -204,7 +204,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="PhiProperties.html">Mathematical Properties of the Golden Ratio</a></li>
 <li class="toctree-l1"><a class="reference internal" href="FibonacciMatrix.html">The Fibonacci Matrix</a></li>
 <li class="toctree-l1"><a class="reference internal" href="RootsOf5I.html">Matrix Square Roots and Related Fibonacci Matrices</a></li>
-<li class="toctree-l1"><a class="reference internal" href="GoldenSquareFractal.html">Golden Square Fractal (August 26, 2023 update!)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GoldenSquareFractal.html">Golden Square Fractal</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Sunflower Simulator</a></li>
 </ul>
 
@@ -626,7 +626,7 @@ document.write(`
 </section>
 <section id="real-flowers">
 <h2>Real Flowers<a class="headerlink" href="#real-flowers" title="Permalink to this heading">#</a></h2>
-<p>Below is a photo of the head of a sunflower recently purchased from Trader Joe’s. The arrangement of florets inside is strikingly similar to the mathematical model. I tried counting spirals and found one strange that seems out of place and doesn’t reach to the center. Including all of them I counted <span class="math notranslate nohighlight">\(F_{10}=55\)</span> spirals. Feel free to double check my count.</p>
+<p>Below is a photo of the head of a sunflower recently purchased from Trader Joe’s. The arrangement of florets inside is strikingly similar to the mathematical model. I tried counting spirals and found a strange one that seems out of place and doesn’t reach to the center. Including all of them I counted <span class="math notranslate nohighlight">\(F_{10}=55\)</span> spirals. Feel free to double check my count.</p>
 <p><img alt="Sunflower with 55ish spirals" src="_images/Sunflower55.png" /></p>
 <p>Below is a photo of a Dalia also from Trader Joe’s. The petals don’t seem to be nicely arranged in spirals but I tried counting anyway. I counted <span class="math notranslate nohighlight">\(F_7=13\)</span> of them; Coincidence?</p>
 <p><img alt="Dalia with 13 spirals maybe?" src="_images/Dalia13.png" /></p>
@@ -670,7 +670,7 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Golden Square Fractal (August 26, 2023 update!)</p>
+        <p class="prev-next-title">Golden Square Fractal</p>
       </div>
     </a>
 </div></div>

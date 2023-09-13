@@ -7,7 +7,7 @@ copyright: "2023"
 logo: logo.png
 
 # Force re-execution of notebooks on each build.
-# See https://jupyterbook.org/content/execute.html
+# See https://jupyterbook.org/content/execute.htmlF
 execute:
   execute_notebooks: force
 
@@ -44,4 +44,4 @@ html:
       repo: "Jim-Pearson/Jim-Pearson.github.io"
 
 launch_buttons:
-  binderhub_url: "https://mybinder.org" 
+  binderhub_url: "https://mybinder.org"

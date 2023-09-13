@@ -79,7 +79,7 @@ var addUtterances = () => {
     script.setAttribute("label", "💬 comment");
     script.setAttribute("crossorigin", "anonymous");
 
-    sections = document.querySelectorAll("section");
+    sections = document.querySelectorAll("div.section");
     if (sections !== null) {
         section = sections[sections.length-1];
         section.appendChild(script);
@@ -108,7 +108,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="_static/logo.png"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Golden Square Fractal (August 26, 2023 update!)" href="GoldenSquareFractal.html" />
+    <link rel="next" title="Golden Square Fractal" href="GoldenSquareFractal.html" />
     <link rel="prev" title="The Fibonacci Matrix" href="FibonacciMatrix.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -205,7 +205,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="PhiProperties.html">Mathematical Properties of the Golden Ratio</a></li>
 <li class="toctree-l1"><a class="reference internal" href="FibonacciMatrix.html">The Fibonacci Matrix</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Matrix Square Roots and Related Fibonacci Matrices</a></li>
-<li class="toctree-l1"><a class="reference internal" href="GoldenSquareFractal.html">Golden Square Fractal (August 26, 2023 update!)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GoldenSquareFractal.html">Golden Square Fractal</a></li>
 <li class="toctree-l1"><a class="reference internal" href="SunflowerSim.html">Sunflower Simulator</a></li>
 </ul>
 
@@ -410,7 +410,7 @@ document.write(`
   <p><span class="math notranslate nohighlight">\(\newcommand{\pb}[0]{\overline{\phi}}\)</span>
 <span class="math notranslate nohighlight">\(\newcommand{\cb}[0]{\overline{C}}\)</span>
 <span class="math notranslate nohighlight">\(\newcommand{\pbn}[1]{\pb\vphantom{\phi}^{#1}}\)</span>
-<span class="math notranslate nohighlight">\(\newcommand{\Pb}[0]{\overline{\Phi}}\)</span>
+<span class="math notranslate nohighlight">\(\newcommand{\Pb}[0]{\overline{\Phi}\vphantom{\Phi}}\)</span>
 <span class="math notranslate nohighlight">\(\newcommand{\Pbn}[1]{\Pb^{#1}}\)</span></p>
 <section class="tex2jax_ignore mathjax_ignore" id="matrix-square-roots-and-related-fibonacci-matrices">
 <h1>Matrix Square Roots and Related Fibonacci Matrices<a class="headerlink" href="#matrix-square-roots-and-related-fibonacci-matrices" title="Permalink to this heading">#</a></h1>
@@ -500,7 +500,7 @@ L_n\cdot I &amp;= \Phi ^n + \Pbn{n} &amp;&amp; F_n\cdot I = (\Phi^n - \Pbn{n})R^
 1 &amp; 1\\
 1 &amp; 0
 \end{matrix}\right] \)</span>.</p>
-<p>This is the Fibonacci matrix, Also known as the Fibonacci Q-matrix. Two notable properties are:</p>
+<p>This is the Fibonacci matrix, also known as the Fibonacci Q-matrix. Two notable properties are:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split} \Phi^n = 
 \left[\begin{matrix}
@@ -516,13 +516,13 @@ L_n &amp; L_{n-1}
 \end{matrix}\right] \end{split}\]</div>
 <p>In this case, <span class="math notranslate nohighlight">\(\Phi\)</span> expresses the recursive formula that the Fibonacci numbers obey, which is <span class="math notranslate nohighlight">\(F_n = F_{n-1} +F_{n-1}\)</span>. If we define a Fibonacci vector <span class="math notranslate nohighlight">\(\vec{F_n} = \left[\begin{matrix} F_n \\ F_{n-1} \end{matrix}\right] \)</span>, then <span class="math notranslate nohighlight">\(\Phi\)</span> will advance it to <span class="math notranslate nohighlight">\(\vec{F_{n+1}}\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[ \Phi \vec{F_n} = \vec{F_{n+1}} \]</div>
+\[ \Phi \vec{F_n} = \vec{F_{n}}_{+1} \]</div>
 <p>The Lucas numbers obey the same recursive rule, <span class="math notranslate nohighlight">\(L_n = L_{n-1} +L_{n-1}\)</span>, so that if we define a Lucas vector <span class="math notranslate nohighlight">\(\vec{L_n} = \left[\begin{matrix} L_n \\ L_{n-1} \end{matrix}\right] \)</span> then</p>
 <div class="math notranslate nohighlight">
-\[ \Phi \vec{L_n} = \vec{L_{n+1}} \]</div>
+\[ \Phi \vec{L_n} = \vec{L_{n}}_{+1} \]</div>
 <p>More generally,</p>
 <div class="math notranslate nohighlight">
-\[ \Phi^k \vec{F_n} = \vec{F_{n+k}} \quad \text{and} \quad \Phi^k \vec{L_n} = \vec{L_{n+k}}\]</div>
+\[ \Phi^k \vec{F_n} = \vec{F_{n}}_{+k} \quad \text{and} \quad \Phi^k \vec{L_n} = \vec{L_{n}}_{+k}\]</div>
 </section>
 <section id="example-2">
 <h3>Example 2<a class="headerlink" href="#example-2" title="Permalink to this heading">#</a></h3>
@@ -787,7 +787,7 @@ d^2 + bc &amp;= 5
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Golden Square Fractal (August 26, 2023 update!)</p>
+        <p class="prev-next-title">Golden Square Fractal</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

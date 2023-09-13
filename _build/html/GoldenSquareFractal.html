@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Golden Square Fractal (August 26, 2023 update!) &#8212; Jim Pearson&#39;s Page</title>
+    <title>Golden Square Fractal &#8212; Jim Pearson&#39;s Page</title>
   
   
   
@@ -79,7 +79,7 @@ var addUtterances = () => {
     script.setAttribute("label", "💬 comment");
     script.setAttribute("crossorigin", "anonymous");
 
-    sections = document.querySelectorAll("section");
+    sections = document.querySelectorAll("div.section");
     if (sections !== null) {
         section = sections[sections.length-1];
         section.appendChild(script);
@@ -205,7 +205,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="PhiProperties.html">Mathematical Properties of the Golden Ratio</a></li>
 <li class="toctree-l1"><a class="reference internal" href="FibonacciMatrix.html">The Fibonacci Matrix</a></li>
 <li class="toctree-l1"><a class="reference internal" href="RootsOf5I.html">Matrix Square Roots and Related Fibonacci Matrices</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Golden Square Fractal (August 26, 2023 update!)</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Golden Square Fractal</a></li>
 <li class="toctree-l1"><a class="reference internal" href="SunflowerSim.html">Sunflower Simulator</a></li>
 </ul>
 
@@ -372,7 +372,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Golden Square Fractal (August 26, 2023 update!)</h1>
+    <h1>Golden Square Fractal</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -386,10 +386,9 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="golden-square-fractal-august-26-2023-update">
-<h1>Golden Square Fractal (August 26, 2023 update!)<a class="headerlink" href="#golden-square-fractal-august-26-2023-update" title="Permalink to this heading">#</a></h1>
-<p>The code below draws a fractal shape with the color scheme carefully manipulated to make it pretty. See the resulting shape below the code.</p>
-<p><strong>August 26 update:</strong> An explanation follows.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="golden-square-fractal">
+<h1>Golden Square Fractal<a class="headerlink" href="#golden-square-fractal" title="Permalink to this heading">#</a></h1>
+<p>The code below draws a fractal shape with the color scheme carefully manipulated to make it pretty. See the resulting shape below the code. An explanation follows.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
@@ -490,11 +489,11 @@ document.write(`
 </div>
 </div>
 <p>I’ll try explaining the algorithm step by step.</p>
-<p>First a bit of mathematic background. As mentioned in the code comments, the fractal is built using squares whose side lengths are powers of <span class="math notranslate nohighlight">\(\psi = \frac{\sqrt 5 - 1}{2}\)</span> which is the reciprocal of the Golden Ratio <span class="math notranslate nohighlight">\(\phi = \frac{\sqrt 5 + 1}{2}\)</span>, i.e. <span class="math notranslate nohighlight">\(\psi = \frac{1}{\phi}\)</span>. <span class="math notranslate nohighlight">\(\psi\)</span> obeys a curious recursive property:</p>
+<p>First a bit of mathematical background. As mentioned in the code comments, the fractal is built using squares whose side lengths are powers of <span class="math notranslate nohighlight">\(\psi = \frac{\sqrt 5 - 1}{2}\)</span> which is the reciprocal of the Golden Ratio <span class="math notranslate nohighlight">\(\phi = \frac{\sqrt 5 + 1}{2}\)</span>, i.e. <span class="math notranslate nohighlight">\(\psi = \frac{1}{\phi}\)</span>. Arguable <span class="math notranslate nohighlight">\(\psi\)</span> is also the Golden Ratio. It obeys a curious recursive property:</p>
 <div class="math notranslate nohighlight" id="equation-psi-recursion-eqn">
 <span class="eqno">(1)<a class="headerlink" href="#equation-psi-recursion-eqn" title="Permalink to this equation">#</a></span>\[\psi^{n+2} + \psi^{n+1} = \psi^n\]</div>
-<p>In words, the sum of two consecutive powers of <span class="math notranslate nohighlight">\(\psi\)</span> equals the previous power of <span class="math notranslate nohighlight">\(\psi\)</span>. Since the component squares in the figue have side lengths of powers of <span class="math notranslate nohighlight">\(\psi\)</span>, equation <a class="reference internal" href="#equation-psi-recursion-eqn">(1)</a> will be useful in understanding the fractal.</p>
-<p>For the remainder of this article, any text that refers to placing a square at a certain point means that the <em>lower left corner</em> is placed at the stated point. This seems to me to be the easiest way to conceive how the algorithm works and happens to coincide with the syntax of the Matplotlib library in Python.</p>
+<p>In words, the sum of two consecutive powers of <span class="math notranslate nohighlight">\(\psi\)</span> equals the previous power of <span class="math notranslate nohighlight">\(\psi\)</span>. Since the component squares in the fractal image above have side lengths of powers of <span class="math notranslate nohighlight">\(\psi\)</span>, equation <a class="reference internal" href="#equation-psi-recursion-eqn">(1)</a> will be useful in understanding the fractal.</p>
+<p>For the remainder of this article, any text that refers to placing a square at a certain point means that the <em>lower left corner</em> of the square is placed at the stated point. This seems to me to be the easiest way to conceive how the algorithm works and happens to coincide with the syntax of the Matplotlib library in Python.</p>
 <p>Now let’s break the fractal down conceptually. We’ll focus on the lower-left half first. Let’s see a rendering that includes axes to show the scale of the image:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -644,13 +643,13 @@ document.write(`
 <img alt="_images/cb03a6a2ecdab83a8def2ac091defe7d646c3bc6c1b0c7e6d059c4495c3d0eed.png" src="_images/cb03a6a2ecdab83a8def2ac091defe7d646c3bc6c1b0c7e6d059c4495c3d0eed.png" />
 </div>
 </div>
-<p>This iteration only generated seven new target points instead of eight. The target point marked green in the figure is special. Notice that two magenta colored squares touch corners there. The green point is both <span class="math notranslate nohighlight">\((\psi, \psi^2+\psi^3)\)</span> and <span class="math notranslate nohighlight">\((\psi^2+\psi^3, \psi)\)</span>. Recalling <a class="reference internal" href="#equation-psi-recursion-eqn">(1)</a> again, set <span class="math notranslate nohighlight">\(n=1\)</span> and then <span class="math notranslate nohighlight">\(\psi^3+\psi^2=\psi\)</span>. So <span class="math notranslate nohighlight">\((\psi, \psi^2+\psi^3)\)</span> and <span class="math notranslate nohighlight">\((\psi^2+\psi^3, \psi)\)</span> are the same point and can both be written <span class="math notranslate nohighlight">\((\psi, \psi)\)</span>. Since this one point took the place of two points, the total number of points was reduced by one from eight to seven.</p>
+<p>This iteration only generated seven new target points instead of eight. The target point marked green in the figure is special. Notice that two magenta colored squares touch corners there. The green point is both <span class="math notranslate nohighlight">\((\psi, \psi^2+\psi^3)\)</span> and <span class="math notranslate nohighlight">\((\psi^2+\psi^3, \psi)\)</span>. Recalling <a class="reference internal" href="#equation-psi-recursion-eqn">(1)</a> again, set <span class="math notranslate nohighlight">\(n=1\)</span> and then <span class="math notranslate nohighlight">\(\psi^3+\psi^2=\psi\)</span>. So the points <span class="math notranslate nohighlight">\((\psi, \psi^2+\psi^3)\)</span> and <span class="math notranslate nohighlight">\((\psi^2+\psi^3, \psi)\)</span> are the same point and can both be written <span class="math notranslate nohighlight">\((\psi, \psi)\)</span>. Since this one point took the place of two points, the total number of points was reduced by one from eight to seven.</p>
 <p>The next iteration, the fourth one, which I won’t illustrate, generates seven squares measuring <span class="math notranslate nohighlight">\(\psi^4 \times \psi^4\)</span> and 12 new target points. The fifth iteration produces 12 <span class="math notranslate nohighlight">\(\psi^5 \times \psi^5\)</span> squares and 20 new target points. In general, the number of squares produced in the <span class="math notranslate nohighlight">\(n^{th}\)</span> iteration is <span class="math notranslate nohighlight">\(F_{n+2} - 1\)</span> i.e. one less than the <span class="math notranslate nohighlight">\(n+2^{th}\)</span> Fibonacci number. You could also say that the number of squares produced in the <span class="math notranslate nohighlight">\(n^{th}\)</span> iteration equals the sum of the first <span class="math notranslate nohighlight">\(n\)</span> Fibonacci numbers due to a well-known identity:</p>
 <div class="math notranslate nohighlight">
 \[
 \sum_{i=1}^n F_n = F_{n+2}-1
 \]</div>
-<p>So now you have an idea how the lower left half of the fractal is produced. The code is set to run for 14 iterations because the image stops changing after 14. The upper right half is produced by reflecting the lower left half. I won’t get into the gritty details of the arithmetic involved in reflection or the coloring scheme. This concludes the explanation. Hopefully somone will read this tutorial and enjoy it!</p>
+<p>So now you have an idea how the lower left half of the fractal is produced. The code is set to run for 14 iterations because the image stops changing after 14. The upper right half is produced by reflecting the lower left half. I won’t elaborate the details of the arithmetic involved in reflection or the coloring scheme. This concludes the explanation. Hopefully somone will read this tutorial and enjoy it!</p>
 </section>
 
     <script type="text/x-thebe-config">

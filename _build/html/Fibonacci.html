@@ -79,7 +79,7 @@ var addUtterances = () => {
     script.setAttribute("label", "💬 comment");
     script.setAttribute("crossorigin", "anonymous");
 
-    sections = document.querySelectorAll("section");
+    sections = document.querySelectorAll("div.section");
     if (sections !== null) {
         section = sections[sections.length-1];
         section.appendChild(script);
@@ -205,7 +205,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="PhiProperties.html">Mathematical Properties of the Golden Ratio</a></li>
 <li class="toctree-l1"><a class="reference internal" href="FibonacciMatrix.html">The Fibonacci Matrix</a></li>
 <li class="toctree-l1"><a class="reference internal" href="RootsOf5I.html">Matrix Square Roots and Related Fibonacci Matrices</a></li>
-<li class="toctree-l1"><a class="reference internal" href="GoldenSquareFractal.html">Golden Square Fractal (August 26, 2023 update!)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GoldenSquareFractal.html">Golden Square Fractal</a></li>
 <li class="toctree-l1"><a class="reference internal" href="SunflowerSim.html">Sunflower Simulator</a></li>
 </ul>
 
@@ -404,8 +404,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <p><span class="math notranslate nohighlight">\(\newcommand{\pb}[0]{\overline{\phi}}\)</span>
-<span class="math notranslate nohighlight">\(\newcommand{\cb}[0]{\overline{C}}\)</span>
+  <p><span class="math notranslate nohighlight">\(\newcommand{\pb}[0]{\overline{\phi}\vphantom{\phi}}\)</span>
+<span class="math notranslate nohighlight">\(\newcommand{\cb}[0]{\overline{C}\vphantom{C}}\)</span>
 <span class="math notranslate nohighlight">\(\newcommand{\pbn}[1]{\pb\vphantom{\phi}^{#1}}\)</span></p>
 <section class="tex2jax_ignore mathjax_ignore" id="the-fibonacci-sequence-lucas-numbers-and-the-golden-ratio">
 <h1>The Fibonacci Sequence, Lucas Numbers, and the Golden Ratio<a class="headerlink" href="#the-fibonacci-sequence-lucas-numbers-and-the-golden-ratio" title="Permalink to this heading">#</a></h1>
@@ -421,7 +421,7 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">Math</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Markdown</span><span class="p">,</span> <span class="n">Math</span>
 
 <span class="n">n</span> <span class="o">=</span> <span class="mi">15</span>
 <span class="k">def</span> <span class="nf">Fib1</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
@@ -447,15 +447,14 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\text{The first 20 values in the Fibonacci sequence:}&#39;</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">Markdown</span><span class="p">(</span><span class="s2">&quot;The first 20 values in the Fibonacci sequence:&quot;</span><span class="p">))</span>
 <span class="n">vals</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">Fib1</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">20</span><span class="p">)]</span>
 <span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">vals</span><span class="p">)))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \text{The first 20 values in the Fibonacci sequence:}\]</div>
+<p>The first 20 values in the Fibonacci sequence:</p>
 <div class="output text_latex math notranslate nohighlight">
 \[\displaystyle 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181\]</div>
 </div>
@@ -463,7 +462,7 @@ document.write(`
 </section>
 <section id="fibonacci-sequence-for-negative-indices">
 <h2>Fibonacci Sequence for Negative Indices<a class="headerlink" href="#fibonacci-sequence-for-negative-indices" title="Permalink to this heading">#</a></h2>
-<p>The Fib1() function above only delivers valid results for counting numbers <span class="math notranslate nohighlight">\(1, 2, 3...\)</span> Notice that the sequence definition says nothing about a zeroth Fibonacci number <span class="math notranslate nohighlight">\(F_0\)</span> or negatively indexed Fibonacci numbers, e.g. <span class="math notranslate nohighlight">\(F_{-1}\)</span> or <span class="math notranslate nohighlight">\( F_{-5}\)</span>. However, there is a manner by which the sequence can be extended to include indices below <span class="math notranslate nohighlight">\(1\)</span>: We may simply stipulate that the Fibonacci recursion equation also applies to indices less than <span class="math notranslate nohighlight">\(1\)</span>. Note that the recursion equation <span class="math notranslate nohighlight">\( F_n = F_{n-1} + F_{n-2} \)</span> can be solved for <span class="math notranslate nohighlight">\(F_{n-2}\)</span>, yielding: <span class="math notranslate nohighlight">\( F_{n-2} = F_{n} - F_{n-1} .\)</span> One might prefer to reindex the equation so it reads <span class="math notranslate nohighlight">\( F_{n} = F_{n+2} - F_{n+1} .\)</span></p>
+<p>The Fib1() function in the code above only delivers valid results for counting numbers <span class="math notranslate nohighlight">\(1, 2, 3...\)</span> Notice that the sequence definition says nothing about a zeroth Fibonacci number <span class="math notranslate nohighlight">\(F_0\)</span> or negatively indexed Fibonacci numbers, e.g. <span class="math notranslate nohighlight">\(F_{-1}\)</span> or <span class="math notranslate nohighlight">\( F_{-5}\)</span>. However, the sequence can be extended to include indices below <span class="math notranslate nohighlight">\(1\)</span>: We may simply stipulate that the Fibonacci recursion equation also applies to those lower indices. Note that the recursion equation <span class="math notranslate nohighlight">\( F_n = F_{n-1} + F_{n-2} \)</span> can be solved for <span class="math notranslate nohighlight">\(F_{n-2}\)</span>, yielding: <span class="math notranslate nohighlight">\( F_{n-2} = F_{n} - F_{n-1} .\)</span> One might prefer to reindex the equation so it reads <span class="math notranslate nohighlight">\( F_{n} = F_{n+2} - F_{n+1} .\)</span></p>
 <p>The equation in its original form said, “Each Fibonacci number is the sum of its two immediate predecessors”; Now the rearranged equation illustrates also that “Each Fibonacci number is the difference of its two immediate successors”. We may apply the equation to calculate values for <span class="math notranslate nohighlight">\(F_0, F_{-1}, F_{-2},\)</span> etc. as far as we please.</p>
 <p>Let’s use a function that calculates Fibonacci numbers for any integer index:</p>
 <div class="cell docutils container">
@@ -494,15 +493,14 @@ document.write(`
 <p>We find that <span class="math notranslate nohighlight">\(F_{-10} = -F_{10}\)</span>. A general formula that relates positively and negatively indexed Fibonacci numbers is <span class="math notranslate nohighlight">\(F_{-n}=(-1)^{n+1}  F_n .\)</span> In words, the negatively indexed Fibonacci numbers are equal in magnitude to their positively indexed counterparts but alternating in sign. We also find that <span class="math notranslate nohighlight">\(F_0=0\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\text{The Fibonacci numbers indexed from -5 to 5 are:}&quot;</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">Markdown</span><span class="p">(</span><span class="s2">&quot;The Fibonacci numbers indexed from -5 to 5 are:&quot;</span><span class="p">))</span>
 <span class="n">vals</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">Fib2</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">)]</span>
 <span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">vals</span><span class="p">)))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \text{The Fibonacci numbers indexed from -5 to 5 are:}\]</div>
+<p>The Fibonacci numbers indexed from -5 to 5 are:</p>
 <div class="output text_latex math notranslate nohighlight">
 \[\displaystyle 5, -3, 2, -1, 1, 0, 1, 1, 2, 3, 5\]</div>
 </div>
@@ -528,15 +526,14 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Lucas2</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">Fib2</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">Fib2</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\text{The Lucas numbers indexed from -5 to 5 are:}&quot;</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Markdown</span><span class="p">(</span><span class="s2">&quot;The Lucas numbers indexed from -5 to 5 are:&quot;</span><span class="p">))</span>
 <span class="n">vals</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">Lucas2</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">)]</span>
 <span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">vals</span><span class="p">)))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \text{The Lucas numbers indexed from -5 to 5 are:}\]</div>
+<p>The Lucas numbers indexed from -5 to 5 are:</p>
 <div class="output text_latex math notranslate nohighlight">
 \[\displaystyle -11, 7, -4, 3, -1, 2, 1, 3, 4, 7, 11\]</div>
 </div>
